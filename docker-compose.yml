@@ -50,7 +50,7 @@ services:
     # on macOS. This will cache reads and writes making the container
     # authoritative, so your computer will be behind, but not by much
     volumes:
-      - ./:/root/work:delegated
+      - ./:/root/work
     entrypoint: /root/docker-entrypoint.sh
   # This creates a SECOND container
   # called "db" that will run Postgres.

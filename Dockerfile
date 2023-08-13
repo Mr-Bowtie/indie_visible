@@ -36,7 +36,8 @@ RUN apt-get update -qq && \
 # an even numbered version unless you are doing Node development.
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
-    npm install -g yarn
+    npm install -g yarn && \
+    yarn install
 
 # Now install the Postgres client, which is needed for the Postgres gem.  We don't need
 # the entire Postgres server in here.
