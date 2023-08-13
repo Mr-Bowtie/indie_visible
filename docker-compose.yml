@@ -10,6 +10,7 @@ services:
     # we want to build from the Dockerfile in this directory instead of pulling down an image from docker hub
     build:
       context: .
+      dockerfile: Dockerfile.development
     # This gives the built image a name and tag matching the project names
     image: $PROJECT_NAME:latest
     container_name: $PROJECT_NAME-web

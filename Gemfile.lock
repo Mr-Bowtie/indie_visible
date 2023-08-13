@@ -104,6 +104,8 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.2)
+      rails
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -217,6 +219,8 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.8.4)
+    redis (5.0.7)
+      redis-client (>= 0.9.0)
     redis-client (0.15.0)
       connection_pool
     regexp_parser (2.8.1)
@@ -352,6 +356,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  dockerfile-rails (>= 1.5)
   dotenv-rails
   factory_bot_rails
   faker
@@ -363,6 +368,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 5.0)
   rails (~> 7.0.7)
+  redis (~> 5.0)
   rspec
   rspec-rails
   rubocop-rails

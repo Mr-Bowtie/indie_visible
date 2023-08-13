@@ -1,15 +1,17 @@
-require "sidekiq/web"
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
+  get '/', to: 'rails/welcome#index', as: :root
 
-  if !Rails.env.development?
+  unless Rails.env.development?
     Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-      username == ENV.fetch("SIDEKIQ_WEB_USER") &&
-        password == ENV.fetch("SIDEKIQ_WEB_PASSWORD")
+      username == ENV.fetch('SIDEKIQ_WEB_USER') &&
+        password == ENV.fetch('SIDEKIQ_WEB_PASSWORD')
     end
   end
-  mount Sidekiq::Web => "/sidekiq"end
+  mount Sidekiq::Web => '/sidekiq'
+end
