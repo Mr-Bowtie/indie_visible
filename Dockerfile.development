@@ -1,3 +1,5 @@
+# syntax = docker/dockerfile:latest
+
 # This is generated, please edit
 # Dockerfile.template if you want to
 # make changes. Also note that some
