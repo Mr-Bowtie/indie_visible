@@ -17,6 +17,7 @@ services:
     environment: 
       RAILS_MASTER_KEY: $RAILS_MASTER_KEY
       RAILS_ENV: $RAILS_ENV
+      FRESH: $FRESH
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     restart: on-failure:3
