@@ -3,7 +3,7 @@ services:
   # is going to run. The key can be anything. Note that this
   # key will be the name of this image on the network that docker-compose
   # creates, so make it explicit and obvious.
-  indie_extravaganza:
+  indie_visible:
     # tty and stdin_open allow attaching and interacting with a running process, required for interacting with the pry console for debugging
     tty: true
     stdin_open: true
@@ -86,7 +86,7 @@ services:
     # can see the default values for
     # connecting to postgres.
     image: amd64/postgres:15
-    container_name: indie_extravaganza-db
+    container_name: indie_visible-db
 
     # We don't want to pull this big image every time
     pull_policy: "missing"
@@ -104,7 +104,7 @@ services:
   # Postgres block above, this starts up a Redis server using 6.x.x
   redis:
     image: amd64/redis:6
-    container_name: indie_extravaganza-redis
+    container_name: indie_visible-redis
     # We don't want to pull this big image every time
     pull_policy: "missing"
 # vim: ft=yaml nospell

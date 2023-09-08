@@ -1,4 +1,4 @@
-# indie_extravaganza
+# indie_visible
 
 This app does: test change!
 
