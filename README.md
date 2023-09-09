@@ -24,3 +24,11 @@ This app does: test change!
   in the UNIX environment
 * Rails logging uses lograge. `bin/setup help`
   can tell you how to see this locally
+
+## Required environment variables
+
+* HOSTNAME
+* DB_HOST
+* RAILS_MASTER_KEY
+* REDIS_URL
+* DATABASE_URL
