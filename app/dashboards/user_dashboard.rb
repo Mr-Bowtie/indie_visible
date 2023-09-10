@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -14,6 +14,7 @@ class UserDashboard < Administrate::BaseDashboard
     remember_created_at: Field::DateTime,
     reset_password_sent_at: Field::DateTime,
     reset_password_token: Field::String,
+    role: Field::Number
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,8 +25,7 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     email
-    encrypted_password
-    remember_created_at
+    role
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,10 +33,8 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     email
-    encrypted_password
-    remember_created_at
+    role
     reset_password_sent_at
-    reset_password_token
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -44,6 +42,7 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     email
+    role
     encrypted_password
     remember_created_at
     reset_password_sent_at
@@ -60,7 +59,11 @@ class UserDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = {
+    admin: ->(users) { users.where(role: 'admin') },
+    author: ->(users) { users.where(role: 'author') }
+
+  }.freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.

@@ -44,7 +44,8 @@ CREATE TABLE public.users (
     encrypted_password character varying DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying,
     reset_password_sent_at timestamp(6) without time zone,
-    remember_created_at timestamp(6) without time zone
+    remember_created_at timestamp(6) without time zone,
+    role integer
 );
 
 
@@ -119,6 +120,7 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20230910021817');
+('20230910021817'),
+('20230910025508');
 
 
