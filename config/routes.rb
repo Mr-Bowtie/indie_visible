@@ -1,6 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+
+      root to: "users#index"
+    end
   # ============ Clearance routes =============
   # uncomment to change and override the defaults 
 
