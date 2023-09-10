@@ -1,1 +1,1 @@
-PGPASSWORD=postgres psql -U postgres -h db -p 5432 indie_extravaganza_development
+PGPASSWORD=postgres psql -U postgres -h db -p 5432 indie_visible_development

@@ -64,7 +64,7 @@ COPY --link Gemfile Gemfile.lock ./
 RUN echo "gem: --no-document" >> ~/.gemrc && \
     gem update --system && \
     gem install bundler && \
-    bundle check || bundle install
+    bundle check || bundle install --verbose
 
 # Allows rails server to be accessible outside this docker container
 ENV BINDING="0.0.0.0"
@@ -75,6 +75,8 @@ COPY ./docker-entrypoint.sh /root
 
 # This says to expose the given port to the outside world.
 EXPOSE 3000
+
+RUN bundle exec rails assets:precompile
 
 # Although WORKDIR specifies a base directory where COPY, ADD, RUN, etc. commands run from,
 # we use it here as a default directory where docker run AKA bin/exec commands will
