@@ -14,7 +14,7 @@ class UserDashboard < Administrate::BaseDashboard
     remember_created_at: Field::DateTime,
     reset_password_sent_at: Field::DateTime,
     reset_password_token: Field::String,
-    role: Field::Number
+    role: Field::Select
   }.freeze
 
   # COLLECTION_ATTRIBUTES
