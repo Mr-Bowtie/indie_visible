@@ -76,7 +76,7 @@ COPY ./docker-entrypoint.sh /root
 # This says to expose the given port to the outside world.
 EXPOSE 3000
 
-RUN bin/rails assets:precompile
+RUN bundle exec rails assets:precompile
 
 # Although WORKDIR specifies a base directory where COPY, ADD, RUN, etc. commands run from,
 # we use it here as a default directory where docker run AKA bin/exec commands will
