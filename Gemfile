@@ -102,7 +102,8 @@ gem 'dockerfile-rails', '>= 1.5', group: :development
 
 gem 'redis', '~> 5.0'
 
-gem 'clearance', '~> 2.6'
 gem 'pundit', '~> 2.3'
 
-gem 'administrate', '~> 0.19.0'
+gem "administrate", "~> 0.19.0"
+
+gem "devise", "~> 4.9"
