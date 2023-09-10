@@ -45,7 +45,7 @@ CREATE TABLE public.users (
     reset_password_token character varying,
     reset_password_sent_at timestamp(6) without time zone,
     remember_created_at timestamp(6) without time zone,
-    role integer
+    role integer DEFAULT 0
 );
 
 
