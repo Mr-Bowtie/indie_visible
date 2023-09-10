@@ -14,8 +14,6 @@ else
 	echo "No server lock to worry about"
 fi
 
-echo "=========== FRESH = $FRESH ============="
-
 if [ "$FRESH" = "true" ]; then
 	echo "======= Refreshing Container Setup ======="
 	bin/container_setup

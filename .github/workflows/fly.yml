@@ -17,7 +17,7 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to Fly 
         run: |
-          flyctl deploy --remote-only --app indie-extravaganza-dev
+          flyctl deploy --remote-only --app indie-visible-staging
 
   on-failure:
     runs-on: ubuntu-latest
