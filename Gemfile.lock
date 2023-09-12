@@ -89,6 +89,8 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.0.1)
     builder (3.2.4)
+    bulma-rails (0.9.4)
+      sassc (~> 2.0)
     bundler-audit (0.9.1)
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
@@ -119,12 +121,13 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
-    dockerfile-rails (1.5.2)
+    dockerfile-rails (1.5.5)
       rails
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    dry-cli (1.0.0)
     e2mmap (0.1.0)
     erubi (1.12.0)
     factory_bot (6.2.1)
@@ -136,13 +139,14 @@ GEM
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     foreman (0.87.2)
-    globalid (1.1.0)
-      activesupport (>= 5.0)
+    globalid (1.2.1)
+      activesupport (>= 6.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
-    irb (1.7.4)
-      reline (>= 0.3.6)
+    irb (1.8.1)
+      rdoc
+      reline (>= 0.3.8)
     jaro_winkler (1.5.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -188,7 +192,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
-    minitest (5.19.0)
+    minitest (5.20.0)
     msgpack (1.7.2)
     net-imap (0.3.7)
       date
@@ -200,8 +204,6 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.4-aarch64-linux)
-      racc (~> 1.4)
     nokogiri (1.15.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
@@ -211,13 +213,15 @@ GEM
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
-    pg (1.5.3)
+    pg (1.5.4)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
+    psych (5.1.0)
+      stringio
     public_suffix (5.0.3)
     puma (5.6.7)
       nio4r (~> 2.0)
@@ -225,6 +229,8 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.7.1)
     rack (2.2.8)
+    rack-proxy (0.7.7)
+      rack
     rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.8)
@@ -258,12 +264,14 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.8.4)
+    rdoc (6.5.0)
+      psych (>= 4.0.0)
     redis (5.0.7)
       redis-client (>= 0.9.0)
-    redis-client (0.15.0)
+    redis-client (0.17.0)
       connection_pool
     regexp_parser (2.8.1)
-    reline (0.3.7)
+    reline (0.3.8)
       io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -294,7 +302,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rubocop (1.56.0)
+    rubocop (1.56.2)
       base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -312,11 +320,11 @@ GEM
       rubocop (~> 1.41)
     rubocop-factory_bot (2.23.1)
       rubocop (~> 1.33)
-    rubocop-rails (2.20.2)
+    rubocop-rails (2.21.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.23.2)
+    rubocop-rspec (2.24.0)
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
@@ -359,7 +367,7 @@ GEM
     solargraph-rails (1.1.0)
       activesupport
       solargraph
-    sprockets (4.2.0)
+    sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
     sprockets-rails (3.4.2)
@@ -368,6 +376,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.2)
       railties (>= 6.0.0)
+    stringio (3.0.8)
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.4.0)
@@ -378,9 +387,16 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    vite_rails (3.0.15)
+      railties (>= 5.1, < 8)
+      vite_ruby (~> 3.0, >= 3.2.2)
+    vite_ruby (3.3.4)
+      dry-cli (>= 0.7, < 2)
+      rack-proxy (~> 0.6, >= 0.6.1)
+      zeitwerk (~> 2.2)
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (4.2.0)
+    web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -399,7 +415,6 @@ GEM
     zeitwerk (2.6.11)
 
 PLATFORMS
-  aarch64-linux
   arm64-darwin-21
   x86_64-linux
 
@@ -408,6 +423,7 @@ DEPENDENCIES
   annotate
   bootsnap
   brakeman
+  bulma-rails (~> 0.9.4)
   bundler-audit
   capybara
   cssbundling-rails
@@ -438,6 +454,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  vite_rails (~> 3.0)
   web-console
   webdrivers
 
@@ -445,4 +462,4 @@ RUBY VERSION
    ruby 3.1.3p185
 
 BUNDLED WITH
-   2.4.13
+   2.4.19

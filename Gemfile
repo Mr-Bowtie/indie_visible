@@ -107,3 +107,7 @@ gem 'pundit', '~> 2.3'
 gem "administrate", "~> 0.19.0"
 
 gem "devise", "~> 4.9"
+
+gem "vite_rails", "~> 3.0"
+
+gem "bulma-rails", "~> 0.9.4"
