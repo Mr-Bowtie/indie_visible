@@ -78,7 +78,7 @@ gem 'bundler-audit'
 gem 'lograge'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'
-gem 'sidekiq'
+gem 'sidekiq', '>= 7.1.3'
 
 group :development, :test do
   gem 'dotenv-rails'
