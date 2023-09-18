@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Logging
   module Logs
     TRACE_ID = 'trace_id'

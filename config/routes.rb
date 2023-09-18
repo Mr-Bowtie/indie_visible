@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
   get 'users/index'
   namespace :admin do
-      resources :users
+    resources :users
 
-      root to: "users#index"
-    end
+    root to: 'users#index'
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root "users#index"
+  root 'users#index'
 
   devise_for :users
   unless Rails.env.development?
