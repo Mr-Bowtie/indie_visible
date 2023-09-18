@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BookPolicy < ApplicationPolicy
   def show?
     user.admin? || record.user == user
@@ -15,4 +17,3 @@ class BookPolicy < ApplicationPolicy
     user.admin? || record.user == user
   end
 end
-

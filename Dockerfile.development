@@ -1,29 +1,18 @@
 # syntax = docker/dockerfile:latest
 
-# This is generated, please edit
-# Dockerfile.template if you want to
-# make changes. Also note that some
-# values come from bin/vars, so check that out as well
-# Thus, this is a Debian-based build.
 FROM amd64/ruby:3.1.3
 
-# Before we start, you'll note there are a lot of RUN directives. Each of these creates a layer that is cached by
-# Docker.  Thus, if you change the second RUN directive and rebuild the image, the first RUN directive doesn't have
-# to be re-executed - the cached layer is used and the second directive is executed from there.
-#
-# Each RUN directive in here is chosen to allow the image to evolve over time while minimizing the amount of
-# re-building that has to be done.
-#
-# Thus, the first few things set up stuff that is unlikely to change frequently, such as OS-level tools and Node.
-# Later directives do stuff like Chrome, which will change a lot and is also unstable.
-
-# This tells our apt-get calls to not ask for input, but does not releive us of the 
-# great responsibility of using -y to all commands to indicate that yes, our invocation
-# of the command to install a package means we do, in fact, want that package installed.
+# Set non-interactive mode for apt-get
 ENV DEBIAN_FRONTEND noninteractive
+# Allows rails server to be accessible outside this docker container
+ENV BINDING="0.0.0.0"
+# Set bundler path to use the cache volume
+ENV BUNDLE_PATH vendor/bundle
 
-# This is copied from the Rails devcontainer and installs base packages we will need for other things we'll
-# install.
+# Set working directory
+WORKDIR /root/work
+
+# Install OS dependencies and tools
 RUN apt-get update -qq && \
     apt-get install -y \
                     build-essential \
@@ -32,55 +21,40 @@ RUN apt-get update -qq && \
                     libvips \
                     procps \
                     rsync \
-                    wget
+                    wget \
+                    node-gyp \
+                    postgresql \
+                    netcat \
+                    chromium \
+                    chromium-driver && \
+    # Clean up to reduce image size
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# This installs the latest supported verison of Node. It should be
-# an even numbered version unless you are doing Node development.
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
+COPY package.json yarn.lock ./
+ARG NODE_VERSION=18.16.1
+# ARG YARN_VERSION=1.22.19
+ENV PATH=/usr/local/node/bin:$PATH
+# Install Node
+RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
     npm install -g yarn && \
-    yarn install
+    yarn install && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Now install the Postgres client, which is needed for the Postgres gem.  We don't need
-# the entire Postgres server in here.
-# These instructions are from https://www.postgresql.org/download/linux/ubuntu/
-# This is needed because this version of Debian does not have Postgres 15 and we want to be on 
-# the latest version.
-RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
-		wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
-		apt-get update && \
-		apt-get -y install postgresql-client-15
-
-# Next, we install chromium and chromium-driver to facilitate Rails system tests.
-# There is no Chrome for ARM linux distributions, so we have to use Chromium.
-# Note that although Apple Silicon is capable of emulating AMD instructions, Chrome
-# requires system calls that are not emulated. It is unclear if Apple, Docker, or Google
-# are the ones who could fix this, but none of them are at the moment.
-RUN apt-get -y install chromium chromium-driver
-
-# Now, we set up RubyGems to avoid building documentation. We don't need the docs
-# inside this image and it slows down gem installation to have them.
-COPY --link Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock ./
+# RubyGems setup
 RUN echo "gem: --no-document" >> ~/.gemrc && \
-    gem update --system && \
     gem install bundler && \
-    bundle check || bundle install --verbose
+    bundle check || bundle install
 
-# Allows rails server to be accessible outside this docker container
-ENV BINDING="0.0.0.0"
-
-# This entrypoint produces a nice help message and waits around for you to do
-# something with the container.
-COPY ./docker-entrypoint.sh /root
-
-# This says to expose the given port to the outside world.
+# Expose port 3000
 EXPOSE 3000
 
+# Precompile Rails assets
 RUN bundle exec rails assets:precompile
 
-# Although WORKDIR specifies a base directory where COPY, ADD, RUN, etc. commands run from,
-# we use it here as a default directory where docker run AKA bin/exec commands will
-# be run from. Essentially if you bin/exec bash, this is the directory you will end up in.
-# It is also where docker-compose.yml will map your local directory.
-WORKDIR /root/work
-# vim: ft=Dockerfile
+
+# Copy the docker entrypoint script
+COPY ./docker-entrypoint.sh ./vite-entrypoint.sh /root

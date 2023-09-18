@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -36,7 +38,7 @@ RSpec.describe User, type: :model do
 
   describe 'default role' do
     it 'is set to author by default' do
-      new_user = User.new
+      new_user = described_class.new
       expect(new_user.role).to eq('author')
     end
   end

@@ -2,7 +2,10 @@
 
 set -e
 
+manifest_path="./public/vite-dev/manifest.json"
+
 bundle check || bundle install
+bundle exec rails assets:precompile
 
 # server isnt shutting down nicely and managing this file lock, so Im manually doing it for now
 file_path="./tmp/pids/server.pid" # Replace with the actual path to your file

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'logging/logs'
 class ApplicationService
   include Logging::Logs

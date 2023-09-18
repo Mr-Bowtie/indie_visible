@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -78,7 +80,7 @@ gem 'bundler-audit'
 gem 'lograge'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'
-gem 'sidekiq'
+gem 'sidekiq', '>= 7.1.3'
 
 group :development, :test do
   gem 'dotenv-rails'
@@ -104,6 +106,10 @@ gem 'redis', '~> 5.0'
 
 gem 'pundit', '~> 2.3'
 
-gem "administrate", "~> 0.19.0"
+gem 'administrate', '~> 0.19.0'
 
-gem "devise", "~> 4.9"
+gem 'devise', '~> 4.9'
+
+gem 'vite_rails', '~> 3.0'
+
+gem 'bulma-rails', '~> 0.9.4'
