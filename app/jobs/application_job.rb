@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'logging/logs'
 # Do not inherit from ActiveJob. All jobs use sidekiq
 class ApplicationJob

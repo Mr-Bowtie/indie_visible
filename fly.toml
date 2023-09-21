@@ -1,14 +1,17 @@
-# fly.toml app configuration file generated for indie-extravaganza-dev on 2023-08-13T13:54:58-04:00
+# fly.toml app configuration file generated for indie-visible-staging on 2023-08-18T12:42:32-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "indie-extravaganza-dev"
+app = "indie-visible-staging"
 primary_region = "ewr"
 console_command = "/rails/bin/rails console"
 
+[processes]
+  app = "./bin/rails server"
+  sidekiq = "bundle exec sidekiq"
+
 [http_service]
-  processes = ["app"]
   internal_port = 3000
   force_https = true
   auto_stop_machines = true
@@ -17,9 +20,5 @@ console_command = "/rails/bin/rails console"
   processes = ["app"]
 
 [[statics]]
-  guest_path = "/root/work/public"
+  guest_path = "/rails/public"
   url_prefix = "/"
-
-[processes]
-  app = "./bin/rails server"
-  sidekiq = "bundle exec sidekiq"
