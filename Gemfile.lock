@@ -129,6 +129,8 @@ GEM
       railties (>= 3.2)
     dry-cli (1.0.0)
     e2mmap (0.1.0)
+    erb-formatter (0.4.3)
+      syntax_tree (~> 6.0)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -214,6 +216,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
+    prettier_print (1.2.1)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -377,6 +380,8 @@ GEM
     stimulus-rails (1.2.2)
       railties (>= 6.0.0)
     stringio (3.0.8)
+    syntax_tree (6.2.0)
+      prettier_print (>= 1.2.0)
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.4.0)
@@ -431,6 +436,7 @@ DEPENDENCIES
   devise (~> 4.9)
   dockerfile-rails (>= 1.5)
   dotenv-rails
+  erb-formatter (~> 0.4.3)
   factory_bot_rails
   faker
   foreman

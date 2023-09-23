@@ -113,3 +113,5 @@ gem 'devise', '~> 4.9'
 gem 'vite_rails', '~> 3.0'
 
 gem 'bulma-rails', '~> 0.9.4'
+
+gem "erb-formatter", "~> 0.4.3", :group => :development
