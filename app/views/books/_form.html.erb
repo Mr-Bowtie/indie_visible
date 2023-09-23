@@ -1,52 +1,101 @@
 <%= form_with(model: book) do |form| %>
-  <% if book.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
-      <ul>
-        <% book.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="container is-mobile">
+    <div class="field">
+      <%= form.label :title, class: "label", style: "display: block" %>
+      <%= form.text_field :title, class: "input" %>
+      <% if book.errors[:title] %>
+        <ul>
+          <% book.errors.where(:title).each do |error| %>
+            <li class="has-text-danger"><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+    <div class="field-container">
+      <div class="field">
+        <%= form.label :primary_link, class: "label", style: "display: block" %>
+        <%= form.text_field :primary_link, class: "input" %>
+        <% if book.errors[:primary_link] %>
+          <ul>
+            <% book.errors.where(:primary_link).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
 
-  <div>
-    <%= form.label :primary_link, style: "display: block" %>
-    <%= form.text_field :primary_link %>
-  </div>
+    <div class="field">
+      <%= form.label :one_liner_blurb, class: "label", style: "display: block" %>
+      <%= form.text_field :one_liner_blurb, class: "input" %>
+      <% if book.errors[:one_liner_blurb] %>
+        <ul>
+          <% book.errors.where(:one_liner_blurb).each do |error| %>
+            <li class="has-text-danger"><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
 
-  <div>
-    <%= form.label :one_liner_blurb, style: "display: block" %>
-    <%= form.text_field :one_liner_blurb %>
-  </div>
+    <div class="field">
+      <%= form.label :description, class: "label", style: "display: block" %>
+      <%= form.text_area :description, class: "input" %>
+      <% if book.errors[:description] %>
+        <ul>
+          <% book.errors.where(:description).each do |error| %>
+            <li class="has-text-danger"><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
+    <div class="field">
+      <%= form.label :display_price, class: "label", style: "display: block" %>
+      <%= form.text_field :display_price, class: "input" %>
+      <% if book.errors[:display_price] %>
+        <ul>
+          <% book.errors.where(:display_price).each do |error| %>
+            <li class="has-text-danger"><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
 
-  <div>
-    <%= form.label :display_price, style: "display: block" %>
-    <%= form.text_field :display_price %>
-  </div>
+    <div class="container is-flex is-flex-direction-row is-align-items-center">
+      <div
+        class="
+          mr-4
+          field
+          is-flex
+          is-flex-direction-row
+          is-align-items-center
+          is-justify-content-center
+        "
+      >
+        <%= form.check_box :free, class: "checkbox mr-2" %>
+        <%= form.label :free, class: "label", style: "display: block" %>
+      </div>
 
-  <div>
-    <%= form.label :free, style: "display: block" %>
-    <%= form.check_box :free %>
-  </div>
+      <div
+        class="
+          mr-4
+          mb-3
+          field
+          is-flex
+          is-flex-direction-row
+          is-align-items-center
+          is-justify-content-center
+        "
+      >
+        <%= form.check_box :promo_active, class: "checkbox mr-2" %>
+        <%= form.label :promo_active, class: "label", style: "display: block" %>
+      </div>
+    </div>
 
-  <div>
-    <%= form.label :promo_active, style: "display: block" %>
-    <%= form.check_box :promo_active %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <div>
+      <%= form.submit "Submit", class: "button is-info" %>
+    </div>
   </div>
 <% end %>
