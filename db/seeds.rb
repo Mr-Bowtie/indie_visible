@@ -10,6 +10,7 @@
 
 25.times do
   FactoryBot.create(:book, :has_tags, :has_genres)
+end
 
 5.times do
   FactoryBot.create(:user, :author)
