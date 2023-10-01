@@ -37,3 +37,8 @@
 // @import "bulma/sass/layout/section.sass";
 
 @import 'bulma/bulma';
+
+input[type=checkbox] {
+  width: 1.25rem;
+  height: 1.25rem;
+}
