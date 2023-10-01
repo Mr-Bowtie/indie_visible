@@ -1,19 +1,19 @@
 <%= form_with(model: book) do |form| %>
 
-  <div class="container is-mobile">
-    <div class="field">
-      <%= form.label :title, class: "label", style: "display: block" %>
-      <%= form.text_field :title, class: "input" %>
-      <% if book.errors[:title] %>
-        <ul>
-          <% book.errors.where(:title).each do |error| %>
-            <li class="has-text-danger"><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
+  <div class="columns">
+    <div class="column is-half">
+      <div class="field">
+        <%= form.label :title, class: "label", style: "display: block" %>
+        <%= form.text_field :title, class: "input" %>
+        <% if book.errors[:title] %>
+          <ul>
+            <% book.errors.where(:title).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
 
-    <div class="field-container">
       <div class="field">
         <%= form.label :primary_link, class: "label", style: "display: block" %>
         <%= form.text_field :primary_link, class: "input" %>
@@ -25,77 +25,77 @@
           </ul>
         <% end %>
       </div>
-    </div>
 
-    <div class="field">
-      <%= form.label :one_liner_blurb, class: "label", style: "display: block" %>
-      <%= form.text_field :one_liner_blurb, class: "input" %>
-      <% if book.errors[:one_liner_blurb] %>
-        <ul>
-          <% book.errors.where(:one_liner_blurb).each do |error| %>
-            <li class="has-text-danger"><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-
-    <div class="field">
-      <%= form.label :description, class: "label", style: "display: block" %>
-      <%= form.text_area :description, class: "input" %>
-      <% if book.errors[:description] %>
-        <ul>
-          <% book.errors.where(:description).each do |error| %>
-            <li class="has-text-danger"><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-
-    <div class="field">
-      <%= form.label :display_price, class: "label", style: "display: block" %>
-      <%= form.text_field :display_price, class: "input" %>
-      <% if book.errors[:display_price] %>
-        <ul>
-          <% book.errors.where(:display_price).each do |error| %>
-            <li class="has-text-danger"><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-
-    <div class="container is-flex is-flex-direction-row is-align-items-center">
-      <div
-        class="
-          mr-4
-          field
-          is-flex
-          is-flex-direction-row
-          is-align-items-center
-          is-justify-content-center
-        "
-      >
-        <%= form.check_box :free, class: "checkbox mr-2" %>
-        <%= form.label :free, class: "label", style: "display: block" %>
+      <div class="field">
+        <%= form.label :one_liner_blurb, class: "label", style: "display: block" %>
+        <%= form.text_field :one_liner_blurb, class: "input" %>
+        <% if book.errors[:one_liner_blurb] %>
+          <ul>
+            <% book.errors.where(:one_liner_blurb).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
       </div>
 
-      <div
-        class="
-          mr-4
-          mb-3
-          field
-          is-flex
-          is-flex-direction-row
-          is-align-items-center
-          is-justify-content-center
-        "
-      >
-        <%= form.check_box :promo_active, class: "checkbox mr-2" %>
-        <%= form.label :promo_active, class: "label", style: "display: block" %>
+      <div class="field">
+        <%= form.label :display_price, class: "label", style: "display: block" %>
+        <%= form.text_field :display_price, class: "input" %>
+        <% if book.errors[:display_price] %>
+          <ul>
+            <% book.errors.where(:display_price).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+    <div class="column is-half">
+      <div class="field">
+        <%= form.label :description, class: "label", style: "display: block" %>
+        <%= form.text_area :description, class: "textarea", rows: "10" %>
+        <% if book.errors[:description] %>
+          <ul>
+            <% book.errors.where(:description).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+      <div class="container is-flex is-flex-direction-row is-align-items-center">
+        <div
+          class="
+            mr-4
+            field
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :free, class: "checkbox mr-2" %>
+          <%= form.label :free, class: "label", style: "display: block" %>
+        </div>
+
+        <div
+          class="
+            mr-4
+            mb-3
+            field
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :promo_active, class: "checkbox mr-2" %>
+          <%= form.label :promo_active, class: "label", style: "display: block" %>
+        </div>
       </div>
     </div>
 
-    <div>
-      <%= form.submit "Submit", class: "button is-info" %>
-    </div>
+  </div>
+  <div>
+    <%= form.submit "Submit", class: "button is-info" %>
   </div>
 <% end %>
