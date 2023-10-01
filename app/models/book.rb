@@ -4,13 +4,16 @@
 #
 #  id               :bigint           not null, primary key
 #  additional_links :string           default([]), is an Array
+#  adult_content    :boolean          default(FALSE)
 #  description      :text
 #  display_price    :string
 #  free             :boolean          default(FALSE)
 #  genres           :string           default([]), is an Array
+#  kindle_unlimited :boolean          default(FALSE)
 #  one_liner_blurb  :string
 #  primary_link     :string
 #  promo_active     :boolean          default(FALSE)
+#  queer_rep        :boolean          default(FALSE)
 #  tags             :string           default([]), is an Array
 #  title            :string
 #  trigger_warning  :string           default("")

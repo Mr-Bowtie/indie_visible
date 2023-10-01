@@ -43,7 +43,10 @@ CREATE TABLE public.books (
     tags character varying[] DEFAULT '{}'::character varying[],
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    trigger_warning character varying DEFAULT ''::character varying
+    trigger_warning character varying DEFAULT ''::character varying,
+    kindle_unlimited boolean DEFAULT false,
+    queer_rep boolean DEFAULT false,
+    adult_content boolean DEFAULT false
 );
 
 
@@ -76,10 +79,6 @@ CREATE TABLE public.schema_migrations (
 
 
 --
--- Name: books id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -111,6 +110,13 @@ CREATE SEQUENCE public.users_id_seq
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: books id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
 
 
 --
@@ -176,6 +182,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230830011956'),
 ('20230831111650'),
 ('20230910021817'),
-('20230910025508');
+('20230910025508'),
+('20231001010609');
 
 
