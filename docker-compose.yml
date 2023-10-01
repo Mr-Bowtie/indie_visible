@@ -22,7 +22,7 @@ services:
       - 'vite'
     init: true
     ports:
-      - "9998:3000"
+      - "9998:5000"
     volumes:
       - ./:/root/work:delegated
       - gem_cache:/root/work/vendor/bundle
