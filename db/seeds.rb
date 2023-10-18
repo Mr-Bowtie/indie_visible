@@ -19,3 +19,7 @@ end
 2.times do
   FactoryBot.create(:user, :admin)
 end
+
+5.times do
+  FactoryBot.create(:tag)
+end

@@ -46,7 +46,8 @@ CREATE TABLE public.books (
     trigger_warning character varying DEFAULT ''::character varying,
     kindle_unlimited boolean DEFAULT false,
     queer_rep boolean DEFAULT false,
-    adult_content boolean DEFAULT false
+    adult_content boolean DEFAULT false,
+    tag_id bigint
 );
 
 
@@ -76,6 +77,37 @@ ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tags (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
 
 
 --
@@ -120,6 +152,13 @@ ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_
 
 
 --
+-- Name: tags id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -151,11 +190,26 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: tags tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_books_on_tag_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_tag_id ON public.books USING btree (tag_id);
 
 
 --
@@ -173,6 +227,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: books fk_rails_71bab61117; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_71bab61117 FOREIGN KEY (tag_id) REFERENCES public.tags(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -183,6 +245,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230831111650'),
 ('20230910021817'),
 ('20230910025508'),
-('20231001010609');
+('20231001010609'),
+('20231001193451');
 
 

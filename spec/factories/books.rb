@@ -19,6 +19,15 @@
 #  trigger_warning  :string           default("")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  tag_id           :bigint
+#
+# Indexes
+#
+#  index_books_on_tag_id  (tag_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (tag_id => tags.id)
 #
 FactoryBot.define do
   factory :book do

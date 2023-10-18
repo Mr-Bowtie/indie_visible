@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'users/index'
   namespace :admin do
     resources :users
+    resources :tags
+    resources :books
 
     root to: 'users#index'
   end
