@@ -26,7 +26,6 @@ services:
     volumes:
       - ./:/root/work:delegated
       - gem_cache:/root/work/vendor/bundle
-
     entrypoint: /root/docker-entrypoint.sh
 
   db:
@@ -60,7 +59,6 @@ services:
     ports:
       - "3036:3036"
     entrypoint: /root/vite-entrypoint.sh
-        
 
 volumes: 
   vite_dev:
