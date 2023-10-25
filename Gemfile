@@ -7,66 +7,80 @@ ruby '3.1.3'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
-
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
-
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
-
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.6.7'
-
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
-
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
-
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
-
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem 'cssbundling-rails'
-
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
-
-# Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
-
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', require: false
-
-# Use Sass to process CSS
-# gem "sassc-rails"
-
+gem 'bootsnap'
+# Angular style components for views, replacment of sorts for view partials
+gem 'view_component'
+# Key value database store used most commonly for caching
+gem 'redis', '~> 5.0'
+# Data access restrictor
+gem 'pundit', '~> 2.3'
+# Admin panel
+gem 'administrate', '~> 0.19.0'
+# user auth
+gem 'devise', '~> 4.9'
+# Super fast asset compiler with Hot Module Refresh and auto-refresh capabilities on a local dev server
+gem 'vite_rails', '~> 3.0'
+# css framework
+gem 'bulma-rails', '~> 0.9.4'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
+# Google cloud storage adapter
+gem 'google-cloud-storage', '~> 1.11', require: false
+# seed date genaration
+gem 'factory_bot_rails'
+# fake data generation
+gem 'faker'
+# Security scanning 
+gem 'brakeman'
+# Run security audits on installed gems
+gem 'bundler-audit'
+# better rails logging
+gem 'lograge'
+# rubocop extension for rails
+gem 'rubocop-rails'
+# rubocop extension for rspec
+gem 'rubocop-rspec'
+# Background job processing
+gem 'sidekiq', '>= 7.1.3'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
+  gem 'foreman'
+  gem 'pry-byebug'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  # add schema annotations to model related files
+  gem 'annotate'
+  # add a default dockerfile and dockerfile generator for local dev
+  gem 'dockerfile-rails', '>= 1.5'
+  # Used instead of lsp since I cant find a reliable auto-formatter for erb in nvim
+  gem 'erb-formatter', '~> 0.4.3'
+  # improves solargraph integration with Rails
+  gem 'solargraph-rails'
 end
 
 group :test do
@@ -74,44 +88,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-end
-gem 'brakeman'
-gem 'bundler-audit'
-gem 'lograge'
-gem 'rubocop-rails'
-gem 'rubocop-rspec'
-gem 'sidekiq', '>= 7.1.3'
-
-group :development, :test do
-  gem 'dotenv-rails'
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'foreman'
-  gem 'pry-byebug'
-end
-
-group :development do
-  gem 'annotate'
-  gem 'solargraph-rails'
-end
-
-group :test do
   gem 'rspec'
   gem 'rspec-rails'
 end
 
-gem 'dockerfile-rails', '>= 1.5', group: :development
-
-gem 'redis', '~> 5.0'
-
-gem 'pundit', '~> 2.3'
-
-gem 'administrate', '~> 0.19.0'
-
-gem 'devise', '~> 4.9'
-
-gem 'vite_rails', '~> 3.0'
-
-gem 'bulma-rails', '~> 0.9.4'
-
-gem "erb-formatter", "~> 0.4.3", :group => :development
