@@ -15,6 +15,7 @@ services:
       POSTGRES_PASSWORD: postgres
       VITE_RUBY_HOST: vite
       DB_HOST: db
+      REDIS_URL: redis://redis:6379/1
     restart: on-failure:3
     depends_on:
       - 'db'
