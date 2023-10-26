@@ -31,7 +31,10 @@
       </div>
 
       <div class="field">
-        <%= form.label :primary_link, "Purchase link",class: "label", style: "display: block" %>
+        <%= form.label :primary_link,
+                   "Purchase link",
+                   class: "label",
+                   style: "display: block" %>
         <div class="control">
           <%= form.text_field :primary_link, class: "input" %>
         </div>
@@ -197,6 +200,7 @@
     <%= form.submit "Submit", class: "button is-info" %>
   </div>
 <% end %>
+
 <script>
   const fileInput = document.querySelector('#cover_image_file_input input[type=file]');
   fileInput.onchange = () => {
