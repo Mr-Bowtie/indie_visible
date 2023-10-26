@@ -33,4 +33,5 @@ class Book < ApplicationRecord
   REQUIRED_ATTRIBUTES = %i[title display_price one_liner_blurb primary_link].freeze
   validates(*REQUIRED_ATTRIBUTES, presence: true)
   has_one :tag
+  has_one_attached :cover_image
 end

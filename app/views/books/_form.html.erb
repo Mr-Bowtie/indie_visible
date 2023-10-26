@@ -3,6 +3,20 @@
   <div class="columns">
     <div class="field column is-half">
       <div class="field">
+        <div id="cover_image_file_input" class="file is-boxed has-name">
+          <%= form.label :cover_image, "Cover image", class: "file-label", style: "display:block" do |builder| %>
+            <%= form.file_field :cover_image, class: "file-input" %>
+            <% if book.cover_image.attached? %>
+              <%= image_tag book.cover_image%>
+            <% end %>
+            <span class="file-cta">
+              <span class="file-label">upload cover image</span>
+            </span>
+            <span class="file-name"></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="field">
         <%= form.label :title, class: "label", style: "display: block" %>
         <div class="control">
           <%= form.text_field :title, class: "input" %>
@@ -183,3 +197,12 @@
     <%= form.submit "Submit", class: "button is-info" %>
   </div>
 <% end %>
+<script>
+  const fileInput = document.querySelector('#cover_image_file_input input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#cover_image_file_input .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

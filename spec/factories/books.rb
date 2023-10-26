@@ -38,6 +38,15 @@ FactoryBot.define do
     display_price { Faker::Commerce.price }
     free { false }
     promo_active { false }
+
+    after(:build) do |book|
+      book.cover_image.attach(
+        io: File.open(Rails.root.join('public','generic_cover.png')),
+        filename: 'generic_cover.png',
+        content_type: 'image/png'
+      )
+    end
+
   end
 
   trait :has_tags do
