@@ -1,14 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Books</h1>
-
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
-  <% end %>
+<div class="container">
+  <h1 class="title is-1">Books</h1>
+  <div class="tile is-ancestor is-flex-wrap-wrap" id="books">
+    <% @books.each do |book| %>
+      <%= render(Books::GalleryCardComponent.new(book: book)) %>
+    <% end %>
+  </div>
 </div>
 
 <%= link_to "New book", new_book_path %>

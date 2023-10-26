@@ -1,0 +1,15 @@
+<div class="tile is-parent is-vertical is-3" id="<%= dom_id book %>">
+  <% if book.cover_image.attached? %>
+    <%= image_tag book.cover_image %>
+  <% end %>
+
+  <p>
+    <strong>Title:</strong>
+    <%= book.title %>
+  </p>
+
+  <p>
+    <strong>price:</strong>
+    <%= book.display_price %>
+  </p>
+</div>
