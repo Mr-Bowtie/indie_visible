@@ -12,25 +12,26 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1"
 
-
 # Update gems and bundler
 RUN gem update --system --no-document && \
     gem install -N bundler
+
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3
+    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 libc6
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=18.16.1
-# ARG YARN_VERSION=1.22.19
+ARG YARN_VERSION=1.22.19
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    npm install -g yarn && \
+    npm i -g corepack && \
+    corepack prepare yarn@$YARN_VERSION --activate && \
     rm -rf /tmp/node-build-master
 
 # Install application gems
@@ -50,7 +51,7 @@ COPY --link . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE=DUMMY REDIS_URL=DUMMY HOSTNAME=DUMMY ./bin/rails assets:precompile
+RUN SECRET_KEY_BASE=DUMMY REDIS_URL=DUMMY ./bin/rails assets:precompile
 
 
 # Final stage for app image
