@@ -7,9 +7,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+5.times do
+  FactoryBot.create(:tag)
+end
+
 
 25.times do
-  FactoryBot.create(:book, :has_tags, :has_genres)
+  FactoryBot.create(:book)
 end
 
 5.times do
@@ -20,6 +24,3 @@ end
   FactoryBot.create(:user, :admin)
 end
 
-5.times do
-  FactoryBot.create(:tag)
-end

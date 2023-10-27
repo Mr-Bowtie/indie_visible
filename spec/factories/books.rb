@@ -38,6 +38,7 @@ FactoryBot.define do
     display_price { Faker::Commerce.price }
     free { false }
     promo_active { false }
+    tag { Tag.all.sample }
 
     after(:build) do |book|
       book.cover_image.attach(
