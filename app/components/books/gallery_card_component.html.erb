@@ -1,9 +1,13 @@
-<div class="tile is-parent is-vertical is-3" id="<%= dom_id book %>">
+<div class="tile is-parent is-vertical is-3"
+     id="<%= dom_id book %>"
+     data-books--card-id="<%= book.id %>"
+     data-controller="books--card"
+     data-action="click->books--card#showModal">
   <% if book.cover_image.attached? %>
     <%= image_tag book.cover_image %>
   <% end %>
 
-  <p>
+  <p data-action="click->books--card#showModal">
     <strong>Title:</strong>
     <%= book.title %>
   </p>

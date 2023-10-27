@@ -1,1 +1,16 @@
-<div>Add Books::GalleryQuickView template here</div>
+<div data-controller="books--quick-view"
+     data-books--quick-view-id="<%= book.id %>"
+     data-books--quick-view-target="modal"
+     class="modal">
+  <div class="modal-background" data-action="click->books--quick-view#close"></div>
+  <div class="modal-content has-background-white">
+    <h1 class="title is-2"><%= book.title %></h1>
+    <% if book.cover_image.attached? %>
+      <%= image_tag book.cover_image %>
+    <% end %>
+    <p><%= book.description %></p>
+  </div>
+  <div class="modal-close is-large"
+       aria-label="close"
+       data-action="click->books--quick-view#close"></div>
+</div>
