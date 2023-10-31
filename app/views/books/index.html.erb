@@ -1,12 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="container">
-  <h1 class="title is-1">Books</h1>
+  <div class="level">
+    <h1 class="title is-1">Books</h1>
+    <%== pagy_bulma_nav(@pagy) %>
+  </div>
   <div class="tile is-ancestor is-flex-wrap-wrap" id="books">
     <% @books.each do |book| %>
       <%= render(Books::GalleryCardComponent.new(book: book)) %>
       <%= render(Books::GalleryQuickViewComponent.new(book: book)) %>
     <% end %>
+  </div>
+  <div class="level">
+    <div class="level-left"></div>
+    <div class="level-right">
+      <%== pagy_bulma_nav(@pagy) %>
+    </div>
   </div>
 </div>
 
