@@ -1,16 +1,42 @@
-<div data-controller="books--quick-view"
-     data-books--quick-view-id="<%= book.id %>"
-     data-books--quick-view-target="modal"
-     class="modal">
+<div
+  data-controller="books--quick-view"
+  data-books--quick-view-id="<%= book.id %>"
+  data-books--quick-view-target="modal"
+  class="modal"
+>
   <div class="modal-background" data-action="click->books--quick-view#close"></div>
   <div class="modal-content has-background-white">
     <h1 class="title is-2"><%= book.title %></h1>
+
+    <% unless book.tag.nil? %>
+      <h2 class="subtitle">Tag: <%= book.tag.name %></h2>
+    <% end %>
+
+    <div class="mb-2">
+      <% if book.adult_content %>
+        <span class="tag is-danger">Adult Content</span>
+      <% end %>
+
+      <% if book.kindle_unlimited %>
+        <span class="tag is-warning">KU</span>
+      <% end %>
+
+      <% if book.queer_rep %>
+        <span class="tag is-link">Queer Rep</span>
+      <% end %>
+    </div>
+
     <% if book.cover_image.attached? %>
       <%= image_tag book.cover_image %>
     <% end %>
+
+    <a href="<%= book.primary_link %>" class="button is-link auto-center is-medium">Buy Here</a>
+
     <p><%= book.description %></p>
   </div>
-  <div class="modal-close is-large"
-       aria-label="close"
-       data-action="click->books--quick-view#close"></div>
+  <div
+    class="modal-close is-large"
+    aria-label="close"
+    data-action="click->books--quick-view#close"
+  ></div>
 </div>
