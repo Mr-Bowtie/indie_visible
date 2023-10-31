@@ -34,7 +34,7 @@ FactoryBot.define do
     title { Faker::Book.title }
     primary_link { Faker::Internet.url }
     one_liner_blurb { Faker::Lorem.sentence }
-    description { Faker::Lorem.paragraph }
+    description { Faker::Lorem.paragraphs(number: rand(2..10)).join(' ') }
     display_price { Faker::Commerce.price }
     free { false }
     promo_active { false }
@@ -56,5 +56,12 @@ FactoryBot.define do
 
   trait :has_genres do
     genres { Array.new(3) { Faker::Book.genre } }
+  end
+
+  trait :has_flags do
+    booleans = [true, false]
+    adult_content { booleans.sample }
+    kindle_unlimited { booleans.sample }
+    queer_rep { booleans.sample }
   end
 end

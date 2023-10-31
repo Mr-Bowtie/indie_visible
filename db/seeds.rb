@@ -13,7 +13,7 @@ end
 
 
 25.times do
-  FactoryBot.create(:book)
+  FactoryBot.create(:book, :has_flags)
 end
 
 5.times do
