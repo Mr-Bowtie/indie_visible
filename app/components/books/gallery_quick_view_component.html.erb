@@ -9,7 +9,7 @@
     <h1 class="title is-2"><%= book.title %></h1>
 
     <% unless book.tag.nil? %>
-      <h2 class="subtitle">Tag: <%= book.tag.name %></h2>
+      <a href="/books?tag=<%= book.tag.id %>" class="subtitle">Tag: <%= book.tag.name %></a>
     <% end %>
 
     <div class="mb-2">
