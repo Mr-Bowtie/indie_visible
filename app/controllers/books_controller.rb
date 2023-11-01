@@ -4,7 +4,11 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @pagy, @books = pagy(Book.all)
+    if params[:tag].present?
+      @pagy, @books = pagy(Book.filter_by_tag_id(params[:tag]))
+    else
+      @pagy, @books = pagy(Book.all)
+    end
   end
 
   # GET /books/1 or /books/1.json

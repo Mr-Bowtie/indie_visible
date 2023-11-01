@@ -3,6 +3,12 @@
 <div class="container">
   <div class="level">
     <h1 class="title is-1">Books</h1>
+    <%= form_with url: "/books", method: :get do |form| %>
+      <%= form.label :tag, "Filter by tag:" %>
+      <%= form.select :tag, Tag.all.collect { |t| [t.name, t.id] }, include_blank: true %>
+      <%= form.submit "apply filter" %>
+    <% end %>
+    <%= link_to "Clear filters", books_path, class: "button is-danger is-outlined" %>
     <%== pagy_bulma_nav(@pagy) %>
   </div>
   <div class="tile is-ancestor is-flex-wrap-wrap" id="books">

@@ -34,4 +34,6 @@ class Book < ApplicationRecord
   validates(*REQUIRED_ATTRIBUTES, presence: true)
   belongs_to :tag
   has_one_attached :cover_image
+
+  scope :filter_by_tag_id, ->(tag_id) { where("tag_id = ?", tag_id)}
 end
