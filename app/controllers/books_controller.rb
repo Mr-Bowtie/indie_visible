@@ -5,7 +5,9 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     if params[:tag].present?
+      @tag = Tag.find(params[:tag])
       @pagy, @books = pagy(Book.filter_by_tag_id(params[:tag]))
+      @filters = [@tag.name]
     else
       @pagy, @books = pagy(Book.all)
     end
