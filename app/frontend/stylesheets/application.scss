@@ -47,6 +47,14 @@ input[type=checkbox] {
   width: 100%;
 }
 
+.mobile-centered-container {
+  @include touch {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
+}
+
 .auto-center {
   width: 100%;
 }
