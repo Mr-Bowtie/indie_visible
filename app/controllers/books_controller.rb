@@ -4,13 +4,23 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    if params[:tag].present?
-      @tag = Tag.find(params[:tag])
-      @pagy, @books = pagy(Book.filter_by_tag_id(params[:tag]))
-      @filters = [@tag.name]
-    else
-      @pagy, @books = pagy(Book.all)
+    collection = Book.all
+    @filters = []
+    
+    # for each param with a real value, apply a filter to the books list
+    # also add a string to the filters list to display active filters
+    filtering_params.select { |_, val| val != '0' && val != ''}.each do |p_key, p_val|
+      collection = if p_key == 'tag'
+                     @filters.push(Tag.find(p_val).name)
+                     collection.send :filter_by_tag, p_val
+                   else
+                      #TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
+                     @filters.push(p_key)
+                     collection.send p_key.to_sym
+                   end
     end
+
+    @pagy, @books = pagy(collection)
   end
 
   # GET /books/1 or /books/1.json
@@ -72,5 +82,9 @@ class BooksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def book_params
     params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :free, :promo_active, :tag_id, :adult_content, :kindle_unlimited, :queer_rep, :cover_image)
+  end
+
+  def filtering_params
+    params.permit(:tag, :adult_content, :kindle_unlimited, :queer_rep)
   end
 end

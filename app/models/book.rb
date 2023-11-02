@@ -35,5 +35,8 @@ class Book < ApplicationRecord
   belongs_to :tag
   has_one_attached :cover_image
 
-  scope :filter_by_tag_id, ->(tag_id) { where("tag_id = ?", tag_id)}
+  scope :filter_by_tag, ->(tag_id) { where('tag_id = ?', tag_id) }
+  scope :kindle_unlimited, -> { where('kindle_unlimited = true') }
+  scope :queer_rep, -> { where('queer_rep = true') }
+  scope :adult_content, -> { where('adult_content = true') }
 end
