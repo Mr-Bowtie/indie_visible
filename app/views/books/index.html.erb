@@ -45,7 +45,12 @@
       </div>
     </div>
   <% end %>
-  <%== pagy_bulma_nav(@pagy) %>
+  <div class="level">
+    <div class="level-left"></div>
+    <div class="level-right">
+      <%== pagy_bulma_nav(@pagy) %>
+    </div>
+  </div>
   <div class="tile is-ancestor is-flex-wrap-wrap" id="books">
     <% @books.each do |book| %>
       <%= render(Books::GalleryCardComponent.new(book: book)) %>
