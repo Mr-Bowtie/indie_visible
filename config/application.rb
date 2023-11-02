@@ -24,6 +24,8 @@ module Indievisible
     # and that means using SQL-based structure.
     config.active_record.schema_format = :sql
 
+    config.assets.paths << Rails.root.join("app", "frontend", "stylesheets")
+
     config.generators do |g|
       # We don't want per-resource stylesheets since
       # that is not how stylesheets work.

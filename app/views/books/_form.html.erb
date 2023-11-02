@@ -1,0 +1,212 @@
+<%= form_with(model: book) do |form| %>
+
+  <div class="columns">
+    <div class="field column is-half">
+      <div class="field">
+        <div id="cover_image_file_input" class="file is-boxed has-name">
+          <%= form.label :cover_image, "Cover image", class: "file-label", style: "display:block" do |builder| %>
+            <%= form.file_field :cover_image, class: "file-input" %>
+            <% if book.cover_image.attached? %>
+              <%= image_tag book.cover_image%>
+            <% end %>
+            <span class="file-cta">
+              <span class="file-label">upload cover image</span>
+            </span>
+            <span class="file-name"></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="field">
+        <%= form.label :title, class: "label", style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :title, class: "input" %>
+        </div>
+        <% if book.errors[:title] %>
+          <ul>
+            <% book.errors.where(:title).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= form.label :primary_link,
+                   "Purchase link",
+                   class: "label",
+                   style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :primary_link, class: "input" %>
+        </div>
+        <% if book.errors[:primary_link] %>
+          <ul>
+            <% book.errors.where(:primary_link).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= form.label :one_liner_blurb, class: "label", style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :one_liner_blurb, class: "input" %>
+        </div>
+        <% if book.errors[:one_liner_blurb] %>
+          <ul>
+            <% book.errors.where(:one_liner_blurb).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div
+        class="
+          container
+          is-flex
+          is-flex-direction-row
+          is-justify-content-space-between
+        "
+      >
+        <div class="field" style="width: 100%;">
+          <%= form.label :tag, class: "label" %>
+          <div class="control">
+            <div class="select is-rounded" style="width: 80%;">
+              <%= form.select :tag_id, Tag.all.collect { |t| [t.name, t.id] } %>
+            </div>
+          </div>
+          <% if book.errors[:tag_id] %>
+            <ul>
+              <% book.errors.where(:tag_id).each do |error| %>
+                <li class="has-text-danger"><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= form.label :display_price, class: "label", style: "display: block" %>
+          <div class="control">
+            <%= form.text_field :display_price, class: "input" %>
+          </div>
+          <% if book.errors[:display_price] %>
+            <ul>
+              <% book.errors.where(:display_price).each do |error| %>
+                <li class="has-text-danger"><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+
+      <div
+        class="
+          container
+          field
+          is-grouped
+          is-flex
+          is-flex-direction-row
+          is-align-items-center
+        "
+      >
+        <div
+          class="
+            mr-4
+            control
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :adult_content, class: "checkbox mr-2" %>
+          <%= form.label :adult_content, class: "label", style: "display: block" %>
+        </div>
+        <div
+          class="
+            mr-4
+            control
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :kindle_unlimited, class: "checkbox mr-2" %>
+          <%= form.label :kindle_unlimited, class: "label", style: "display: block" %>
+        </div>
+        <div
+          class="
+            mr-4
+            control
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :queer_rep, class: "checkbox mr-2" %>
+          <%= form.label :queer_rep, class: "label", style: "display: block" %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-half">
+      <div class="field">
+        <%= form.label :description, class: "label", style: "display: block" %>
+        <%= form.text_area :description, class: "textarea", rows: "10" %>
+        <% if book.errors[:description] %>
+          <ul>
+            <% book.errors.where(:description).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+      <div class="container is-flex is-flex-direction-row is-align-items-center">
+        <div
+          class="
+            mr-4
+            field
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :free, class: "checkbox mr-2" %>
+          <%= form.label :free, class: "label", style: "display: block" %>
+        </div>
+
+        <div
+          class="
+            mr-4
+            mb-3
+            field
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :promo_active, class: "checkbox mr-2" %>
+          <%= form.label :promo_active, class: "label", style: "display: block" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div>
+    <%= form.submit "Submit", class: "button is-info" %>
+  </div>
+<% end %>
+
+<script>
+  const fileInput = document.querySelector('#cover_image_file_input input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#cover_image_file_input .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

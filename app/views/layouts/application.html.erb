@@ -6,31 +6,41 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%# <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> %>
     <%= vite_client_tag %>
-    <%= vite_javascript_tag 'application' %>
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
-
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
-
+    <%= vite_javascript_tag "application" %>
+    <!-- If using a TypeScript entrypoint file: vite_typescript_tag
+    'application' If using a .jsx or .tsx entrypoint, add the extension:
+    vite_javascript_tag 'application.jsx' Visit the guide for more information:
+    https://vite-ruby.netlify.app/guide/rails -->
   </head>
 
   <body>
+    <nav class="navbar mb-6">
+      <div class="navbar-brand">
+        <%= link_to "IndieVisible", books_path, class: "title is-3 has-background-info has-text-white p-3"%>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <% if signed_in? %>
+              <span class="mr-3">
+                Signed in as:
+                <%= current_user.email %>
+              </span>
+              <%= button_to "Sign out",
+              destroy_user_session_path,
+              method: :delete,
+              class: "button is-danger" %>
+            <% else %>
+              <%= link_to "Sign in", user_session_path, class: "button is-primary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p> 
-    <% if signed_in? %>
-      Signed in as: <%= current_user.email %>
-      <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to 'Sign in', user_session_path %>
-    <% end %>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

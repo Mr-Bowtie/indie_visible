@@ -3,9 +3,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :books
   get 'users/index'
   namespace :admin do
     resources :users
+    resources :tags
+    resources :books
 
     root to: 'users#index'
   end
@@ -13,7 +16,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root 'users#index'
+  root "books#index"
 
   devise_for :users
   unless Rails.env.development?

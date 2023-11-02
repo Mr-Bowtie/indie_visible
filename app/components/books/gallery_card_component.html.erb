@@ -1,0 +1,40 @@
+<div
+  class="tile is-parent is-vertical is-3"
+  id="<%= dom_id book %>"
+  data-books--card-id="<%= book.id %>"
+  data-controller="books--card"
+  data-action="click->books--card#showModal"
+>
+  <% if book.cover_image.attached? %>
+    <%= image_tag book.cover_image %>
+  <% end %>
+
+  <p data-action="click->books--card#showModal">
+    <strong>Title:</strong>
+    <%= book.title %>
+  </p>
+
+  <p>
+    <strong>Blurb:</strong>
+    <%= book.one_liner_blurb %>
+  </p>
+
+  <p>
+    <strong>price:</strong>
+    <%= book.display_price %>
+  </p>
+
+  <div>
+    <% if book.adult_content %>
+      <span class="tag is-danger">Adult Content</span>
+    <% end %>
+
+    <% if book.kindle_unlimited %>
+      <span class="tag is-warning">KU</span>
+    <% end %>
+
+    <% if book.queer_rep %>
+      <span class="tag is-link">Queer Rep</span>
+    <% end %>
+  </div>
+</div>

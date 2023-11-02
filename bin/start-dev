@@ -1,5 +1,5 @@
 #!/bin/sh
 echo "🚀 Starting docker-compose.yml for dev"
-env RAILS_ENV=development RAILS_MASTER_KEY=$(cat ../config/master.key) docker compose up $*
+env RAILS_ENV=development docker compose up $*
 
 # vim: ft=bash

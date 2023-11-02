@@ -15,6 +15,7 @@ services:
       POSTGRES_PASSWORD: postgres
       VITE_RUBY_HOST: vite
       DB_HOST: db
+      REDIS_URL: redis://redis:6379/1
     restart: on-failure:3
     depends_on:
       - 'db'
@@ -22,11 +23,10 @@ services:
       - 'vite'
     init: true
     ports:
-      - "9998:3000"
+      - "9998:5000"
     volumes:
       - ./:/root/work:delegated
       - gem_cache:/root/work/vendor/bundle
-
     entrypoint: /root/docker-entrypoint.sh
 
   db:
@@ -60,7 +60,6 @@ services:
     ports:
       - "3036:3036"
     entrypoint: /root/vite-entrypoint.sh
-        
 
 volumes: 
   vite_dev:

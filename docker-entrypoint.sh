@@ -5,7 +5,6 @@ set -e
 manifest_path="./public/vite-dev/manifest.json"
 
 bundle check || bundle install
-bundle exec rails assets:precompile
 
 # server isnt shutting down nicely and managing this file lock, so Im manually doing it for now
 file_path="./tmp/pids/server.pid" # Replace with the actual path to your file
@@ -22,5 +21,7 @@ if [ "$FRESH" = "true" ]; then
 	bin/container_setup
 fi
 
-echo "======= Starting Rails server ======="
-bin/rails s -b 0.0.0.0
+echo "======= Starting Foreman ======="
+# bin/rails s -b 0.0.0.0
+
+bundle exec foreman start -f Procfile.dev

@@ -1,0 +1,202 @@
+<%= form_for([namespace, page.resource], html: { class: "form" }) do |form| %>
+  <% if page.resource.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= t(
+          "administrate.form.errors",
+          pluralized_errors: pluralize(page.resource.errors.count, t("administrate.form.error")),
+          resource_name: display_resource_name(page.resource_name, singular: true)
+        ) %>
+      </h2>
+
+      <ul>
+        <% page.resource.errors.full_messages.each do |message| %>
+          <li class="flash-error"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="columns">
+    <div class="field column is-half">
+      <div class="field">
+        <%= form.label :title, class: "label", style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :title, class: "input" %>
+        </div>
+        <% if page.resource.errors[:title] %>
+          <ul>
+            <% page.resource.errors.where(:title).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= form.label :primary_link, class: "label", style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :primary_link, class: "input" %>
+        </div>
+        <% if page.resource.errors[:primary_link] %>
+          <ul>
+            <% page.resource.errors.where(:primary_link).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= form.label :one_liner_blurb, class: "label", style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :one_liner_blurb, class: "input" %>
+        </div>
+        <% if page.resource.errors[:one_liner_blurb] %>
+          <ul>
+            <% page.resource.errors.where(:one_liner_blurb).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div
+        class="
+          container
+          is-flex
+          is-flex-direction-row
+          is-justify-content-space-between
+        "
+      >
+        <div class="field" style="width: 100%;">
+          <%= form.label :tag, class: "label" %>
+          <div class="control">
+            <div class="select is-rounded" style="width: 80%;">
+              <%= form.select :tag_id, Tag.all.collect { |t| [t.name, t.id] } %>
+            </div>
+          </div>
+          <% if page.resource.errors[:tag_id] %>
+            <ul>
+              <% page.resource.errors.where(:tag_id).each do |error| %>
+                <li class="has-text-danger"><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= form.label :display_price, class: "label", style: "display: block" %>
+          <div class="control">
+            <%= form.text_field :display_price, class: "input" %>
+          </div>
+          <% if page.resource.errors[:display_price] %>
+            <ul>
+              <% page.resource.errors.where(:display_price).each do |error| %>
+                <li class="has-text-danger"><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+
+      <div
+        class="
+          container
+          field
+          is-grouped
+          is-flex
+          is-flex-direction-row
+          is-align-items-center
+        "
+      >
+        <div
+          class="
+            mr-4
+            control
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :adult_content, class: "checkbox mr-2" %>
+          <%= form.label :adult_content, class: "label", style: "display: block" %>
+        </div>
+        <div
+          class="
+            mr-4
+            control
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :kindle_unlimited, class: "checkbox mr-2" %>
+          <%= form.label :kindle_unlimited, class: "label", style: "display: block" %>
+        </div>
+        <div
+          class="
+            mr-4
+            control
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :queer_rep, class: "checkbox mr-2" %>
+          <%= form.label :queer_rep, class: "label", style: "display: block" %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-half">
+      <div class="field">
+        <%= form.label :description, class: "label", style: "display: block" %>
+        <%= form.text_area :description, class: "textarea", rows: "10" %>
+        <% if page.resource.errors[:description] %>
+          <ul>
+            <% page.resource.errors.where(:description).each do |error| %>
+              <li class="has-text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+      <div class="container is-flex is-flex-direction-row is-align-items-center">
+        <div
+          class="
+            mr-4
+            field
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :free, class: "checkbox mr-2" %>
+          <%= form.label :free, class: "label", style: "display: block" %>
+        </div>
+
+        <div
+          class="
+            mr-4
+            mb-3
+            field
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :promo_active, class: "checkbox mr-2" %>
+          <%= form.label :promo_active, class: "label", style: "display: block" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div>
+    <%= form.submit "Submit", class: "button is-warning" %>
+  </div>
+<% end %>
