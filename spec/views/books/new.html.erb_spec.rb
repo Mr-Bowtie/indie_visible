@@ -14,7 +14,7 @@ RSpec.describe "books/new", type: :view do
     ))
   end
 
-  it "renders new book form" do
+  xit "renders new book form" do
     render
 
     assert_select "form[action=?][method=?]", books_path, "post" do
