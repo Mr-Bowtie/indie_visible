@@ -170,6 +170,38 @@ ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
 
 
 --
+-- Name: businesses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.businesses (
+    id bigint NOT NULL,
+    name character varying,
+    website_url character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: businesses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.businesses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: businesses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.businesses_id_seq OWNED BY public.businesses.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -272,6 +304,13 @@ ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_
 
 
 --
+-- Name: businesses id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.businesses ALTER COLUMN id SET DEFAULT nextval('public.businesses_id_seq'::regclass);
+
+
+--
 -- Name: tags id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -323,6 +362,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.books
     ADD CONSTRAINT books_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: businesses businesses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.businesses
+    ADD CONSTRAINT businesses_pkey PRIMARY KEY (id);
 
 
 --
@@ -435,6 +482,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230910025508'),
 ('20231001010609'),
 ('20231001193451'),
-('20231018010306');
+('20231018010306'),
+('20231103003633');
 
 

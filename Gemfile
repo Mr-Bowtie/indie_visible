@@ -35,6 +35,7 @@ gem 'redis', '~> 5.0'
 gem 'pundit', '~> 2.3'
 # Admin panel
 gem 'administrate', '~> 0.19.0'
+gem 'administrate-field-active_storage'
 # user auth
 gem 'devise', '~> 4.9'
 # Super fast asset compiler with Hot Module Refresh and auto-refresh capabilities on a local dev server
