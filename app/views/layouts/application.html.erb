@@ -17,9 +17,14 @@
   <body>
     <nav class="navbar mb-6">
       <div class="navbar-brand">
-        <%= link_to "IndieVisible", books_path, class: "title is-3 has-background-info has-text-white p-3"%>
+        <%= link_to "IndieVisible", books_path, class: "navbar-item title is-3 has-background-info has-text-white p-3"%>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-controller="navbar" data-action="click->navbar#toggleMenu" data-target="navMenu">
+  <span aria-hidden="true"></span>
+  <span aria-hidden="true"></span>
+  <span aria-hidden="true"></span>
+</a>
       </div>
-      <div class="navbar-menu">
+      <div class="navbar-menu" id="navMenu">
         <div class="navbar-start">
           <a class="navbar-item" href="<%= books_path %>">Books</a>
           <a class="navbar-item" href="<%= businesses_path %>">Businesses</a>
