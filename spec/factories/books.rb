@@ -42,15 +42,15 @@ FactoryBot.define do
     free { false }
     promo_active { false }
     tag { Tag.all.sample }
+    author { User.where(role: 'author').sample }
 
     after(:build) do |book|
       book.cover_image.attach(
-        io: File.open(Rails.root.join('public','generic_cover.png')),
+        io: File.open(Rails.root.join('public/generic_cover.png')),
         filename: 'generic_cover.png',
         content_type: 'image/png'
       )
     end
-
   end
 
   trait :has_tags do
