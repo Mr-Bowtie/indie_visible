@@ -146,7 +146,8 @@ CREATE TABLE public.books (
     kindle_unlimited boolean DEFAULT false,
     queer_rep boolean DEFAULT false,
     adult_content boolean DEFAULT false,
-    tag_id bigint
+    tag_id bigint,
+    author_id bigint
 );
 
 
@@ -425,6 +426,13 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
+-- Name: index_books_on_author_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_author_id ON public.books USING btree (author_id);
+
+
+--
 -- Name: index_books_on_tag_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -443,6 +451,14 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: books fk_rails_53d51ce16a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_53d51ce16a FOREIGN KEY (author_id) REFERENCES public.users(id);
 
 
 --
@@ -483,6 +499,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231001010609'),
 ('20231001193451'),
 ('20231018010306'),
-('20231103003633');
+('20231103003633'),
+('20231105214308');
 
 

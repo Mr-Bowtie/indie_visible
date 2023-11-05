@@ -19,14 +19,17 @@
 #  trigger_warning  :string           default("")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  author_id        :bigint
 #  tag_id           :bigint
 #
 # Indexes
 #
-#  index_books_on_tag_id  (tag_id)
+#  index_books_on_author_id  (author_id)
+#  index_books_on_tag_id     (tag_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (author_id => users.id)
 #  fk_rails_...  (tag_id => tags.id)
 #
 require 'rails_helper'
