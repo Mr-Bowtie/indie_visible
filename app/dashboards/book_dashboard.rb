@@ -21,11 +21,13 @@ class BookDashboard < Administrate::BaseDashboard
     promo_active: Field::Boolean,
     queer_rep: Field::Boolean,
     tag: Field::HasOne,
+    author: Field::HasOne,
     tags: Field::String,
     title: Field::String,
     trigger_warning: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    cover_image: Field::ActiveStorage,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -44,21 +46,19 @@ class BookDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    additional_links
-    adult_content
+    cover_image
+    title
     description
-    display_price
-    free
-    genres
-    kindle_unlimited
     one_liner_blurb
+    display_price
     primary_link
+    adult_content
+    free
+    kindle_unlimited
     promo_active
     queer_rep
+    author
     tag
-    tags
-    title
-    trigger_warning
     created_at
     updated_at
   ].freeze
@@ -67,19 +67,18 @@ class BookDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    cover_image
     additional_links
     adult_content
     description
     display_price
     free
-    genres
     kindle_unlimited
     one_liner_blurb
     primary_link
     promo_active
     queer_rep
     tag
-    tags
     title
     trigger_warning
   ].freeze

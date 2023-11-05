@@ -16,7 +16,8 @@ class UserDashboard < Administrate::BaseDashboard
     remember_created_at: Field::DateTime,
     reset_password_sent_at: Field::DateTime,
     reset_password_token: Field::String,
-    role: Field::Select
+    role: Field::Select,
+    books: Field::HasMany.with_options(foreign_key: 'author_id')
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -36,6 +37,7 @@ class UserDashboard < Administrate::BaseDashboard
     id
     email
     role
+    books
     reset_password_sent_at
   ].freeze
 
@@ -45,6 +47,7 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     email
     role
+    books
     encrypted_password
     remember_created_at
     reset_password_sent_at

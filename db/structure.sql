@@ -253,7 +253,8 @@ CREATE TABLE public.users (
     reset_password_token character varying,
     reset_password_sent_at timestamp(6) without time zone,
     remember_created_at timestamp(6) without time zone,
-    role integer DEFAULT 0
+    role integer DEFAULT 0,
+    name character varying
 );
 
 
@@ -500,6 +501,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231001193451'),
 ('20231018010306'),
 ('20231103003633'),
-('20231105214308');
+('20231105214308'),
+('20231105223253');
 
 
