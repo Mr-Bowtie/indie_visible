@@ -1,0 +1,20 @@
+<div class="container">
+  <h1 class="title is-1"><%= @author.name %></h1>
+  <% if @author.photo.attached? %>
+    <%= image_tag @author.photo, size: "500" %>
+  <% end %>
+  <h2 class="subtitle is-2">About the author</h2>
+  <p class="mb-3"><%= @author.about %></p>
+  <h2 class="subtitle is-3">Links</h2>
+  <div class="mb-2">
+    <strong style="display: block" class="mb-2">Website:</strong>
+      <a href="<%= @author.website_url %>" target="_blank"><%= @author.website_url %></a>
+  </div>
+  <div>
+    <strong style="display: block" class="mb-2">Socials:</strong>
+    <% @author.social_links.each do |link| %>
+      <div><a href="<%= link %>"><%= link %></a></div>
+    <% end %>
+  </div>
+
+</div>

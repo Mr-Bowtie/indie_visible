@@ -17,7 +17,7 @@ class BookDashboard < Administrate::BaseDashboard
     genres: Field::String,
     kindle_unlimited: Field::Boolean,
     one_liner_blurb: Field::String,
-    primary_link: Field::String,
+    primary_link: Field::Url,
     promo_active: Field::Boolean,
     queer_rep: Field::Boolean,
     tag: Field::HasOne,

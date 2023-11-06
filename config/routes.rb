@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :businesses
   resources :books
   get 'users/index'
+  get 'authors/:id', to: 'users#author_show'
   namespace :admin do
     resources :users
     resources :tags

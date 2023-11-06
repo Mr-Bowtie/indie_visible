@@ -5,6 +5,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  about                  :text
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  name                   :string
@@ -12,6 +13,8 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :integer          default("author")
+#  social_links           :string           default([]), is an Array
+#  website_url            :string
 #
 # Indexes
 #
