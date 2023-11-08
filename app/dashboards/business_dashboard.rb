@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class BookDashboard < Administrate::BaseDashboard
+class BusinessDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,25 +9,13 @@ class BookDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    additional_links: Field::String,
-    adult_content: Field::Boolean,
-    description: Field::Text,
-    display_price: Field::String,
-    free: Field::Boolean,
-    genres: Field::String,
-    kindle_unlimited: Field::Boolean,
-    one_liner_blurb: Field::String,
-    primary_link: Field::Url,
-    promo_active: Field::Boolean,
-    queer_rep: Field::Boolean,
-    tag: Field::HasOne,
-    author: Field::HasOne,
-    tags: Field::String,
-    title: Field::String,
-    trigger_warning: Field::String,
+    # logo_image_attachment: Field::HasOne,
+    # logo_image_blob: Field::HasOne,
+    logo_image: Field::ActiveStorage,
+    name: Field::String,
+    website_url: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    cover_image: Field::ActiveStorage,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -37,28 +25,16 @@ class BookDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    additional_links
-    adult_content
-    description
+    name
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    cover_image
-    title
-    description
-    one_liner_blurb
-    display_price
-    primary_link
-    adult_content
-    free
-    kindle_unlimited
-    promo_active
-    queer_rep
-    author
-    tag
+    logo_image
+    name
+    website_url
     created_at
     updated_at
   ].freeze
@@ -67,20 +43,9 @@ class BookDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    cover_image
-    additional_links
-    adult_content
-    description
-    display_price
-    free
-    kindle_unlimited
-    one_liner_blurb
-    primary_link
-    promo_active
-    queer_rep
-    tag
-    title
-    trigger_warning
+    logo_image
+    name
+    website_url
   ].freeze
 
   # COLLECTION_FILTERS
@@ -95,10 +60,10 @@ class BookDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how books are displayed
+  # Overwrite this method to customize how businesses are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(book)
-  #   "Book ##{book.id}"
+  # def display_resource(business)
+  #   "Business ##{business.id}"
   # end
 end

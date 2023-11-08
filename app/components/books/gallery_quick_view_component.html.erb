@@ -7,6 +7,7 @@
   <div class="modal-background" data-action="click->books--quick-view#close"></div>
   <div class="modal-content has-background-white">
     <h1 class="title is-2"><%= book.title %></h1>
+    <h2 class="subtitle is-3">By: <a href="/authors/<%= book.author.id %>"><%= book.author.name %></a></h2>
 
     <% unless book.tag.nil? %>
       <a href="/books?tag=<%= book.tag.id %>" class="subtitle">Tag: <%= book.tag.name %></a>

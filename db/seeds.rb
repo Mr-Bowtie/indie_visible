@@ -11,16 +11,14 @@
   FactoryBot.create(:tag)
 end
 
+5.times do
+  FactoryBot.create(:user, :is_author)
+end
 
 25.times do
   FactoryBot.create(:book, :has_flags)
 end
 
-5.times do
-  FactoryBot.create(:user, :author)
-end
-
 2.times do
   FactoryBot.create(:user, :admin)
 end
-

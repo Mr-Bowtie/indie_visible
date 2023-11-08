@@ -6,6 +6,8 @@ import { app } from "./app"
 
 import Books__QuickViewController from "./books/quick_view_controller"
 import Books__CardController from "./books/card_controller"
+import NavbarController from "./navbar_controller.js"
 
 app.register("books--quick-view", Books__QuickViewController)
 app.register("books--card", Books__CardController)
+app.register("navbar", NavbarController)

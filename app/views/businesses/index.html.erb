@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container">
+  <h1 class="title is-1">Businesses</h1>
+
+  <div id="businesses" class="tile is-ancestor is-flex-wrap-wrap">
+    <% @businesses.each do |business| %>
+      <%= render business %>
+    <% end %>
+  </div>
+</div>

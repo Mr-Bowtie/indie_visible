@@ -146,7 +146,8 @@ CREATE TABLE public.books (
     kindle_unlimited boolean DEFAULT false,
     queer_rep boolean DEFAULT false,
     adult_content boolean DEFAULT false,
-    tag_id bigint
+    tag_id bigint,
+    author_id bigint
 );
 
 
@@ -167,6 +168,38 @@ CREATE SEQUENCE public.books_id_seq
 --
 
 ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
+
+
+--
+-- Name: businesses; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.businesses (
+    id bigint NOT NULL,
+    name character varying,
+    website_url character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: businesses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.businesses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: businesses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.businesses_id_seq OWNED BY public.businesses.id;
 
 
 --
@@ -220,7 +253,11 @@ CREATE TABLE public.users (
     reset_password_token character varying,
     reset_password_sent_at timestamp(6) without time zone,
     remember_created_at timestamp(6) without time zone,
-    role integer DEFAULT 0
+    role integer DEFAULT 0,
+    name character varying,
+    website_url character varying,
+    about text,
+    social_links character varying[] DEFAULT '{}'::character varying[]
 );
 
 
@@ -269,6 +306,13 @@ ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAU
 --
 
 ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
+
+
+--
+-- Name: businesses id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.businesses ALTER COLUMN id SET DEFAULT nextval('public.businesses_id_seq'::regclass);
 
 
 --
@@ -326,6 +370,14 @@ ALTER TABLE ONLY public.books
 
 
 --
+-- Name: businesses businesses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.businesses
+    ADD CONSTRAINT businesses_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -378,6 +430,13 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
+-- Name: index_books_on_author_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_author_id ON public.books USING btree (author_id);
+
+
+--
 -- Name: index_books_on_tag_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -396,6 +455,14 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: books fk_rails_53d51ce16a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_53d51ce16a FOREIGN KEY (author_id) REFERENCES public.users(id);
 
 
 --
@@ -435,6 +502,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230910025508'),
 ('20231001010609'),
 ('20231001193451'),
-('20231018010306');
+('20231018010306'),
+('20231103003633'),
+('20231105214308'),
+('20231105223253'),
+('20231106011309');
 
 

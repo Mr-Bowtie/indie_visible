@@ -19,14 +19,17 @@
 #  trigger_warning  :string           default("")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  author_id        :bigint
 #  tag_id           :bigint
 #
 # Indexes
 #
-#  index_books_on_tag_id  (tag_id)
+#  index_books_on_author_id  (author_id)
+#  index_books_on_tag_id     (tag_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (author_id => users.id)
 #  fk_rails_...  (tag_id => tags.id)
 #
 FactoryBot.define do
@@ -39,15 +42,15 @@ FactoryBot.define do
     free { false }
     promo_active { false }
     tag { Tag.all.sample }
+    author { User.where(role: 'author').sample }
 
     after(:build) do |book|
       book.cover_image.attach(
-        io: File.open(Rails.root.join('public','generic_cover.png')),
+        io: File.open(Rails.root.join('public/generic_cover.png')),
         filename: 'generic_cover.png',
         content_type: 'image/png'
       )
     end
-
   end
 
   trait :has_tags do

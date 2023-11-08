@@ -3,12 +3,15 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :businesses
   resources :books
   get 'users/index'
+  get 'authors/:id', to: 'users#author_show'
   namespace :admin do
     resources :users
     resources :tags
     resources :books
+    resources :businesses
 
     root to: 'users#index'
   end
