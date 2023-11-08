@@ -12,16 +12,17 @@ By default, the relationship is rendered as a link to the associated object.
   An instance of [Administrate::Field::BelongsTo][1].
   A wrapper around the belongs_to relationship pulled from the database.
 
-[1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/BelongsTo
-%>
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/BelongsTo %>
 
-<% if field.data %>
-  <% if accessible_action?(field.data, :show) %>
-    <%= link_to(
-      field.display_associated_resource,
-      [namespace, field.data],
-    ) %>
-  <% else %>
-    <%= field.display_associated_resource %>
+  <% if field.data %>
+    <% if accessible_action?(field.data, :show) %>
+      <%= link_to(
+        # INFO: this means that any class used with this association will have to respond to name
+        # TODO: refactor to add a fall back if associated class does not have a name defined
+        field.data.name,
+        [namespace, field.data]
+      ) %>
+    <% else %>
+      <%= field.display_associated_resource %>
+    <% end %>
   <% end %>
-<% end %>
