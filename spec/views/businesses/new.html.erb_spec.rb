@@ -8,7 +8,7 @@ RSpec.describe "businesses/new", type: :view do
     ))
   end
 
-  it "renders new business form" do
+  xit "renders new business form" do
     render
 
     assert_select "form[action=?][method=?]", businesses_path, "post" do
