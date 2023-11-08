@@ -37,9 +37,10 @@ class BookDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    additional_links
-    adult_content
-    description
+    title
+    author
+    tag
+    free
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
