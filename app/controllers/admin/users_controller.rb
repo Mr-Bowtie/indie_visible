@@ -41,6 +41,9 @@ module Admin
     #     permit(dashboard.permitted_attributes(action_name)).
     #     transform_values { |value| value == "" ? nil : value }
     # end
+    def resource_params
+      params.require(:user).permit(:about, :email, :name, :role, :social_links, :photo, :website_url, book_ids: [])
+    end
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
