@@ -20,7 +20,8 @@ By default, the relationship is rendered as a link to the associated object.
         # INFO: this means that any class used with this association will have to respond to name
         # TODO: refactor to add a fall back if associated class does not have a name defined
         field.data.name,
-        [namespace, field.data]
+        [namespace, field.data],
+        class: "has-text-link"
       ) %>
     <% else %>
       <%= field.data.name %>
