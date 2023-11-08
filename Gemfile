@@ -23,7 +23,7 @@ gem 'stimulus-rails'
 gem 'cssbundling-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# Windows does not include zone info files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap'
@@ -38,6 +38,7 @@ gem 'administrate', '~> 0.19.0'
 gem 'administrate-field-active_storage'
 # user auth
 gem 'devise', '~> 4.9'
+gem 'devise_invitable'
 # Super fast asset compiler with Hot Module Refresh and auto-refresh capabilities on a local dev server
 gem 'vite_rails', '~> 3.0'
 # css framework
