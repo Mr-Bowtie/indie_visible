@@ -9,34 +9,60 @@ By default, it renders:
 - Content for a search bar
   (if provided by a `content_for` block in a nested page)
 - Flashes
-- Links to stylesheets and JavaScripts
-%>
+- Links to stylesheets and JavaScripts %>
+  <!DOCTYPE html>
+  <html lang="<%= I18n.locale %>">
+    <head>
+      <meta charset="utf-8">
+      <meta name="ROBOTS" content="NOODP">
+      <meta name="viewport" content="initial-scale=1">
+      <title>
+        <%= content_for(:title) %>
+        -
+        <%= application_title %>
+      </title>
+      <%= render "stylesheet" %>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag if defined?(csp_meta_tag) %>
+    </head>
+    <body>
+      <%= render "icons" %>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <%= link_to "IndieVisible",
+          books_path,
+          class: "navbar-item title is-3 has-background-info has-text-white p-3" %>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <% if signed_in? %>
+                <span class="mr-3">
+                  Signed in as:
+                  <%= current_user.email %>
+                </span>
+                <%= button_to "Sign out",
+                destroy_user_session_path,
+                method: :delete,
+                class: "button is-danger" %>
+              <% else %>
+                <%= link_to "Sign in", user_session_path, class: "button is-primary" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-<!DOCTYPE html>
-<html lang="<%= I18n.locale %>">
-<head>
-  <meta charset="utf-8">
-  <meta name="ROBOTS" content="NOODP">
-  <meta name="viewport" content="initial-scale=1">
-  <title>
-    <%= content_for(:title) %> - <%= application_title %>
-  </title>
-  <%= render "stylesheet" %>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag if defined?(csp_meta_tag) %>
-</head>
-<body>
-  <%= render "icons" %>
+      <div class="app-container">
 
-  <div class="app-container">
-    <%= render "navigation" -%>
+        <%= render "navigation" -%>
 
-    <main class="main-content">
-      <%= render "flashes" -%>
-      <%= yield %>
-    </main>
-  </div>
+        <main class="main-content">
+          <%= render "flashes" -%>
+          <%= yield %>
+        </main>
+      </div>
 
-  <%= render "javascript" %>
-</body>
-</html>
+      <%= render "javascript" %>
+    </body>
+  </html>
