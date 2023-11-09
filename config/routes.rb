@@ -19,9 +19,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root "books#index"
+  root 'books#index'
 
-  devise_for :users
+  devise_for :users, skip: :registrations
+  as :user do
+    # Allow users to edit and delete their own registrations but not create new ones
+    get 'users/edit' => 'devise/registrations#edit', as: 'edit_user_registration'
+    put 'users' => 'devise/registrations#update', as: 'user_registration'
+    delete 'users' => 'devise/registrations#destroy', as: 'destroy_user_registration'
+  end
   unless Rails.env.development?
     Sidekiq::Web.use Rack::Auth::Basic do |username, password|
       username == ENV.fetch('SIDEKIQ_WEB_USER') &&
