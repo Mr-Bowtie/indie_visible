@@ -19,20 +19,17 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    true
-    # user.admin? || record.id == user.id
+    user.admin? || record.id == user.id
   end
 
   def create?
-    true
-    # user.admin? || user.author?
+    user.admin? || user.author?
   end
 
   def update?
-    true
-    # return user.super_admin? if record.super_admin?
-    #
-    # user.admin? || record.id == user.id
+    return user.super_admin? if record.super_admin?
+
+    user.admin? || record.id == user.id
   end
 
   def destroy?
