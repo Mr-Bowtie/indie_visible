@@ -37,10 +37,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum role: { author: 0, admin: 1 }
+  enum role: { author: 0, admin: 1, super_admin: 2 }
   has_many :books, foreign_key: 'author_id'
   has_one_attached :photo
 
   # authors that have been sent invitations but havent logged in and filled out their profile will have an empty name
   scope :valid_authors, -> { where(role: 'author').where.not(name: '') }
+
+  
 end
