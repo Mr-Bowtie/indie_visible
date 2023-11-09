@@ -75,14 +75,18 @@
           </div>
         </div>
 
-        <div class="field" style="width: 100%;">
-          <%= form.label :author, class: "label" %>
-          <div class="control">
-            <div class="select is-rounded" style="width: 80%;">
-              <%= form.select :author_id, User.valid_authors.collect { |t| [t.name, t.id] } %>
+        <% if current_user.admin? %>
+          <div class="field" style="width: 100%;">
+            <%= form.label :author, class: "label" %>
+            <div class="control">
+              <div class="select is-rounded" style="width: 80%;">
+                <%= form.select :author_id, User.valid_authors.collect { |t| [t.name, t.id] } %>
+              </div>
             </div>
           </div>
-        </div>
+        <% else %>
+          <%= form.hidden_field :author_id, value: current_user.id %>
+        <% end %>
 
         <div class="field">
           <%= form.label :display_price, class: "label", style: "display: block" %>
