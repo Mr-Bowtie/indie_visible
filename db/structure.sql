@@ -257,7 +257,15 @@ CREATE TABLE public.users (
     name character varying,
     website_url character varying,
     about text,
-    social_links character varying[] DEFAULT '{}'::character varying[]
+    social_links character varying[] DEFAULT '{}'::character varying[],
+    invitation_token character varying,
+    invitation_created_at timestamp(6) without time zone,
+    invitation_sent_at timestamp(6) without time zone,
+    invitation_accepted_at timestamp(6) without time zone,
+    invitation_limit integer,
+    invited_by_type character varying,
+    invited_by_id bigint,
+    invitations_count integer DEFAULT 0
 );
 
 
@@ -451,6 +459,27 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 
 
 --
+-- Name: index_users_on_invitation_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_invitation_token ON public.users USING btree (invitation_token);
+
+
+--
+-- Name: index_users_on_invited_by; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_invited_by ON public.users USING btree (invited_by_type, invited_by_id);
+
+
+--
+-- Name: index_users_on_invited_by_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_invited_by_id ON public.users USING btree (invited_by_id);
+
+
+--
 -- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -506,6 +535,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231103003633'),
 ('20231105214308'),
 ('20231105223253'),
-('20231106011309');
+('20231106011309'),
+('20231108174716');
 
 

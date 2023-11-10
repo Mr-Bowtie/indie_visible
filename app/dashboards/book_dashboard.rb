@@ -20,8 +20,8 @@ class BookDashboard < Administrate::BaseDashboard
     primary_link: Field::Url,
     promo_active: Field::Boolean,
     queer_rep: Field::Boolean,
-    tag: Field::HasOne,
-    author: Field::HasOne,
+    tag: Field::BelongsTo,
+    author: Field::BelongsTo,
     tags: Field::String,
     title: Field::String,
     trigger_warning: Field::String,
@@ -37,9 +37,10 @@ class BookDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    additional_links
-    adult_content
-    description
+    title
+    author
+    tag
+    free
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

@@ -31,25 +31,11 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <% if signed_in? %>
-              <span class="mr-3">
-                Signed in as:
-                <%= current_user.email %>
-              </span>
-              <%= button_to "Sign out",
-              destroy_user_session_path,
-              method: :delete,
-              class: "button is-danger" %>
-            <% else %>
-              <%= link_to "Sign in", user_session_path, class: "button is-primary" %>
-            <% end %>
+            <%= link_to "Author Portal", admin_root_path, class: "button is-primary" %>
           </div>
         </div>
       </div>
     </nav>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
