@@ -12,21 +12,23 @@ to be displayed on a resource's edit form page.
   An instance of [Administrate::Field::Select][1].
   A wrapper around the attribute pulled from the database.
 
-[1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/Select
-%>
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/Select %>
 
-<div class="field-unit__label">
-  <%= f.label field.attribute %>
-</div>
-<div class="field-unit__field">
-  <%=
-    f.select(
-      field.attribute,
-      options_for_select(
-        field.selectable_options,
-        field.data,
-      ),
-      include_blank: field.include_blank_option
-    )
-  %>
-</div>
+  <div class="field-unit__label">
+    <%= f.label field.attribute %>
+  </div>
+  <div class="field-unit__field">
+    <% if field.resource.class == User && field.attribute == :role && !current_user.super_admin? %>
+      <%= f.select(
+        field.attribute,
+        options_for_select(field.selectable_options.reject {|o| o == "super_admin" }, field.data),
+        include_blank: field.include_blank_option
+      ) %>
+    <% else %>
+      <%= f.select(
+        field.attribute,
+        options_for_select(field.selectable_options, field.data),
+        include_blank: field.include_blank_option
+      ) %>
+    <% end %>
+  </div>
