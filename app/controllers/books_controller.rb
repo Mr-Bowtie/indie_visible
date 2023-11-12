@@ -10,9 +10,9 @@ class BooksController < ApplicationController
     # for each param with a real value, apply a filter to the books list
     # also add a string to the filters list to display active filters
     filtering_params.select { |_, val| val != '0' && val != '' }.each do |p_key, p_val|
-      collection = if p_key == 'tag'
-                     @filters.push(Tag.find(p_val).name)
-                     collection.send :filter_by_tag, p_val
+      collection = if p_key == 'genre'
+                     @filters.push(Genre.find(p_val).name)
+                     collection.send :filter_by_genre, p_val
                    else
                      # TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
                      @filters.push(p_key)

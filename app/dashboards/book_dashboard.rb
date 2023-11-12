@@ -20,7 +20,7 @@ class BookDashboard < Administrate::BaseDashboard
     primary_link: Field::Url,
     promo_active: Field::Boolean,
     queer_rep: Field::Boolean,
-    tag: Field::BelongsTo,
+    genre: Field::BelongsTo,
     author: Field::BelongsTo,
     tags: Field::String,
     title: Field::String,
@@ -40,7 +40,7 @@ class BookDashboard < Administrate::BaseDashboard
     title
     promo_active
     author
-    tag
+    genre
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -59,7 +59,7 @@ class BookDashboard < Administrate::BaseDashboard
     promo_active
     queer_rep
     author
-    tag
+    genre
     created_at
     updated_at
   ].freeze
@@ -79,7 +79,7 @@ class BookDashboard < Administrate::BaseDashboard
     primary_link
     promo_active
     queer_rep
-    tag
+    genre
     title
     trigger_warning
   ].freeze

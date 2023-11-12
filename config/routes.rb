@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'authors/:id', to: 'users#author_show'
   namespace :admin do
     resources :users
-    resources :tags
+    resources :genres
     resources :books
     resources :businesses
 

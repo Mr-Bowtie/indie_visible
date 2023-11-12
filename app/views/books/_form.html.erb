@@ -70,15 +70,15 @@
         "
       >
         <div class="field" style="width: 100%;">
-          <%= form.label :tag, class: "label" %>
+          <%= form.label :genre, class: "label" %>
           <div class="control">
             <div class="select is-rounded" style="width: 80%;">
-              <%= form.select :tag_id, Tag.all.collect { |t| [t.name, t.id] } %>
+              <%= form.select :genre_id, Genre.all.collect { |g| [g.name, g.id] } %>
             </div>
           </div>
-          <% if book.errors[:tag_id] %>
+          <% if book.errors[:genre_id] %>
             <ul>
-              <% book.errors.where(:tag_id).each do |error| %>
+              <% book.errors.where(:genre_id).each do |error| %>
                 <li class="has-text-danger"><%= error.full_message %></li>
               <% end %>
             </ul>

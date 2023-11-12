@@ -138,7 +138,6 @@ CREATE TABLE public.books (
     display_price character varying,
     free boolean DEFAULT false,
     promo_active boolean DEFAULT false,
-    genres character varying[] DEFAULT '{}'::character varying[],
     tags character varying[] DEFAULT '{}'::character varying[],
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
@@ -146,7 +145,7 @@ CREATE TABLE public.books (
     kindle_unlimited boolean DEFAULT false,
     queer_rep boolean DEFAULT false,
     spicy boolean DEFAULT false,
-    tag_id bigint,
+    genre_id bigint,
     author_id bigint
 );
 
@@ -203,19 +202,10 @@ ALTER SEQUENCE public.businesses_id_seq OWNED BY public.businesses.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+-- Name: genres; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.schema_migrations (
-    version character varying NOT NULL
-);
-
-
---
--- Name: tags; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.tags (
+CREATE TABLE public.genres (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp(6) without time zone NOT NULL,
@@ -224,10 +214,10 @@ CREATE TABLE public.tags (
 
 
 --
--- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: genres_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.tags_id_seq
+CREATE SEQUENCE public.genres_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -236,10 +226,19 @@ CREATE SEQUENCE public.tags_id_seq
 
 
 --
--- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: genres_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+ALTER SEQUENCE public.genres_id_seq OWNED BY public.genres.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
 
 
 --
@@ -326,10 +325,10 @@ ALTER TABLE ONLY public.businesses ALTER COLUMN id SET DEFAULT nextval('public.b
 
 
 --
--- Name: tags id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: genres id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
+ALTER TABLE ONLY public.genres ALTER COLUMN id SET DEFAULT nextval('public.genres_id_seq'::regclass);
 
 
 --
@@ -388,19 +387,19 @@ ALTER TABLE ONLY public.businesses
 
 
 --
+-- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.genres
+    ADD CONSTRAINT genres_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
-
-
---
--- Name: tags tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.tags
-    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
 
 
 --
@@ -447,10 +446,10 @@ CREATE INDEX index_books_on_author_id ON public.books USING btree (author_id);
 
 
 --
--- Name: index_books_on_tag_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_books_on_genre_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_books_on_tag_id ON public.books USING btree (tag_id);
+CREATE INDEX index_books_on_genre_id ON public.books USING btree (genre_id);
 
 
 --
@@ -501,7 +500,7 @@ ALTER TABLE ONLY public.books
 --
 
 ALTER TABLE ONLY public.books
-    ADD CONSTRAINT fk_rails_71bab61117 FOREIGN KEY (tag_id) REFERENCES public.tags(id);
+    ADD CONSTRAINT fk_rails_71bab61117 FOREIGN KEY (genre_id) REFERENCES public.genres(id);
 
 
 --
@@ -540,6 +539,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231106011309'),
 ('20231108174716'),
 ('20231112011754'),
-('20231112050129');
+('20231112050129'),
+('20231112052156');
 
 

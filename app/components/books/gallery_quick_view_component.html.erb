@@ -12,9 +12,9 @@
         <a href="/authors/<%= book.author.id %>"><%= book.author.name %></a></h2>
     <% end %>
 
-    <% unless book.tag.nil? %>
-      <a href="/books?tag=<%= book.tag.id %>" class="subtitle">Tag:
-        <%= book.tag.name %></a>
+    <% unless book.genre.nil? %>
+      <a href="/books?genre=<%= book.genre.id %>" class="subtitle">Genre:
+        <%= book.genre.name %></a>
     <% end %>
 
     <div class="mb-2">

@@ -5,9 +5,9 @@
     <div class="level-left"><h1 class="title is-1">Books</h1></div>
     <div class="level-right mb-2">
       <%= form_with url: "/books", method: :get do |form| %>
-        <%= form.label :tag, "Filter by tag:", class: "label pt-3" %>
+        <%= form.label :genre, "Filter by genre:", class: "label pt-3" %>
         <div class="select is-rounded is-small">
-          <%= form.select :tag, Tag.all.collect { |t| [t.name, t.id] }, include_blank: true %>
+          <%= form.select :genre, Genre.all.collect { |g| [g.name, g.id] }, include_blank: true %>
         </div>
         <%= form.label :attributes, "Filter by attribute:", class: "label" %>
         <div class="level">
