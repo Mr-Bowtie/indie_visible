@@ -46,7 +46,7 @@ module Admin
     end
 
     def resource_params
-      params.require(:user).permit(:about, :email, :name, :role, :social_links, :photo, :website_url, book_ids: [])
+      params.require(:user).permit(:about, :email, :name, :role, :facebook_url, :instagram_url, :tiktok_url, :photo, :website_url, book_ids: [])
     end
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions

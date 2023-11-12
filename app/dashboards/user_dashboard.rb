@@ -20,7 +20,9 @@ class UserDashboard < Administrate::BaseDashboard
     books: Field::HasMany.with_options(foreign_key: 'author_id'),
     name: Field::String,
     website_url: Field::Url,
-    social_links: Field::String,
+    facebook_url: Field::Url,
+    instagram_url: Field::Url,
+    tiktok_url: Field::Url,
     photo: Field::ActiveStorage,
     about: Field::Text
   }.freeze
@@ -46,7 +48,9 @@ class UserDashboard < Administrate::BaseDashboard
     photo
     about
     website_url
-    social_links
+    facebook_url
+    instagram_url
+    tiktok_url
     role
     books
     reset_password_sent_at
@@ -61,7 +65,9 @@ class UserDashboard < Administrate::BaseDashboard
     photo
     about
     website_url
-    social_links
+    facebook_url
+    instagram_url
+    tiktok_url
     role
     books
   ].freeze

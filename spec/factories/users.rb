@@ -44,7 +44,9 @@ FactoryBot.define do
     role { 'author' }
     about { Faker::Lorem.paragraphs(number: rand(2..10)).join(' ') }
     website_url { Faker::Internet.url }
-    social_links { Array.new(3) { Faker::Internet.url }}
+    facebook_url { Faker::Internet.url }
+    instagram_url { Faker::Internet.url }
+    tiktok_url { Faker::Internet.url }
 
     after(:build) do |book|
       book.photo.attach(
