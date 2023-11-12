@@ -1,0 +1,27 @@
+<%= form_with url: bulk_activation_toggle_books_path, method: :patch do |form| %>
+  <div class="container">
+    <div class="level mobile-centered-container">
+      <div class="level-left"><h1 class="title is-1">Select Books for Promo</h1></div>
+      <div class="level-right"><%= form.submit "Update active books", class: 'button is-info' %></div>
+    </div>
+    <div class="level">
+      <div class="level-left"></div>
+      <div class="level-right">
+        <%== pagy_bulma_nav(@pagy) %>
+      </div>
+    </div>
+    <div class="tile is-ancestor is-flex-wrap-wrap" id="books">
+      <div class="tile is-ancestor is-flex-wrap-wrap" id="books">
+        <% @books.each do |book| %>
+          <%= render(Books::GalleryActivationCardComponent.new(book: book)) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="level">
+      <div class="level-left"></div>
+      <div class="level-right">
+        <%== pagy_bulma_nav(@pagy) %>
+      </div>
+    </div>
+  </div>
+<% end %>

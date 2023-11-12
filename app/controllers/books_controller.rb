@@ -6,15 +6,15 @@ class BooksController < ApplicationController
   def index
     collection = Book.all
     @filters = []
-    
+
     # for each param with a real value, apply a filter to the books list
     # also add a string to the filters list to display active filters
-    filtering_params.select { |_, val| val != '0' && val != ''}.each do |p_key, p_val|
+    filtering_params.select { |_, val| val != '0' && val != '' }.each do |p_key, p_val|
       collection = if p_key == 'tag'
                      @filters.push(Tag.find(p_val).name)
                      collection.send :filter_by_tag, p_val
                    else
-                      #TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
+                     # TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
                      @filters.push(p_key)
                      collection.send p_key.to_sym
                    end
@@ -72,6 +72,25 @@ class BooksController < ApplicationController
     end
   end
 
+  def bulk_activation_toggle_form
+    @pagy, @books = pagy(Book.all)
+    render 'bulk_activation_toggle_form'
+  end
+
+  def bulk_activation_toggle
+    Book.transaction do
+      mass_activation_toggle_params[:books].each do |toggle_params|
+        binding.pry
+        book = Book.find(toggle_params[:id])
+        book.update!(toggle_params.except(:id))
+      end
+    end
+
+    redirect_to admin_root_path, notice: 'Books promo status successfully updated'
+  rescue StandardError => e
+    redirect_to admin_root_path, alert: "Error setting books promo status: #{e}"
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -86,5 +105,9 @@ class BooksController < ApplicationController
 
   def filtering_params
     params.permit(:tag, :adult_content, :kindle_unlimited, :queer_rep)
+  end
+
+  def mass_activation_toggle_params
+    params.permit(:authenticity_token, :commit, :_method, books: [:promo_active])
   end
 end
