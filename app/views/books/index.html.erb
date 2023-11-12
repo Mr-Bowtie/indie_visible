@@ -1,40 +1,46 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="container">
+  <div class="is-flex is-justify-content-center mb-6"><h1 class="title is-1">Books</h1></div>
   <div class="level mobile-centered-container">
-    <div class="level-left"><h1 class="title is-1">Books</h1></div>
-    <div class="level-right mb-2">
-      <%= form_with url: "/books", method: :get do |form| %>
-        <%= form.label :genre, "Filter by genre:", class: "label pt-3" %>
-        <div class="select is-rounded is-small">
-          <%= form.select :genre, Genre.all.collect { |g| [g.name, g.id] }, include_blank: true %>
-        </div>
-        <%= form.label :attributes, "Filter by attribute:", class: "label" %>
-        <div class="level">
-          <div class="control mr-2">
-            <%= form.label :spicy, class: "lable" %>
-            <%= form.check_box :spicy, class: "checkbox" %>
-          </div>
-          <div class="control mr-2">
-            <%= form.label :not_spicy, class: "lable" %>
-            <%= form.check_box :not_spicy, class: "checkbox" %>
-          </div>
-          <div class="control mr-2">
-            <%= form.label :kindle_unlimited, class: "lable" %>
-            <%= form.check_box :kindle_unlimited, class: "checkbox" %>
-          </div>
-          <div class="control mr-2">
-            <%= form.label :queer_rep, class: "lable" %>
-            <%= form.check_box :queer_rep, class: "checkbox" %>
-          </div>
-          <div class="control mr-2">
-            <%= form.label :free, class: "lable" %>
-            <%= form.check_box :free, class: "checkbox" %>
+    <%= form_with url: "/books", method: :get do |form| %>
+      <div class="level-left mb-2 is-align-items-baseline">
+        <div class="mr-2">
+          <%= form.label :genre, "Filter by genre:", class: "label" %>
+          <div class="select is-rounded is-small">
+            <%= form.select :genre,
+                        Genre.all.collect { |g| [g.name, g.id] },
+                        include_blank: true %>
           </div>
         </div>
-        <%= form.submit "apply filters", class: "button is-primary" %>
-      <% end %>
-    </div>
+        <div>
+          <%= form.label :attributes, "Filter by tag:", class: "label" %>
+          <div class="level">
+            <div class="control mr-2 is-flex is-align-items-center">
+              <%= form.label :spicy, class: "lable mr-2" %>
+              <%= form.check_box :spicy, class: "checkbox" %>
+            </div>
+            <div class="control mr-2 is-flex is-align-items-center">
+              <%= form.label :not_spicy, class: "lable mr-2" %>
+              <%= form.check_box :not_spicy, class: "checkbox" %>
+            </div>
+            <div class="control mr-2 is-flex is-align-items-center">
+              <%= form.label :kindle_unlimited, class: "lable mr-2" %>
+              <%= form.check_box :kindle_unlimited, class: "checkbox" %>
+            </div>
+            <div class="control mr-2 is-flex is-align-items-center">
+              <%= form.label :queer_rep, class: "lable mr-2" %>
+              <%= form.check_box :queer_rep, class: "checkbox" %>
+            </div>
+            <div class="control mr-2 is-flex is-align-items-center">
+              <%= form.label :free, class: "lable mr-2" %>
+              <%= form.check_box :free, class: "checkbox" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= form.submit "apply filters", class: "button is-primary" %>
+    <% end %>
   </div>
   <% unless @filters.empty? %>
     <div class="container mb-4">
