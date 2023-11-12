@@ -145,7 +145,7 @@ CREATE TABLE public.books (
     trigger_warning character varying DEFAULT ''::character varying,
     kindle_unlimited boolean DEFAULT false,
     queer_rep boolean DEFAULT false,
-    adult_content boolean DEFAULT false,
+    spicy boolean DEFAULT false,
     tag_id bigint,
     author_id bigint
 );
@@ -539,6 +539,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231105223253'),
 ('20231106011309'),
 ('20231108174716'),
-('20231112011754');
+('20231112011754'),
+('20231112050129');
 
 

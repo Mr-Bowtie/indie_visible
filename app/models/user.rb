@@ -8,6 +8,8 @@
 #  about                  :text
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  facebook_url           :string
+#  instagram_url          :string
 #  invitation_accepted_at :datetime
 #  invitation_created_at  :datetime
 #  invitation_limit       :integer
@@ -20,7 +22,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :integer          default("author")
-#  social_links           :string           default([]), is an Array
+#  tiktok_url             :string
 #  website_url            :string
 #  invited_by_id          :bigint
 #

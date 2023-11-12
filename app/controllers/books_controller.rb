@@ -80,7 +80,6 @@ class BooksController < ApplicationController
   def bulk_activation_toggle
     Book.transaction do
       mass_activation_toggle_params[:books].each do |toggle_params|
-        binding.pry
         book = Book.find(toggle_params[:id])
         book.update!(toggle_params.except(:id))
       end
@@ -100,11 +99,11 @@ class BooksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def book_params
-    params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :free, :promo_active, :tag_id, :adult_content, :kindle_unlimited, :queer_rep, :cover_image)
+    params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :free, :promo_active, :tag_id, :spicy, :kindle_unlimited, :queer_rep, :cover_image)
   end
 
   def filtering_params
-    params.permit(:tag, :adult_content, :kindle_unlimited, :queer_rep)
+    params.permit(:tag, :spicy, :kindle_unlimited, :queer_rep)
   end
 
   def mass_activation_toggle_params

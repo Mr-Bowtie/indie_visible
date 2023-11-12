@@ -4,7 +4,6 @@
 #
 #  id               :bigint           not null, primary key
 #  additional_links :string           default([]), is an Array
-#  adult_content    :boolean          default(FALSE)
 #  description      :text
 #  display_price    :string
 #  free             :boolean          default(FALSE)
@@ -14,6 +13,7 @@
 #  primary_link     :string
 #  promo_active     :boolean          default(FALSE)
 #  queer_rep        :boolean          default(FALSE)
+#  spicy            :boolean          default(FALSE)
 #  tags             :string           default([]), is an Array
 #  title            :string
 #  trigger_warning  :string           default("")
@@ -42,5 +42,5 @@ class Book < ApplicationRecord
   scope :filter_by_tag, ->(tag_id) { where('tag_id = ?', tag_id) }
   scope :kindle_unlimited, -> { where('kindle_unlimited = true') }
   scope :queer_rep, -> { where('queer_rep = true') }
-  scope :adult_content, -> { where('adult_content = true') }
+  scope :spicy, -> { where('spicy = true') }
 end

@@ -10,7 +10,7 @@ class BookDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     additional_links: Field::String,
-    adult_content: Field::Boolean,
+    spicy: Field::Boolean,
     description: Field::Text,
     display_price: Field::String,
     free: Field::Boolean,
@@ -53,7 +53,7 @@ class BookDashboard < Administrate::BaseDashboard
     one_liner_blurb
     display_price
     primary_link
-    adult_content
+    spicy
     free
     kindle_unlimited
     promo_active
@@ -70,7 +70,7 @@ class BookDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     cover_image
     additional_links
-    adult_content
+    spicy
     description
     display_price
     free

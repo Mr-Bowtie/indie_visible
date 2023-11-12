@@ -4,7 +4,6 @@
 #
 #  id               :bigint           not null, primary key
 #  additional_links :string           default([]), is an Array
-#  adult_content    :boolean          default(FALSE)
 #  description      :text
 #  display_price    :string
 #  free             :boolean          default(FALSE)
@@ -14,6 +13,7 @@
 #  primary_link     :string
 #  promo_active     :boolean          default(FALSE)
 #  queer_rep        :boolean          default(FALSE)
+#  spicy            :boolean          default(FALSE)
 #  tags             :string           default([]), is an Array
 #  title            :string
 #  trigger_warning  :string           default("")
@@ -63,7 +63,7 @@ FactoryBot.define do
 
   trait :has_flags do
     booleans = [true, false]
-    adult_content { booleans.sample }
+    spicy { booleans.sample }
     kindle_unlimited { booleans.sample }
     queer_rep { booleans.sample }
   end
