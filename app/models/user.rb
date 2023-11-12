@@ -44,5 +44,7 @@ class User < ApplicationRecord
   # authors that have been sent invitations but havent logged in and filled out their profile will have an empty name
   scope :valid_authors, -> { where(role: 'author').where.not(name: '') }
 
-  
+  def at_least_admin?
+    admin? || super_admin?
+  end
 end
