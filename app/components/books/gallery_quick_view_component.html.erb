@@ -35,10 +35,10 @@
     </div>
 
     <% if book.cover_image.attached? %>
-      <%= image_tag book.cover_image %>
+      <%= image_tag book.cover_image, class: "mb-2" %>
     <% end %>
 
-    <a href="<%= book.primary_link %>" class="button is-link auto-center is-medium">Buy Here</a>
+    <a href="<%= book.primary_link %>" class="mb-3 button is-link auto-center is-medium">Buy Here</a>
 
     <p><%= book.description %></p>
   </div>
