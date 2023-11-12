@@ -65,5 +65,6 @@ FactoryBot.define do
     spicy { booleans.sample }
     kindle_unlimited { booleans.sample }
     queer_rep { booleans.sample }
+    free { booleans.sample }
   end
 end

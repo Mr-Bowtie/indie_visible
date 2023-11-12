@@ -16,12 +16,20 @@
             <%= form.check_box :spicy, class: "checkbox" %>
           </div>
           <div class="control mr-2">
+            <%= form.label :not_spicy, class: "lable" %>
+            <%= form.check_box :not_spicy, class: "checkbox" %>
+          </div>
+          <div class="control mr-2">
             <%= form.label :kindle_unlimited, class: "lable" %>
             <%= form.check_box :kindle_unlimited, class: "checkbox" %>
           </div>
           <div class="control mr-2">
             <%= form.label :queer_rep, class: "lable" %>
             <%= form.check_box :queer_rep, class: "checkbox" %>
+          </div>
+          <div class="control mr-2">
+            <%= form.label :free, class: "lable" %>
+            <%= form.check_box :free, class: "checkbox" %>
           </div>
         </div>
         <%= form.submit "apply filters", class: "button is-primary" %>

@@ -42,4 +42,7 @@ class Book < ApplicationRecord
   scope :kindle_unlimited, -> { where('kindle_unlimited = true') }
   scope :queer_rep, -> { where('queer_rep = true') }
   scope :spicy, -> { where('spicy = true') }
+  scope :not_spicy, -> { where('spicy = false') }
+  scope :free, -> { where('free = true') }
+
 end
