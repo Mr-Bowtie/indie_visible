@@ -6,6 +6,9 @@
 >
   <div class="modal-background" data-action="click->books--quick-view#close"></div>
   <div class="modal-content has-background-white">
+    <div class="is-flex is-justify-content-right">
+      <button class="delete" data-action="click->books--quick-view#close"></button>
+    </div>
     <h1 class="title is-2"><%= book.title %></h1>
     <% unless book.author_id == nil %>
       <h2 class="subtitle is-3">By:
@@ -39,9 +42,4 @@
 
     <p><%= book.description %></p>
   </div>
-  <div
-    class="modal-close is-large"
-    aria-label="close"
-    data-action="click->books--quick-view#close"
-  ></div>
 </div>
