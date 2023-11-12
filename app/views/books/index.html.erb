@@ -11,7 +11,7 @@
             <%= form.select :genre,
                         Genre.all.collect { |g| [g.name, g.id] },
                         include_blank: true,
-                        selected: params[:genre]%>
+                        selected: params[:genre] %>
           </div>
         </div>
         <div>
@@ -27,7 +27,9 @@
             </div>
             <div class="control mr-2 is-flex is-align-items-center">
               <%= form.label :kindle_unlimited, class: "lable mr-2" %>
-              <%= form.check_box :kindle_unlimited, class: "checkbox", checked: params[:kindle_unlimited] == "1"  %>
+              <%= form.check_box :kindle_unlimited,
+                             class: "checkbox",
+                             checked: params[:kindle_unlimited] == "1" %>
             </div>
             <div class="control mr-2 is-flex is-align-items-center">
               <%= form.label :queer_rep, class: "lable mr-2" %>
@@ -49,8 +51,15 @@
         <div class="level-left">
           <p class="subtitle mb-1 mr-2">Active Filters:</p>
           <div class="tags">
-            <% @filters.each do |filter| %>
-              <span class="tag is-small is-info"><%= filter %></span>
+            <% @filters.each do |filter, value| %>
+              <span class="tag is-small is-info">
+                <%= filter == 'genre' ? value : filter %>
+                <%= link_to "×",
+                books_path(request.query_parameters.merge({ filter => nil })),
+                class: "delete is-small",
+                remote: true,
+                method: :get %>
+              </span>
             <% end %>
           </div>
         </div>
