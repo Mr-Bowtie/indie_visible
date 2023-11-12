@@ -6,7 +6,7 @@
   data-action="click->books--card#showModal"
 >
   <% if book.cover_image.attached? %>
-    <%= image_tag book.cover_image, size: "250"%>
+    <%= image_tag book.cover_image, size: "250" %>
   <% end %>
 
   <p data-action="click->books--card#showModal">
@@ -20,8 +20,12 @@
   </p>
 
   <p>
-    <strong>price:</strong>
-    <%= book.display_price %>
+    <strong>Price:</strong>
+    <% if book.free? %>
+      Free
+    <% else %>
+      <%= book.display_price %>
+    <% end %>
   </p>
 
   <div>
