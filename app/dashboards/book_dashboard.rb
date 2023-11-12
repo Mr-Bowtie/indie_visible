@@ -38,9 +38,9 @@ class BookDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     title
+    promo_active
     author
     tag
-    free
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
