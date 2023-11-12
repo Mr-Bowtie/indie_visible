@@ -55,7 +55,7 @@
               <span class="tag is-small is-info">
                 <%= filter == 'genre' ? value : filter %>
                 <%= link_to "×",
-                books_path(request.query_parameters.merge({ filter => nil })),
+                books_path(request.query_parameters.merge({ filter => '' })),
                 class: "delete is-small",
                 remote: true,
                 method: :get %>
