@@ -174,20 +174,22 @@
           <%= form.label :free, class: "label", style: "display: block" %>
         </div>
 
-        <div
-          class="
-            mr-4
-            mb-3
-            field
-            is-flex
-            is-flex-direction-row
-            is-align-items-center
-            is-justify-content-center
-          "
-        >
-          <%= form.check_box :promo_active, class: "checkbox mr-2" %>
-          <%= form.label :promo_active, class: "label", style: "display: block" %>
-        </div>
+        <% if current_user.admin? || current_user.super_admin? %>
+          <div
+            class="
+              mr-4
+              mb-3
+              field
+              is-flex
+              is-flex-direction-row
+              is-align-items-center
+              is-justify-content-center
+            "
+          >
+            <%= form.check_box :promo_active, class: "checkbox mr-2" %>
+            <%= form.label :promo_active, class: "label", style: "display: block" %>
+          </div>
+        <% end %>
       </div>
     </div>
 
