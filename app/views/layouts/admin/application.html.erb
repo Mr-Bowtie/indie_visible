@@ -41,6 +41,9 @@ By default, it renders:
                   Signed in as:
                   <%= current_user.email %>
                 </span>
+                <span class="tag has-background-info has-text-white mr-3">
+                  <%= current_user.role %>
+                </span>
                 <%= button_to "Sign out",
                 destroy_user_session_path,
                 method: :delete,
