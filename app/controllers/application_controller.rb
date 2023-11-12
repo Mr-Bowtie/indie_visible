@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
     devise_parameter_sanitizer.permit(:account_update, keys: [:role])
   end
+
+  def after_invite_path_for(inviter, invitee)
+    admin_root_path
+  end
 end 
