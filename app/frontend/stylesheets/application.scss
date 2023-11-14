@@ -36,6 +36,12 @@
 // @import "bulma/sass/layout/hero.sass";
 // @import "bulma/sass/layout/section.sass";
 
+
+$primary: #70b5c5;
+$link: #b4d2d9;
+$warning: #ccdde4;
+$danger: #8c5c32;
+$background: #efe7dc;
 @import 'bulma/bulma';
 
 input[type=checkbox] {
@@ -65,4 +71,12 @@ input[type=checkbox] {
 
 .wide-button {
   width: 100%;
+}
+
+.container {
+  max-width: 1000px !important;
+}
+
+.has-background-color {
+  background-color: $background;
 }
