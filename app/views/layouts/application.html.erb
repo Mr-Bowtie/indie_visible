@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="">
   <head>
     <title>Indievisible</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -15,10 +15,10 @@
   </head>
 
   <body>
-    <nav class="navbar mb-2">
+    <nav class="navbar mb-2 has-background-color">
       <div class="navbar-brand">
         <a href="<%= books_path %>">
-          <img src="https://storage.googleapis.com/indievisible_static/indie-visible-logo_1.jpg" alt="Logo of an open book with the words Indie Visible above" width="175">
+          <img src="https://storage.googleapis.com/indievisible_static/indie-visible-logo.png" alt="Logo of an open book with the words Indie Visible above" width="175">
         </a>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-controller="navbar" data-action="click->navbar#toggleMenu" data-target="navMenu">
   <span aria-hidden="true"></span>
@@ -29,7 +29,7 @@
       <div class="navbar-menu" id="navMenu">
         <div class="navbar-start">
           <a class="navbar-item" href="<%= books_path %>">Books</a>
-          <a class="navbar-item" href="<%= businesses_path %>">Businesses</a>
+          <a class="navbar-item" href="<%= businesses_path %>">Bookish Stores</a>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
