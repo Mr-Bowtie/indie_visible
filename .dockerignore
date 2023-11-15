@@ -36,6 +36,9 @@
 !/app/assets/builds/.keep
 /public/assets
 
+# ignore local gem files 
+/vendor
+
 # Vite Ruby
 /public/vite*
 # Vite uses dotenv and suggests to ignore local-only env files. See

@@ -32,7 +32,9 @@ ARG YARN_VERSION=1.22.19
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    npm install -g yarn@$YARN_VERSION && \
+    npm i -g corepack && \
+    corepack prepare yarn@$YARN_VERSION --activate && \
+
     rm -rf /tmp/node-build-master
 
 # Install application gems
