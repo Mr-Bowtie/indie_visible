@@ -1,90 +1,111 @@
 <p style="color: green"><%= notice %></p>
 
-<div class="container">
-  <div class="is-flex is-justify-content-center mb-6"><h1 class="title is-1">Books</h1></div>
-  <div class="level mobile-centered-container">
-    <%= form_with url: "/books", method: :get do |form| %>
-      <div class="level-left mb-2 is-align-items-baseline">
-        <div class="mr-2">
-          <%= form.label :genre, "Filter by genre:", class: "label" %>
-          <div class="select is-rounded is-small">
-            <%= form.select :genre,
-                        Genre.all.collect { |g| [g.name, g.id] },
-                        include_blank: true,
-                        selected: params[:genre] %>
+<% if @live_promo && !@books.empty? %>
+  <div class="container">
+    <div class="is-flex is-justify-content-center mb-6"><h1 class="title is-1">Books</h1></div>
+    <div class="level mobile-centered-container">
+      <%= form_with url: "/books", method: :get do |form| %>
+        <div class="level-left mb-2 is-align-items-baseline">
+          <div class="mr-2">
+            <%= form.label :genre, "Filter by genre:", class: "label" %>
+            <div class="select is-rounded is-small">
+              <%= form.select :genre,
+                          Genre.all.collect { |g| [g.name, g.id] },
+                          include_blank: true,
+                          selected: params[:genre] %>
+            </div>
+          </div>
+          <div>
+            <%= form.label :attributes, "Filter by tag:", class: "label" %>
+            <div class="level">
+              <div class="control mr-2 is-flex is-align-items-center">
+                <%= form.label :spicy, class: "lable mr-2" %>
+                <%= form.check_box :spicy, class: "checkbox", checked: params[:spicy] == "1" %>
+              </div>
+              <div class="control mr-2 is-flex is-align-items-center">
+                <%= form.label :not_spicy, class: "lable mr-2" %>
+                <%= form.check_box :not_spicy, class: "checkbox", checked: params[:not_spicy] == "1" %>
+              </div>
+              <div class="control mr-2 is-flex is-align-items-center">
+                <%= form.label :kindle_unlimited, class: "lable mr-2" %>
+                <%= form.check_box :kindle_unlimited,
+                               class: "checkbox",
+                               checked: params[:kindle_unlimited] == "1" %>
+              </div>
+              <div class="control mr-2 is-flex is-align-items-center">
+                <%= form.label :queer_rep, class: "lable mr-2" %>
+                <%= form.check_box :queer_rep, class: "checkbox", checked: params[:queer_rep] == "1" %>
+              </div>
+              <div class="control mr-2 is-flex is-align-items-center">
+                <%= form.label :free, class: "lable mr-2" %>
+                <%= form.check_box :free, class: "checkbox", checked: params[:free] == "1" %>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <%= form.label :attributes, "Filter by tag:", class: "label" %>
-          <div class="level">
-            <div class="control mr-2 is-flex is-align-items-center">
-              <%= form.label :spicy, class: "lable mr-2" %>
-              <%= form.check_box :spicy, class: "checkbox", checked: params[:spicy] == "1" %>
-            </div>
-            <div class="control mr-2 is-flex is-align-items-center">
-              <%= form.label :not_spicy, class: "lable mr-2" %>
-              <%= form.check_box :not_spicy, class: "checkbox", checked: params[:not_spicy] == "1" %>
-            </div>
-            <div class="control mr-2 is-flex is-align-items-center">
-              <%= form.label :kindle_unlimited, class: "lable mr-2" %>
-              <%= form.check_box :kindle_unlimited,
-                             class: "checkbox",
-                             checked: params[:kindle_unlimited] == "1" %>
-            </div>
-            <div class="control mr-2 is-flex is-align-items-center">
-              <%= form.label :queer_rep, class: "lable mr-2" %>
-              <%= form.check_box :queer_rep, class: "checkbox", checked: params[:queer_rep] == "1" %>
-            </div>
-            <div class="control mr-2 is-flex is-align-items-center">
-              <%= form.label :free, class: "lable mr-2" %>
-              <%= form.check_box :free, class: "checkbox", checked: params[:free] == "1" %>
+        <%= form.submit "apply filters", class: "button is-primary" %>
+      <% end %>
+    </div>
+    <% unless @filters.empty? %>
+      <div class="container mb-4">
+        <div class="level is-justify-content-space-around mobile-centered-container">
+          <div class="level-left">
+            <p class="subtitle mb-1 mr-2">Active Filters:</p>
+            <div class="tags">
+              <% @filters.each do |filter, value| %>
+                <span class="tag is-small is-info">
+                  <%= filter == "genre" ? value : filter %>
+                  <%= link_to "×",
+                  books_path(request.query_parameters.merge({ filter => "" })),
+                  class: "delete is-small",
+                  remote: true,
+                  method: :get %>
+                </span>
+              <% end %>
             </div>
           </div>
+        </div>
+        <div class="is-flex is-justify-content-center mb-2">
+          <%= link_to "Clear filters", books_path, class: "button is-danger is-outlined" %>
         </div>
       </div>
-      <%= form.submit "apply filters", class: "button is-primary" %>
     <% end %>
-  </div>
-  <% unless @filters.empty? %>
-    <div class="container mb-4">
-      <div class="level is-justify-content-space-around mobile-centered-container">
-        <div class="level-left">
-          <p class="subtitle mb-1 mr-2">Active Filters:</p>
-          <div class="tags">
-            <% @filters.each do |filter, value| %>
-              <span class="tag is-small is-info">
-                <%= filter == 'genre' ? value : filter %>
-                <%= link_to "×",
-                books_path(request.query_parameters.merge({ filter => '' })),
-                class: "delete is-small",
-                remote: true,
-                method: :get %>
-              </span>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="is-flex is-justify-content-center mb-2">
-        <%= link_to "Clear filters", books_path, class: "button is-danger is-outlined" %>
+    <div class="level">
+      <div class="level-left"></div>
+      <div class="level-right">
+        <%== pagy_bulma_nav(@pagy) %>
       </div>
     </div>
-  <% end %>
-  <div class="level">
-    <div class="level-left"></div>
-    <div class="level-right">
-      <%== pagy_bulma_nav(@pagy) %>
+    <div class="tile is-ancestor is-flex-wrap-wrap" id="books">
+      <% @books.each do |book| %>
+        <%= render(Books::GalleryCardComponent.new(book: book)) %>
+        <%= render(Books::GalleryQuickViewComponent.new(book: book)) %>
+      <% end %>
+    </div>
+    <div class="level mb-6">
+      <div class="level-left"></div>
+      <div class="level-right">
+        <%== pagy_bulma_nav(@pagy) %>
+      </div>
     </div>
   </div>
-  <div class="tile is-ancestor is-flex-wrap-wrap" id="books">
-    <% @books.each do |book| %>
-      <%= render(Books::GalleryCardComponent.new(book: book)) %>
-      <%= render(Books::GalleryQuickViewComponent.new(book: book)) %>
-    <% end %>
+<% elsif @live_promo && @books.empty? %>
+  <div class="is-flex is-justify-content-center mb-6"><h1 class="title is-1">We'll be live soon. Hang tight!</h1></div>
+<% elsif @upcoming_promo %>
+  <div class="is-flex is-flex-direction-column is-align-items-center mb-6">
+    <h1 class="title is-1">
+      New promo incoming
+    </h1>
+    <h2 class="subtitle is-2">
+      <strong class="has-text-primary"><%= @upcoming_promo.title %></strong>
+      will run
+      <%= @upcoming_promo.start_date %>
+      through
+      <%= @upcoming_promo.end_date %>
+    </h2>
   </div>
-  <div class="level mb-6">
-    <div class="level-left"></div>
-    <div class="level-right">
-      <%== pagy_bulma_nav(@pagy) %>
-    </div>
-  </div>
-</div>
+
+<% else %>
+  <div class="is-flex is-justify-content-center mb-6"><h1 class="title is-1">Check back later for info on the next promotion</h1></div>
+
+<% end %>

@@ -4,14 +4,14 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    collection = Book.where(promo_active: true).order("RANDOM()")
+    collection = Book.where(promo_active: true).order('RANDOM()')
     @filters = {}
 
     # for each param with a real value, apply a filter to the books list
     # also add a string to the filters list to display active filters
     filtering_params.select { |_, val| val != '0' && val != '' }.each do |p_key, p_val|
       collection = if p_key == 'genre'
-                     @filters[p_key] = (Genre.find(p_val).name)
+                     @filters[p_key] = Genre.find(p_val).name
                      collection.send :filter_by_genre, p_val
                    else
                      # TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
@@ -21,6 +21,8 @@ class BooksController < ApplicationController
     end
 
     @pagy, @books = pagy(collection)
+    @live_promo = Promo.active.first
+    @upcoming_promo = Promo.next_up.first
   end
 
   # GET /books/1 or /books/1.json

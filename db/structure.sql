@@ -233,6 +233,39 @@ ALTER SEQUENCE public.genres_id_seq OWNED BY public.genres.id;
 
 
 --
+-- Name: promos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.promos (
+    id bigint NOT NULL,
+    title character varying,
+    start_date date,
+    end_date date,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: promos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.promos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: promos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.promos_id_seq OWNED BY public.promos.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -332,6 +365,13 @@ ALTER TABLE ONLY public.genres ALTER COLUMN id SET DEFAULT nextval('public.genre
 
 
 --
+-- Name: promos id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promos ALTER COLUMN id SET DEFAULT nextval('public.promos_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -392,6 +432,14 @@ ALTER TABLE ONLY public.businesses
 
 ALTER TABLE ONLY public.genres
     ADD CONSTRAINT genres_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: promos promos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promos
+    ADD CONSTRAINT promos_pkey PRIMARY KEY (id);
 
 
 --
@@ -540,6 +588,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231108174716'),
 ('20231112011754'),
 ('20231112050129'),
-('20231112052156');
+('20231112052156'),
+('20231114224041');
 
 

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :genres
     resources :books
     resources :businesses
+    resources :promos
 
     root to: 'users#index'
   end
