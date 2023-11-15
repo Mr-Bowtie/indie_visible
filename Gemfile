@@ -96,3 +96,7 @@ group :test do
   gem 'rspec-rails'
 end
 
+
+gem "sentry-ruby", "~> 5.13"
+
+gem "sentry-rails", "~> 5.13"
