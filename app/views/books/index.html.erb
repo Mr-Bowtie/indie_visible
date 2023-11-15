@@ -2,7 +2,10 @@
 
 <% if @live_promo && !@books.empty? %>
   <div class="container">
-    <div class="is-flex is-justify-content-center mb-6"><h1 class="title is-1">Books</h1></div>
+
+    <div class="is-flex is-flex-direction-column is-align-items-center mb-6">
+      <h1 class="title is-1">Books</h1>
+    </div>
     <div class="level mobile-centered-container">
       <%= form_with url: "/books", method: :get do |form| %>
         <div class="level-left mb-2 is-align-items-baseline">

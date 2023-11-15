@@ -17,14 +17,26 @@
   <body>
     <nav class="navbar mb-2 has-background-color">
       <div class="navbar-brand">
-        <a href="<%= books_path %>">
-          <img src="https://storage.googleapis.com/indievisible_static/indie-visible-logo.png" alt="Logo of an open book with the words Indie Visible above" width="175">
+        <a href="<%= books_path %>" class="ml-3">
+          <img
+            src="https://storage.googleapis.com/indievisible_static/indie-visible-logo.png"
+            alt="Logo of an open book with the words Indie Visible above"
+            width="175"
+          >
         </a>
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-controller="navbar" data-action="click->navbar#toggleMenu" data-target="navMenu">
-  <span aria-hidden="true"></span>
-  <span aria-hidden="true"></span>
-  <span aria-hidden="true"></span>
-</a>
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-controller="navbar"
+          data-action="click->navbar#toggleMenu"
+          data-target="navMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
       <div class="navbar-menu" id="navMenu">
         <div class="navbar-start">
@@ -38,6 +50,13 @@
         </div>
       </div>
     </nav>
+    <div class="is-flex is-justify-content-center mb-4">
+      <img
+        src="https://storage.googleapis.com/indievisible_static/winter-wonderland-banner-3.png"
+        alt="Winter wonderland banner"
+      >
+
+    </div>
     <%= yield %>
   </body>
 </html>
