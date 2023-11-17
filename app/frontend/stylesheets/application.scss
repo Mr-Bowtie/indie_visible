@@ -36,9 +36,9 @@
 // @import "bulma/sass/layout/hero.sass";
 // @import "bulma/sass/layout/section.sass";
 
-
-$primary: #70b5c5;
-$link: #b4d2d9;
+// INFO: theme colors, also set in app/assets/stylesheets/administrate/application.scss
+$primary: #b4d2d9;
+$link: #70b5c5;
 $warning: #ccdde4;
 $danger: #8c5c32;
 $background: #efe7dc;
@@ -71,10 +71,6 @@ input[type=checkbox] {
 
 .wide-button {
   width: 100%;
-}
-
-.container {
-  max-width: 1000px !important;
 }
 
 .has-background-color {

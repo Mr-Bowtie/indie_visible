@@ -27,4 +27,14 @@
 @import "components/search";
 
 @import "utilities/text-color";
+
+// administrate was overwriting the css for the actual app because it also uses bulma;
+// So now I just set the same theme colors here
+
+$primary: #b4d2d9;
+$link: #70b5c5;
+$warning: #ccdde4;
+$danger: #8c5c32;
+$background: #efe7dc;
+
 @import "bulma"
