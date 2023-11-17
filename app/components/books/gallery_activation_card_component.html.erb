@@ -32,13 +32,13 @@
       <%= book.title %>
     </p>
 
+  </div>
     <%= fields_for "books[]", book do |book_fields| %>
       <div class="level">
         <div class="level-left">
-          <%= book_fields.label :promo_active, "Active", class: "label mr-2" %>
+          <%= book_fields.label :promo_active, "Active", class: "label mr-2 mb-0" %>
           <%= book_fields.check_box :promo_active, class: "checkbox", style: "display: inline" %>
         </div>
       </div>
     <% end %>
-  </div>
 </div>
