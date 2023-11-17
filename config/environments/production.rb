@@ -71,7 +71,7 @@ Rails.application.configure do
     port: 587,
     domain: 'IndieVisible',
     user_name: Rails.application.credentials.gmail_username,
-      password: Rails.application.credentials.gmail_password,
+    password: Rails.application.credentials.gmail_password,
     authentication: 'plain',
     enable_starttls_auto: true
   }
