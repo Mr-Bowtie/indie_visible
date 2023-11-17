@@ -9,13 +9,21 @@
       <%= image_tag book.cover_image %>
     <% end %>
 
-    <% if book.ready_for_promo? %>
+    <% if book.ready_for_promo? && book.author.profile_created? %>
       <div class="tag has-background-warning">
         Ready to go live
       </div>
+    <% elsif book.ready_for_promo? && !book.author.profile_created? %>
+      <div class="tag has-background-danger has-text-white">
+        Author missing profile information
+      </div>
+    <% elsif book.author.profile_created? && !book.ready_for_promo? %>
+      <div class="tag has-background-danger has-text-white">
+        Book missing details
+      </div>
     <% else %>
       <div class="tag has-background-danger has-text-white">
-        Needs more info
+        Book and Author missing details
       </div>
     <% end %>
 

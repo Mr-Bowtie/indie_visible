@@ -35,6 +35,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  PROMO_REQUIRED_ATTRIBUTES = %i[name email about]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
@@ -48,5 +49,10 @@ class User < ApplicationRecord
 
   def at_least_admin?
     admin? || super_admin?
+  end
+
+  def profile_created?
+    PROMO_REQUIRED_ATTRIBUTES.all? { |attr| send(attr).present? } &&
+    photo.attached?
   end
 end

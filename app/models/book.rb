@@ -47,7 +47,7 @@ class Book < ApplicationRecord
   scope :free, -> { where('free = true') }
 
   def ready_for_promo?
-    PROMO_REQUIRED_ATTRIBUTES.all?(&:present?) &&
+    PROMO_REQUIRED_ATTRIBUTES.all? {|attr| send(attr).present? } &&
     cover_image.attached?
   end
 end
