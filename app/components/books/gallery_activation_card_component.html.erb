@@ -1,27 +1,36 @@
-<div
-  class="tile is-parent is-vertical is-3"
-  id="<%= dom_id book %>"
-  data-books--card-id="<%= book.id %>"
-  data-controller="books--card"
-  data-action="click->books--card#showModal"
->
-  <% if book.cover_image.attached? %>
-    <%= image_tag book.cover_image, size: "250" %>
-  <% end %>
+<div class="tile is-parent is-vertical is-2" id="<%= dom_id book %>">
+  <div
+    data-books--card-id="<%= book.id %>"
+    data-controller="books--card"
+    data-action="click->books--card#showModal"
+    class="is-flex is-flex-direction-column"
+  >
+    <% if book.cover_image.attached? %>
+      <%= image_tag book.cover_image %>
+    <% end %>
 
-  <p data-action="click->books--card#showModal">
-    <strong>Title:</strong>
-    <%= book.title %>
-  </p>
-
-  <%= fields_for "books[]", book do |book_fields| %>
-    <div class="level">
-      <div class="level-left">
-        <%= book_fields.label :promo_active, "Active", class: "label mr-2" %>
-        <%= book_fields.check_box :promo_active, class: "checkbox", style: "display: inline" %>
+    <% if book.ready_for_promo? %>
+      <div class="tag has-background-warning">
+        Ready to go live
       </div>
-    </div>
-  <% end %>
+    <% else %>
+      <div class="tag has-background-danger has-text-white">
+        Needs more info
+      </div>
+    <% end %>
+
+    <p>
+      <strong>Title:</strong>
+      <%= book.title %>
+    </p>
+
+    <%= fields_for "books[]", book do |book_fields| %>
+      <div class="level">
+        <div class="level-left">
+          <%= book_fields.label :promo_active, "Active", class: "label mr-2" %>
+          <%= book_fields.check_box :promo_active, class: "checkbox", style: "display: inline" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-
