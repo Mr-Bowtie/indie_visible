@@ -75,12 +75,12 @@
           </div>
         </div>
 
-        <% if current_user.admin? %>
+        <% if current_user.at_least_admin? %>
           <div class="field" style="width: 100%;">
             <%= form.label :author, class: "label" %>
             <div class="control">
               <div class="select is-rounded" style="width: 80%;">
-                <%= form.select :author_id, User.valid_authors.collect { |t| [t.name, t.id] } %>
+                <%= form.select :author_id, User.all.collect { |t| [t.name, t.id] } %>
               </div>
             </div>
           </div>
