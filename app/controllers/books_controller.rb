@@ -81,15 +81,15 @@ class BooksController < ApplicationController
 
   def bulk_activation_toggle
     Book.transaction do
-      mass_activation_toggle_params[:books].each do |toggle_params|
-        book = Book.find(toggle_params[:id])
-        book.update!(toggle_params.except(:id))
+      mass_activation_toggle_params[:books].each do |id, toggle_params|
+        book = Book.find(id)
+        book.update!(toggle_params)
       end
     end
 
-    redirect_to admin_root_path, notice: 'Books promo status successfully updated'
+    redirect_to admin_books_path, notice: 'Books promo status successfully updated'
   rescue StandardError => e
-    redirect_to admin_root_path, alert: "Error setting books promo status: #{e}"
+    redirect_to admin_books_path, alert: "Error setting books promo status: #{e}"
   end
 
   private
