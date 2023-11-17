@@ -75,7 +75,7 @@ class BooksController < ApplicationController
   end
 
   def bulk_activation_toggle_form
-    @pagy, @books = pagy(Book.all)
+    @pagy, @books = pagy(Book.all, items: 50)
     render 'bulk_activation_toggle_form'
   end
 
