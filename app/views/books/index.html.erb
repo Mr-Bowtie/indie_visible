@@ -97,11 +97,23 @@
 <% elsif @upcoming_promo %>
   <div class="is-flex is-flex-direction-column is-align-items-center mb-6">
     <h1 class="title is-1">
-      New promo incoming
+      Hold tight, new promo incoming!
     </h1>
+    <h2 class="subtitle is-2">
+      check out the
+      <a href="<%= businesses_path %>">Bookish Stores</a>
+      page while you wait
+    </h2>
   </div>
 
 <% else %>
-  <div class="is-flex is-justify-content-center mb-6"><h1 class="title is-1">Check back later for info on the next promotion</h1></div>
+  <div class="is-flex is-flex-direction-column is-align-items-center mb-6">
+    <h1 class="title is-1">Check back later for info on the next promotion</h1>
+    <h2 class="subtitle is-2">
+      check out the
+      <a href="<%= businesses_path %>">Bookish Stores</a>
+      page while you wait
+    </h2>
+  </div>
 
 <% end %>
