@@ -33,6 +33,7 @@
 #
 class Book < ApplicationRecord
   REQUIRED_ATTRIBUTES = %i[title display_price one_liner_blurb primary_link].freeze
+  PROMO_REQUIRED_ATTRIBUTES = %i[title display_price one_liner_blurb primary_link genre_id author_id].freeze
   validates(*REQUIRED_ATTRIBUTES, presence: true)
   belongs_to :genre
   belongs_to :author, class_name: 'User'
@@ -45,4 +46,8 @@ class Book < ApplicationRecord
   scope :not_spicy, -> { where('spicy = false') }
   scope :free, -> { where('free = true') }
 
+  def ready_for_promo?
+    PROMO_REQUIRED_ATTRIBUTES.all?(&:present?) &&
+    cover_image.attached?
+  end
 end
