@@ -7,12 +7,12 @@
   <div class="modal-background" data-action="click->books--quick-view#close"></div>
   <div class="modal-content has-background-white">
     <div class="is-flex is-justify-content-right">
-      <button class="delete" data-action="click->books--quick-view#close"></button>
+      <span class="delete" data-action="click->books--quick-view#close"></span>
     </div>
     <h1 class="title is-2"><%= book.title %></h1>
     <% unless book.author_id == nil %>
       <h2 class="subtitle is-3">By:
-        <a href="/authors/<%= book.author.id %>"><%= book.author.name %></a></h2>
+        <a href="/authors/<%= book.author.id %>" data-action="click->books--quick-view#unClip"><%= book.author.name %></a></h2>
     <% end %>
 
     <% unless book.genre.nil? %>
