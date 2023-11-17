@@ -45,7 +45,7 @@ class User < ApplicationRecord
   has_one_attached :photo
 
   # authors that have been sent invitations but havent logged in and filled out their profile will have an empty name
-  scope :valid_authors, -> { where(role: 'author').where.not(name: '') }
+  scope :valid_authors, -> { where(name: '').invert_where }
 
   def at_least_admin?
     admin? || super_admin?
