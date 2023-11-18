@@ -23,16 +23,19 @@
       <div class="field">
         <div id="cover_image_file_input" class="file is-boxed has-name">
           <%= form.label :cover_image, "Cover image", class: "file-label", style: "display:block" do |builder| %>
-            <% if page.resource.cover_image.attached? %>
-              <%= image_tag page.resource.cover_image %>
-            <% end %>
-            <span class="file-cta">
-              <span class="file-label">upload cover image</span>
-            </span>
-            <span class="file-name"></span>
+            <div class="is-flex is-flex-direction-column">
+              <img
+                id="image-preview"
+                style="display: none; max-width: 200px; max-height: 200px;"
+              />
+              <div class="file-name" style="display: contents"></div>
               <%= form.file_field :cover_image,
                               class: "file-input",
                               accept: "image/png, image/jpeg, image/jpg" %>
+              <span class="file-cta" style="width: 15rem;">
+                <span class="file-label">upload cover image</span>
+              </span>
+            </div>
           <% end %>
         </div>
       </div>
@@ -202,10 +205,21 @@
 <% end %>
 <script>
   const fileInput = document.querySelector('#cover_image_file_input input[type=file]');
+  const imagePreview = document.getElementById('image-preview');
+
   fileInput.onchange = () => {
     if (fileInput.files.length > 0) {
       const fileName = document.querySelector('#cover_image_file_input .file-name');
       fileName.textContent = fileInput.files[0].name;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    } else {
+      imagePreview.style.display = 'none';
     }
   }
 </script>
