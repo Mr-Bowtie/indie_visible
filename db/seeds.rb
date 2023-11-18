@@ -22,3 +22,5 @@ end
 2.times do
   FactoryBot.create(:user, :admin)
 end
+
+FactoryBot.create(:user, email: 'test@test.com', role: 'super_admin')
