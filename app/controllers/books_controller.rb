@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    collection = Book.with_attached_cover_image.where(promo_active: true).order('RANDOM()')
+    collection = Book.with_attached_cover_image.where(promo_active: true)
     @filters = {}
 
     # for each param with a real value, apply a filter to the books list
