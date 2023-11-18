@@ -1,16 +1,18 @@
 # == Schema Information
 #
-# Table name: tags
+# Table name: promos
 #
 #  id         :bigint           not null, primary key
-#  name       :string
+#  end_date   :date
+#  start_date :date
+#  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 FactoryBot.define do
-  factory :tag do
-    name { Faker::Book.genre }
+  factory :promo do
+    title { "MyString" }
+    start_date { "2023-11-14" }
+    end_date { "2023-11-14" }
   end
 end
-
-

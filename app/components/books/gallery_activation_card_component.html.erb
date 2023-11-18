@@ -1,0 +1,44 @@
+<div class="tile is-parent is-vertical is-2" id="<%= dom_id book %>">
+  <div
+    data-books--card-id="<%= book.id %>"
+    data-controller="books--card"
+    data-action="click->books--card#showModal"
+    class="is-flex is-flex-direction-column"
+  >
+    <% if book.cover_image.attached? %>
+      <%= image_tag book.cover_image %>
+    <% end %>
+
+    <% if book.ready_for_promo? && book.author.profile_created? %>
+      <div class="tag has-background-warning">
+        Ready to go live
+      </div>
+    <% elsif book.ready_for_promo? && !book.author.profile_created? %>
+      <div class="tag has-background-danger has-text-white">
+        Author missing profile information
+      </div>
+    <% elsif book.author.profile_created? && !book.ready_for_promo? %>
+      <div class="tag has-background-danger has-text-white">
+        Book missing details
+      </div>
+    <% else %>
+      <div class="tag has-background-danger has-text-white">
+        Book and Author missing details
+      </div>
+    <% end %>
+
+    <p>
+      <strong>Title:</strong>
+      <%= book.title %>
+    </p>
+
+  </div>
+    <%= fields_for "books[]", book do |book_fields| %>
+      <div class="level">
+        <div class="level-left">
+          <%= book_fields.label :promo_active, "Active", class: "label mr-2 mb-0" %>
+          <%= book_fields.check_box :promo_active, class: "checkbox", style: "display: inline" %>
+        </div>
+      </div>
+    <% end %>
+</div>

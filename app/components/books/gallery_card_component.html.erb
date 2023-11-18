@@ -1,12 +1,12 @@
 <div
-  class="tile is-parent is-vertical is-3"
+  class="tile is-parent is-vertical is-3 mobile-centered-container"
   id="<%= dom_id book %>"
   data-books--card-id="<%= book.id %>"
   data-controller="books--card"
   data-action="click->books--card#showModal"
 >
   <% if book.cover_image.attached? %>
-    <%= image_tag book.cover_image, size: "250"%>
+    <%= image_tag book.cover_image.variant(resize_to_limit: [250, 250]), loading: 'lazy', size: '250' %>
   <% end %>
 
   <p data-action="click->books--card#showModal">
@@ -20,13 +20,17 @@
   </p>
 
   <p>
-    <strong>price:</strong>
-    <%= book.display_price %>
+    <strong>Price:</strong>
+    <% if book.free? %>
+      Free
+    <% else %>
+      <%= book.display_price %>
+    <% end %>
   </p>
 
   <div>
-    <% if book.adult_content %>
-      <span class="tag is-danger">Adult Content</span>
+    <% if book.spicy %>
+      <span class="tag is-danger">Spicy</span>
     <% end %>
 
     <% if book.kindle_unlimited %>

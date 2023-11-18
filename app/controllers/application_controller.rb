@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -9,4 +10,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
     devise_parameter_sanitizer.permit(:account_update, keys: [:role])
   end
-end
+
+  def after_invite_path_for(inviter, invitee)
+    admin_root_path
+  end
+end 

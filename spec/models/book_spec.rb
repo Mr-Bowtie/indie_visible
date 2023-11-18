@@ -4,33 +4,32 @@
 #
 #  id               :bigint           not null, primary key
 #  additional_links :string           default([]), is an Array
-#  adult_content    :boolean          default(FALSE)
 #  description      :text
 #  display_price    :string
 #  free             :boolean          default(FALSE)
-#  genres           :string           default([]), is an Array
 #  kindle_unlimited :boolean          default(FALSE)
 #  one_liner_blurb  :string
 #  primary_link     :string
 #  promo_active     :boolean          default(FALSE)
 #  queer_rep        :boolean          default(FALSE)
+#  spicy            :boolean          default(FALSE)
 #  tags             :string           default([]), is an Array
 #  title            :string
 #  trigger_warning  :string           default("")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  author_id        :bigint
-#  tag_id           :bigint
+#  genre_id         :bigint
 #
 # Indexes
 #
 #  index_books_on_author_id  (author_id)
-#  index_books_on_tag_id     (tag_id)
+#  index_books_on_genre_id   (genre_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (author_id => users.id)
-#  fk_rails_...  (tag_id => tags.id)
+#  fk_rails_...  (genre_id => genres.id)
 #
 require 'rails_helper'
 

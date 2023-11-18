@@ -4,6 +4,8 @@
 ARG RUBY_VERSION=3.1.3
 FROM ruby:$RUBY_VERSION-slim as base
 
+LABEL fly_launch_runtime="rails"
+
 # Rails app lives here
 WORKDIR /rails
 
@@ -32,6 +34,7 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
     npm i -g corepack && \
     corepack prepare yarn@$YARN_VERSION --activate && \
+
     rm -rf /tmp/node-build-master
 
 # Install application gems
@@ -60,6 +63,7 @@ FROM base
 # Install packages needed for deployment
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl postgresql-client && \
+    apt-get install --no-install-recommends -y curl imagemagick libvips postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application

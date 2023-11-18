@@ -1,4 +1,4 @@
-class TagPolicy < ApplicationPolicy
+class GenrePolicy < ApplicationPolicy
   class Scope
     def initialize(user, scope)
       @user = user

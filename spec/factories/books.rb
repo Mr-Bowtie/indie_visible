@@ -4,33 +4,32 @@
 #
 #  id               :bigint           not null, primary key
 #  additional_links :string           default([]), is an Array
-#  adult_content    :boolean          default(FALSE)
 #  description      :text
 #  display_price    :string
 #  free             :boolean          default(FALSE)
-#  genres           :string           default([]), is an Array
 #  kindle_unlimited :boolean          default(FALSE)
 #  one_liner_blurb  :string
 #  primary_link     :string
 #  promo_active     :boolean          default(FALSE)
 #  queer_rep        :boolean          default(FALSE)
+#  spicy            :boolean          default(FALSE)
 #  tags             :string           default([]), is an Array
 #  title            :string
 #  trigger_warning  :string           default("")
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  author_id        :bigint
-#  tag_id           :bigint
+#  genre_id         :bigint
 #
 # Indexes
 #
 #  index_books_on_author_id  (author_id)
-#  index_books_on_tag_id     (tag_id)
+#  index_books_on_genre_id   (genre_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (author_id => users.id)
-#  fk_rails_...  (tag_id => tags.id)
+#  fk_rails_...  (genre_id => genres.id)
 #
 FactoryBot.define do
   factory :book do
@@ -41,7 +40,7 @@ FactoryBot.define do
     display_price { Faker::Commerce.price }
     free { false }
     promo_active { false }
-    tag { Tag.all.sample }
+    genre { Genre.all.sample }
     author { User.where(role: 'author').sample }
 
     after(:build) do |book|
@@ -63,8 +62,9 @@ FactoryBot.define do
 
   trait :has_flags do
     booleans = [true, false]
-    adult_content { booleans.sample }
+    spicy { booleans.sample }
     kindle_unlimited { booleans.sample }
     queer_rep { booleans.sample }
+    free { booleans.sample }
   end
 end

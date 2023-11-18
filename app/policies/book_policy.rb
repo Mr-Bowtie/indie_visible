@@ -8,7 +8,7 @@ class BookPolicy < ApplicationPolicy
     end
 
     def resolve
-      if @user.admin? || @user.super_admin?
+      if @user.at_least_admin?
         @scope.all
       else
         @scope.where(author_id: @user.id)
@@ -21,18 +21,22 @@ class BookPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.super_admin? || record.author_id == user.id
+    user.at_least_admin? || record.author_id == user.id
   end
 
   def create?
-    user.admin? || user.super_admin? || user.author?
+    user.at_least_admin? || user.author?
   end
 
   def update?
-    user.admin? || user.super_admin? || record.author_id == user.id
+    user.at_least_admin? || record.author_id == user.id
   end
 
   def destroy?
-    user.admin? || user.super_admin? || record.author_id == user.id
+    user.at_least_admin? || record.author_id == user.id
+  end
+
+  def bulk_activation_toggle?
+    user.at_least_admin?
   end
 end

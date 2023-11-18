@@ -8,12 +8,24 @@
   <h2 class="subtitle is-3">Links</h2>
   <div class="mb-2">
     <strong style="display: block" class="mb-2">Website:</strong>
-      <a href="<%= @author.website_url %>" target="_blank"><%= @author.website_url %></a>
+    <a href="<%= @author.website_url %>" target="_blank"><%= @author.website_url %></a>
   </div>
-  <div>
+  <div class="mb-6">
     <strong style="display: block" class="mb-2">Socials:</strong>
-    <% @author.social_links.each do |link| %>
-      <div><a href="<%= link %>"><%= link %></a></div>
+    <% unless @author.facebook_url.empty? %>
+      <div>
+        <a href="<%= @author.facebook_url %>">Facebook</a>
+      </div>
+    <% end %>
+    <% unless @author.instagram_url.empty? %>
+      <div>
+        <a href="<%= @author.instagram_url %>">Instagram</a>
+      </div>
+    <% end %>
+    <% unless @author.tiktok_url.empty? %>
+      <div>
+        <a href="<%= @author.tiktok_url %>">TikTok</a>
+      </div>
     <% end %>
   </div>
 

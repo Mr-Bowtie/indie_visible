@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 module Admin
-  class UsersController < Admin::ApplicationController
+  class GenresController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -41,13 +39,6 @@ module Admin
     #     permit(dashboard.permitted_attributes(action_name)).
     #     transform_values { |value| value == "" ? nil : value }
     # end
-    def new
-      redirect_to(new_user_invitation_url)
-    end
-
-    def resource_params
-      params.require(:user).permit(:about, :email, :name, :role, :facebook_url, :instagram_url, :tiktok_url, :photo, :website_url, book_ids: [])
-    end
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information

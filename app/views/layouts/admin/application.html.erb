@@ -27,11 +27,15 @@ By default, it renders:
     </head>
     <body>
       <%= render "icons" %>
-      <nav class="navbar">
+      <nav class="navbar has-background-color">
         <div class="navbar-brand">
-          <%= link_to "IndieVisible",
-          books_path,
-          class: "navbar-item title is-3 has-background-info has-text-white p-3" %>
+          <a href="<%= books_path %>">
+            <img
+              src="https://storage.googleapis.com/indievisible_static/indie-visible-logo.png"
+              alt="Logo of an open book with the words Indie Visible above"
+              width="175"
+            >
+          </a>
         </div>
         <div class="navbar-menu" id="navMenu">
           <div class="navbar-end">
@@ -40,6 +44,9 @@ By default, it renders:
                 <span class="mr-3">
                   Signed in as:
                   <%= current_user.email %>
+                </span>
+                <span class="tag has-background-info has-text-white mr-3">
+                  <%= current_user.role %>
                 </span>
                 <%= button_to "Sign out",
                 destroy_user_session_path,

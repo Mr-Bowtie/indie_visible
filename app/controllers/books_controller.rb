@@ -4,23 +4,25 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    collection = Book.all
-    @filters = []
-    
+    collection = Book.with_attached_cover_image.where(promo_active: true).order('RANDOM()')
+    @filters = {}
+
     # for each param with a real value, apply a filter to the books list
     # also add a string to the filters list to display active filters
-    filtering_params.select { |_, val| val != '0' && val != ''}.each do |p_key, p_val|
-      collection = if p_key == 'tag'
-                     @filters.push(Tag.find(p_val).name)
-                     collection.send :filter_by_tag, p_val
+    filtering_params.select { |_, val| val != '0' && val != '' }.each do |p_key, p_val|
+      collection = if p_key == 'genre'
+                     @filters[p_key] = Genre.find(p_val).name
+                     collection.send :filter_by_genre, p_val
                    else
-                      #TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
-                     @filters.push(p_key)
+                     # TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
+                     @filters[p_key] = p_val
                      collection.send p_key.to_sym
                    end
     end
 
     @pagy, @books = pagy(collection)
+    @live_promo = Promo.active.first
+    @upcoming_promo = Promo.next_up.first
   end
 
   # GET /books/1 or /books/1.json
@@ -72,6 +74,24 @@ class BooksController < ApplicationController
     end
   end
 
+  def bulk_activation_toggle_form
+    @pagy, @books = pagy(Book.with_attached_cover_image.all, items: 50)
+    render 'bulk_activation_toggle_form'
+  end
+
+  def bulk_activation_toggle
+    Book.transaction do
+      mass_activation_toggle_params[:books].each do |id, toggle_params|
+        book = Book.find(id)
+        book.update!(toggle_params)
+      end
+    end
+
+    redirect_to admin_books_path, notice: 'Books promo status successfully updated'
+  rescue StandardError => e
+    redirect_to admin_books_path, alert: "Error setting books promo status: #{e}"
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -81,10 +101,14 @@ class BooksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def book_params
-    params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :free, :promo_active, :tag_id, :adult_content, :kindle_unlimited, :queer_rep, :cover_image)
+    params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :free, :promo_active, :genre_id, :spicy, :kindle_unlimited, :queer_rep, :cover_image)
   end
 
   def filtering_params
-    params.permit(:tag, :adult_content, :kindle_unlimited, :queer_rep)
+    params.permit(:genre, :spicy, :not_spicy, :kindle_unlimited, :queer_rep, :free)
+  end
+
+  def mass_activation_toggle_params
+    params.permit(:authenticity_token, :commit, :_method, books: [:promo_active])
   end
 end

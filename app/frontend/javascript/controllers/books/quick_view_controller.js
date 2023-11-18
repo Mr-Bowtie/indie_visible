@@ -6,5 +6,10 @@ export default class extends Controller {
 
   close(){
     this.modalTarget.classList.remove('is-active')
+    document.querySelector('html').classList.remove('is-clipped')
+  }
+
+  unClip(){
+    document.querySelector('html').classList.remove('is-clipped')
   }
 }
