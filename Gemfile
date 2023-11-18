@@ -44,6 +44,7 @@ gem 'vite_rails', '~> 3.0'
 # css framework
 gem 'bulma-rails', '~> 0.9.4'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem 'active_storage_validations'
 gem 'image_processing', '~> 1.2'
 # Google cloud storage adapter
 gem 'google-cloud-storage', '~> 1.11', require: false

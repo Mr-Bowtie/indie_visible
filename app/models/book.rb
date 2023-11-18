@@ -35,6 +35,7 @@ class Book < ApplicationRecord
   REQUIRED_ATTRIBUTES = %i[title display_price one_liner_blurb primary_link].freeze
   PROMO_REQUIRED_ATTRIBUTES = %i[title display_price one_liner_blurb primary_link genre_id author_id].freeze
   validates(*REQUIRED_ATTRIBUTES, presence: true)
+  validates :cover_image, content_type: ['image/png', 'image/jpg', 'image/jpeg']
   belongs_to :genre
   belongs_to :author, class_name: 'User'
   has_one_attached :cover_image
@@ -47,7 +48,7 @@ class Book < ApplicationRecord
   scope :free, -> { where('free = true') }
 
   def ready_for_promo?
-    PROMO_REQUIRED_ATTRIBUTES.all? {|attr| send(attr).present? } &&
-    cover_image.attached?
+    PROMO_REQUIRED_ATTRIBUTES.all? { |attr| send(attr).present? } &&
+      cover_image.attached?
   end
 end

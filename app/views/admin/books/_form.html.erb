@@ -23,7 +23,6 @@
       <div class="field">
         <div id="cover_image_file_input" class="file is-boxed has-name">
           <%= form.label :cover_image, "Cover image", class: "file-label", style: "display:block" do |builder| %>
-            <%= form.file_field :cover_image, class: "file-input" %>
             <% if page.resource.cover_image.attached? %>
               <%= image_tag page.resource.cover_image %>
             <% end %>
@@ -31,6 +30,9 @@
               <span class="file-label">upload cover image</span>
             </span>
             <span class="file-name"></span>
+              <%= form.file_field :cover_image,
+                              class: "file-input",
+                              accept: "image/png, image/jpeg, image/jpg" %>
           <% end %>
         </div>
       </div>
