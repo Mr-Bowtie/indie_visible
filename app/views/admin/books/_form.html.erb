@@ -23,7 +23,7 @@
       <div class="field is-flex is-flex-direction-row">
         <div id="cover_image_file_input" class="file is-boxed has-name">
           <%= form.label :cover_image, "Cover image", class: "file-label", style: "display:block" do |builder| %>
-            <div class="is-flex is-flex-direction-column">
+            <div class="is-flex is-flex-direction-column is-align-items-center">
               <div class="is-flex is-flex-direction-row">
                 <% if page.resource.cover_image.attached? %>
                   <div>
@@ -46,6 +46,7 @@
               <span class="file-cta" style="width: 400px;">
                 <span class="file-label">upload cover image</span>
               </span>
+              <p class="has-text-danger">image must be of type: png, jpg, jpeg</p>
             </div>
           <% end %>
         </div>
