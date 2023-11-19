@@ -40,7 +40,7 @@ module Admin
     #     transform_values { |value| value == "" ? nil : value }
     # end
     def resource_params
-    params.require(:book).permit(:spicy, :description, :display_price, :free, :kindle_unlimited, :one_liner_blurb, :primary_link, :promo_active, :queer_rep, :title, :author_id, :genre_id, :cover_image)
+    params.require(:book).permit(:spicy, :description, :display_price, :paperback_price, :free, :kindle_unlimited, :one_liner_blurb, :primary_link, :promo_active, :queer_rep, :title, :author_id, :genre_id, :cover_image)
     end
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions

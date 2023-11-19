@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    collection = Book.with_attached_cover_image.where(promo_active: true)
+    collection = Book.with_attached_cover_image.where(promo_active: true).order(:author_id)
     @filters = {}
 
     # for each param with a real value, apply a filter to the books list
@@ -75,23 +75,21 @@ class BooksController < ApplicationController
   end
 
   def bulk_activation_toggle_form
-    @pagy, @books = pagy(Book.with_attached_cover_image.all, items: 50)
+    @pagy, @books = pagy(Book.with_attached_cover_image.all.order(:author_id, :title), items: 50)
     render 'bulk_activation_toggle_form'
   end
 
-
-
   def bulk_activation_toggle
-    if mass_activation_toggle_params[:toggle_all] == "true"
+    if mass_activation_toggle_params[:toggle_all] == 'true'
       Book.transaction do
         Book.update_all(promo_active: true)
       end
-    redirect_to admin_books_path, notice: 'Books promo status successfully updated'
-    elsif mass_activation_toggle_params[:toggle_all] == "false"
+      redirect_to admin_books_path, notice: 'Books promo status successfully updated'
+    elsif mass_activation_toggle_params[:toggle_all] == 'false'
       Book.transaction do
         Book.update_all(promo_active: false)
       end
-    redirect_to admin_books_path, notice: 'Books promo status successfully updated'
+      redirect_to admin_books_path, notice: 'Books promo status successfully updated'
     else
       Book.transaction do
         mass_activation_toggle_params[:books].each do |id, toggle_params|
@@ -99,9 +97,8 @@ class BooksController < ApplicationController
           book.update!(toggle_params)
         end
       end
-    redirect_to books_bulk_activation_toggle_form_path, notice: 'Books promo status successfully updated'
+      redirect_to books_bulk_activation_toggle_form_path, notice: 'Books promo status successfully updated'
     end
-
   rescue StandardError => e
     redirect_to admin_books_path, alert: "Error setting books promo status: #{e}"
   end
@@ -115,7 +112,7 @@ class BooksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def book_params
-    params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :free, :promo_active, :genre_id, :spicy, :kindle_unlimited, :queer_rep, :cover_image)
+    params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :paperback_price, :free, :promo_active, :genre_id, :spicy, :kindle_unlimited, :queer_rep, :cover_image)
   end
 
   def filtering_params

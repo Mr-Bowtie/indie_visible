@@ -74,9 +74,15 @@
           <% end %>
 
           <div class="field">
-            <%= form.label :display_price, class: "label", style: "display: block" %>
+            <%= form.label :display_price, "E-book Price", class: "label", style: "display: block" %>
             <div class="control">
               <%= form.text_field :display_price, class: "input", style: "width: 20%;" %>
+            </div>
+          </div>
+          <div class="field">
+            <%= form.label :paperback_price, "Paperback Price", class: "label", style: "display: block" %>
+            <div class="control">
+              <%= form.text_field :paperback_price, class: "input", style: "width: 20%;" %>
             </div>
           </div>
         </div>

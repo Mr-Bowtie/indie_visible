@@ -13,6 +13,7 @@ class BookDashboard < Administrate::BaseDashboard
     spicy: Field::Boolean,
     description: Field::Text,
     display_price: Field::String,
+    paperback_price: Field::String,
     free: Field::Boolean,
     kindle_unlimited: Field::Boolean,
     one_liner_blurb: Field::String,
@@ -50,6 +51,7 @@ class BookDashboard < Administrate::BaseDashboard
     description
     one_liner_blurb
     display_price
+    paperback_price
     primary_link
     spicy
     free

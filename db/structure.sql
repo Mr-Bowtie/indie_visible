@@ -146,7 +146,8 @@ CREATE TABLE public.books (
     queer_rep boolean DEFAULT false,
     spicy boolean DEFAULT false,
     genre_id bigint,
-    author_id bigint
+    author_id bigint,
+    paperback_price character varying
 );
 
 
@@ -589,6 +590,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231112011754'),
 ('20231112050129'),
 ('20231112052156'),
-('20231114224041');
+('20231114224041'),
+('20231119005948');
 
 
