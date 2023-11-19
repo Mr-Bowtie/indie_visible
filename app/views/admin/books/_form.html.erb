@@ -122,7 +122,7 @@
           "
         >
           <%= form.check_box :kindle_unlimited, class: "checkbox mr-2" %>
-          <%= form.label :kindle_unlimited, class: "label", style: "display: block" %>
+          <%= form.label :kindle_unlimited, "Kindle Unlimited", class: "label", style: "display: block" %>
         </div>
         <div
           class="
@@ -135,7 +135,7 @@
           "
         >
           <%= form.check_box :queer_rep, class: "checkbox mr-2" %>
-          <%= form.label :queer_rep, class: "label", style: "display: block" %>
+          <%= form.label :queer_rep, "Queer Rep", class: "label", style: "display: block" %>
         </div>
         <div
           class="
@@ -148,7 +148,7 @@
           "
         >
           <%= form.check_box :free, class: "checkbox mr-2" %>
-          <%= form.label :free, class: "label", style: "display: block" %>
+          <%= form.label :free, "Free E-book", class: "label", style: "display: block" %>
         </div>
 
         <% if current_user.admin? || current_user.super_admin? %>
@@ -163,7 +163,7 @@
             "
           >
             <%= form.check_box :promo_active, class: "checkbox mr-2" %>
-            <%= form.label :promo_active, class: "label", style: "display: block" %>
+            <%= form.label :promo_active, "Promo Active",class: "label", style: "display: block" %>
           </div>
         <% end %>
       </div>

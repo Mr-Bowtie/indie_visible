@@ -30,17 +30,17 @@
                 <%= form.check_box :not_spicy, class: "checkbox", checked: params[:not_spicy] == "1" %>
               </div>
               <div class="control mr-2 is-flex is-align-items-center">
-                <%= form.label :kindle_unlimited, class: "lable mr-2" %>
+                <%= form.label :kindle_unlimited, "Kindle Unlimited", class: "lable mr-2" %>
                 <%= form.check_box :kindle_unlimited,
                                class: "checkbox",
                                checked: params[:kindle_unlimited] == "1" %>
               </div>
               <div class="control mr-2 is-flex is-align-items-center">
-                <%= form.label :queer_rep, class: "lable mr-2" %>
+                <%= form.label :queer_rep, "Queer Rep", class: "lable mr-2" %>
                 <%= form.check_box :queer_rep, class: "checkbox", checked: params[:queer_rep] == "1" %>
               </div>
               <div class="control mr-2 is-flex is-align-items-center">
-                <%= form.label :free, class: "lable mr-2" %>
+                <%= form.label :free, "Free E-book", class: "lable mr-2" %>
                 <%= form.check_box :free, class: "checkbox", checked: params[:free] == "1" %>
               </div>
             </div>
