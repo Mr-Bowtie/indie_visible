@@ -79,15 +79,29 @@ class BooksController < ApplicationController
     render 'bulk_activation_toggle_form'
   end
 
+
+
   def bulk_activation_toggle
-    Book.transaction do
-      mass_activation_toggle_params[:books].each do |id, toggle_params|
-        book = Book.find(id)
-        book.update!(toggle_params)
+    if mass_activation_toggle_params[:toggle_all] == "true"
+      Book.transaction do
+        Book.update_all(promo_active: true)
       end
+    redirect_to admin_books_path, notice: 'Books promo status successfully updated'
+    elsif mass_activation_toggle_params[:toggle_all] == "false"
+      Book.transaction do
+        Book.update_all(promo_active: false)
+      end
+    redirect_to admin_books_path, notice: 'Books promo status successfully updated'
+    else
+      Book.transaction do
+        mass_activation_toggle_params[:books].each do |id, toggle_params|
+          book = Book.find(id)
+          book.update!(toggle_params)
+        end
+      end
+    redirect_to books_bulk_activation_toggle_form_path, notice: 'Books promo status successfully updated'
     end
 
-    redirect_to admin_books_path, notice: 'Books promo status successfully updated'
   rescue StandardError => e
     redirect_to admin_books_path, alert: "Error setting books promo status: #{e}"
   end
@@ -109,6 +123,6 @@ class BooksController < ApplicationController
   end
 
   def mass_activation_toggle_params
-    params.permit(:authenticity_token, :commit, :_method, books: [:promo_active])
+    params.permit(:authenticity_token, :commit, :_method, :toggle_all, books: [:promo_active])
   end
 end

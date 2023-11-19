@@ -2,8 +2,12 @@
   <%= form_with url: bulk_activation_toggle_books_path, method: :patch do |form| %>
     <div class="level mobile-centered-container">
       <div class="level-left"><h1 class="title is-1">Select Books for Promo</h1></div>
-      <div class="level-right"><%= form.submit "Update active books", class: "button is-primary" %></div>
+      <div class="level is-justify-content-right">
+        <%= link_to "Back to admin", books_bulk_activation_toggle_form_path, class: "mr-4" %>
+        <div class="level-right"><%= form.submit "Update active books", class: "button is-primary" %></div>
+      </div>
     </div>
+    <p  class="has-text-danger" style="text-align: right">Submit form on every page, or progress wont be saved</p>
     <div class="level">
       <div class="level-left"></div>
       <div class="level-right">
