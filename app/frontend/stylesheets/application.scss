@@ -101,3 +101,12 @@ input[type=checkbox] {
 .has-background-color {
   background-color: $background;
 }
+
+.notice {
+  text-align: center;
+  color: green;
+}
+
+.flash {
+  transition: opacity 0.5s ease-out;
+}

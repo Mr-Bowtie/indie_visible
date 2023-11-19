@@ -7,7 +7,10 @@
         <div class="level-right"><%= form.submit "Update active books", class: "button is-primary" %></div>
       </div>
     </div>
-    <p  class="has-text-danger" style="text-align: right">Submit form on every page, or progress wont be saved</p>
+    <% flash.each do |key, message| %>
+      <%= content_tag(:div, message, class: "flash #{key}") %>
+    <% end %>
+    <p class="has-text-danger" style="text-align: right">Submit form on every page, or progress wont be saved</p>
     <div class="level">
       <div class="level-left"></div>
       <div class="level-right">
@@ -30,3 +33,16 @@
     </div>
   <% end %>
 </div>
+<script>
+  document.addEventListener('turbo:load', function() {
+    const flashes = document.querySelectorAll('.flash');
+    flashes.forEach(flash => {
+      setTimeout(() => {
+        flash.style.opacity = '0';
+        setTimeout(() => {
+          flash.remove();
+        }, 500); // Additional timeout for the fade effect
+      }, 3000); // Flash messages disappear after 5 seconds
+    });
+  });
+</script>
