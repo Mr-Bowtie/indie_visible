@@ -47,7 +47,7 @@ Session.vim
 !/app/assets/builds/.keep
 # Ignore compiled css files, build from source every time
 /app/assets/stylesheets/application.css
-app/frontend/stylesheets/application.css
+/app/frontend/stylesheets/application.css
 
 # Vite Ruby
 /public/vite*
