@@ -10,7 +10,14 @@
 #
 FactoryBot.define do
   factory :business do
-    name { "MyString" }
-    website_url { "MyString" }
+    name { 'Winter Biz' }
+    website_url { Faker::Internet.url }
+    after(:build) do |business|
+      business.logo_image.attach(
+        io: File.open(Rails.root.join('public/biz_placeholder.png')),
+        filename: 'user_image_placeholder.png',
+        content_type: 'image/png'
+      )
+    end
   end
 end

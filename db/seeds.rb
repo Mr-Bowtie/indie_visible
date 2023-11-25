@@ -19,6 +19,10 @@ end
   FactoryBot.create(:book, :has_flags)
 end
 
+6.times do
+  FactoryBot.create(:business)
+end
+
 2.times do
   FactoryBot.create(:user, :admin)
 end
