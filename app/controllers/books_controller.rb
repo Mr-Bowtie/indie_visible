@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    collection = Book.with_attached_cover_image.where(promo_active: true).order(:author_id)
+    collection = Book.with_attached_cover_image.where(promo_active: true).includes(:author, :genre).order(:author_id)
     @filters = {}
 
     # for each param with a real value, apply a filter to the books list
@@ -75,7 +75,7 @@ class BooksController < ApplicationController
   end
 
   def bulk_activation_toggle_form
-    @pagy, @books = pagy(Book.with_attached_cover_image.all.order(:author_id, :title), items: 50)
+    @pagy, @books = pagy(Book.with_attached_cover_image.includes(:author, :genre).all.order(:author_id, :title), items: 50)
     render 'bulk_activation_toggle_form'
   end
 
