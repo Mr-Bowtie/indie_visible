@@ -46,6 +46,7 @@ class Book < ApplicationRecord
   scope :spicy, -> { where('spicy = true') }
   scope :not_spicy, -> { where('spicy = false') }
   scope :free, -> { where('free = true') }
+  scope :promo_active_per_author, ->(author_id) { where(author_id:, promo_active: true) }
 
   def ready_for_promo?
     PROMO_REQUIRED_ATTRIBUTES.all? { |attr| send(attr).present? } &&
