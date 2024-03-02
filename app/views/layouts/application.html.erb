@@ -51,10 +51,11 @@
       </div>
     </nav>
     <div class="container is-flex is-justify-content-center mb-4">
-      <img
-        src="https://storage.googleapis.com/indievisible_static/winter-wonderland-banner-3.png"
-        alt="Winter wonderland banner"
-      >
+      <% if Promo.active.any? %>
+        <%= image_tag Promo.active.first.banner %>
+      <% elsif Promo.next_up.any? %>
+        <%= image_tag Promo.next_up.first.banner %>
+      <% end %>
 
     </div>
     <%= yield %>
