@@ -1,8 +1,24 @@
 <div class="container">
   <h1 class="title is-1"><%= @author.name %></h1>
+  <div class="level is-justify-content-flex-start is-align-items-center">
+    <div class="mr-2">
+      <a href="<%= @author.website_url %>" target="_blank" class="is-size-4">Visit my website!</a>
+    </div>
+    <div>
+      <% unless @author.facebook_url.empty? %>
+        <a href="<%= @author.facebook_url %>" class="mr-2"><%= icon("fa-brands", "facebook", class: "fa-2x") %></a>
+      <% end %>
+      <% unless @author.instagram_url.empty? %>
+        <a href="<%= @author.instagram_url %>" class="mr-2"><%= icon("fa-brands", "instagram", class: "fa-2x") %></a>
+      <% end %>
+      <% unless @author.tiktok_url.empty? %>
+        <a href="<%= @author.tiktok_url %>"><%= icon("fa-brands", "tiktok", class: "fa-2x") %></a>
+      <% end %>
+    </div>
+  </div>
   <div class="columns">
     <% if @author.photo.attached? %>
-      <div class="column">
+      <div class="column has-text-centered">
         <%= image_tag @author.photo, size: "500" %>
       </div>
     <% end %>
@@ -19,28 +35,5 @@
       <%= render(Books::GalleryQuickViewComponent.new(book: book)) %>
     <% end %>
   </div>
-  <h3 class="subtitle is-3">Links</h3>
-    <div class="mb-2">
-      <strong style="display: block" class="mb-2">Website:</strong>
-      <a href="<%= @author.website_url %>" target="_blank"><%= @author.website_url %></a>
-    </div>
-    <div class="mb-6">
-      <strong style="display: block" class="mb-2">Socials:</strong>
-      <% unless @author.facebook_url.empty? %>
-        <div>
-          <a href="<%= @author.facebook_url %>">Facebook</a>
-        </div>
-      <% end %>
-      <% unless @author.instagram_url.empty? %>
-        <div>
-          <a href="<%= @author.instagram_url %>">Instagram</a>
-        </div>
-      <% end %>
-      <% unless @author.tiktok_url.empty? %>
-        <div>
-          <a href="<%= @author.tiktok_url %>">TikTok</a>
-        </div>
-      <% end %>
-    </div>
 
 </div>
