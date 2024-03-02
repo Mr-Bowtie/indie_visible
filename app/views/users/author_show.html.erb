@@ -1,32 +1,46 @@
 <div class="container">
   <h1 class="title is-1"><%= @author.name %></h1>
-  <% if @author.photo.attached? %>
-    <%= image_tag @author.photo, size: "500" %>
-  <% end %>
-  <h2 class="subtitle is-2">About the author</h2>
-  <p class="mb-3"><%= @author.about %></p>
-  <h2 class="subtitle is-3">Links</h2>
-  <div class="mb-2">
-    <strong style="display: block" class="mb-2">Website:</strong>
-    <a href="<%= @author.website_url %>" target="_blank"><%= @author.website_url %></a>
+  <div class="columns">
+    <% if @author.photo.attached? %>
+      <div class="column">
+        <%= image_tag @author.photo, size: "500" %>
+      </div>
+    <% end %>
+    <div class="column">
+      <h2 class="subtitle is-2">About the author</h2>
+      <p class="mb-3"><%= @author.about %></p>
+    </div>
   </div>
-  <div class="mb-6">
-    <strong style="display: block" class="mb-2">Socials:</strong>
-    <% unless @author.facebook_url.empty? %>
-      <div>
-        <a href="<%= @author.facebook_url %>">Facebook</a>
-      </div>
-    <% end %>
-    <% unless @author.instagram_url.empty? %>
-      <div>
-        <a href="<%= @author.instagram_url %>">Instagram</a>
-      </div>
-    <% end %>
-    <% unless @author.tiktok_url.empty? %>
-      <div>
-        <a href="<%= @author.tiktok_url %>">TikTok</a>
-      </div>
+
+  <h3 class="subtitle is-3">Books</h3>
+  <div class="tile is-ancestor is-flex-wrap-wrap">
+    <% Book.promo_active_per_author(@author.id).each do |book| %>
+      <%= render(Books::GalleryCardComponent.new(book: book)) %>
+      <%= render(Books::GalleryQuickViewComponent.new(book: book)) %>
     <% end %>
   </div>
+  <h3 class="subtitle is-3">Links</h3>
+    <div class="mb-2">
+      <strong style="display: block" class="mb-2">Website:</strong>
+      <a href="<%= @author.website_url %>" target="_blank"><%= @author.website_url %></a>
+    </div>
+    <div class="mb-6">
+      <strong style="display: block" class="mb-2">Socials:</strong>
+      <% unless @author.facebook_url.empty? %>
+        <div>
+          <a href="<%= @author.facebook_url %>">Facebook</a>
+        </div>
+      <% end %>
+      <% unless @author.instagram_url.empty? %>
+        <div>
+          <a href="<%= @author.instagram_url %>">Instagram</a>
+        </div>
+      <% end %>
+      <% unless @author.tiktok_url.empty? %>
+        <div>
+          <a href="<%= @author.tiktok_url %>">TikTok</a>
+        </div>
+      <% end %>
+    </div>
 
 </div>
