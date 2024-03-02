@@ -3,7 +3,7 @@
 set -e
 
 echo "[ bin/ci ] Running unit tests"
-bin/rails spec
+bundle exec rspec spec
 
 # TODO: create new rake task to run system tests separately 
 # echo "[ bin/ci ] Running system tests"
