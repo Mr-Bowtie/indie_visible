@@ -1,0 +1,8 @@
+(A) add price to book detail page +springUpdates @styling
+(A) Add books to author bio +springUpdates @styling
+(A) search bar - title and author +springUpdates @feature
+(A) fix mobile styling +springUpdates @styling @mobile
+(B) add back to top button +springUpdates @feature
+(C) Randomize books per user (per session?) +springUpdates @feature
+(A) allow banner upload per promo/ set date to display / display toggle +springUpdates @feature
+make series appear together - in order +springUpdates @feature
