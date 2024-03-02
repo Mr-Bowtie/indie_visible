@@ -12,13 +12,20 @@
     <h1 class="title is-2"><%= book.title %></h1>
     <% unless book.author_id == nil %>
       <h2 class="subtitle is-3">By:
-        <a href="/authors/<%= book.author.id %>" data-action="click->books--quick-view#unClip"><%= book.author.name %></a></h2>
+        <a
+          href="/authors/<%= book.author.id %>"
+          data-action="click->books--quick-view#unClip"
+        ><%= book.author.name %></a></h2>
     <% end %>
 
-    <% unless book.genre.nil? %>
-      <a href="/books?genre=<%= book.genre.id %>" class="subtitle">Genre:
-        <%= book.genre.name %></a>
-    <% end %>
+    <div class="level is-align-items-center mb-2">
+      <% unless book.genre.nil? %>
+        <a href="/books?genre=<%= book.genre.id %>" class="subtitle mb-0">Genre:
+          <%= book.genre.name %></a>
+      <% end %>
+      <p class="subtitle mb-0"><strong>Price:
+        </strong><%= book.display_price %></p>
+    </div>
 
     <div class="mb-2">
       <% if book.spicy %>
@@ -34,11 +41,15 @@
       <% end %>
     </div>
 
-  <% if book.cover_image.attached? %>
-    <%= image_tag book.cover_image, class: "mb-2" %>
-  <% end %>
+    <% if book.cover_image.attached? %>
+      <%= image_tag book.cover_image, class: "mb-2" %>
+    <% end %>
 
-    <a href="<%= book.primary_link %>" class="mb-3 button is-link auto-center is-medium" target="_blank">Buy Here</a>
+    <a
+      href="<%= book.primary_link %>"
+      class="mb-3 button is-link auto-center is-medium"
+      target="_blank"
+    >Buy Here</a>
 
     <p><%= book.description %></p>
   </div>
