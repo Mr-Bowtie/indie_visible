@@ -1,0 +1,10 @@
+<div class="tile is-parent is-vertical is-2 mobile-centered-container">
+  <% if author.photo.attached? %> 
+    <%= image_tag author.photo.variant(resize_to_limit: [200, 200]), loading: "lazy" %>
+  <% else %>
+    <%= image_tag "/user_image2.png" %>
+  <% end %>
+
+  <%= link_to author.name, "/authors/#{author.id}", class: "is-size-4", data: { turbo_frame: "_top"} %>
+
+</div>
