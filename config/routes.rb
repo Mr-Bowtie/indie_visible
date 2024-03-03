@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
   end
   get 'users/index'
+  get '/search', to: 'search#index'
   get 'authors/:id', to: 'users#author_show'
   namespace :admin do
     resources :users
