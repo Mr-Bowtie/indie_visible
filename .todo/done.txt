@@ -1,0 +1,4 @@
+x 2024-03-02 add price to book detail page +springUpdates @styling
+x 2024-03-02 Add books to author bio +springUpdates @styling
+x 2024-03-02 consolidate links to icons +springUpdates @styling
+x 2024-03-02 allow banner upload per promo/ set date to display / display toggle +springUpdates @feature
