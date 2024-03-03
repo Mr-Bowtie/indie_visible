@@ -43,6 +43,16 @@
           <a class="navbar-item" href="<%= books_path %>">Books</a>
           <a class="navbar-item" href="<%= businesses_path %>">Bookish Stores</a>
         </div>
+        <div class="navbar-item width-full ml-4">
+          <%= form_with url: search_path, method: "get", html: { class: "width-full"}  do |form| %>
+            <div class="level is-align-items-center search-container">
+              <%# form.select :query_class, ["Authors", "Books"], selected: "Books" %>
+              <%= form.text_field :query, class: "input mr-2 search-bar" %>
+              <%= form.submit "Search", class: "button mr-4" %>
+            </div>
+
+          <% end %>
+        </div>
         <div class="navbar-end">
           <div class="navbar-item">
             <%= link_to "Author Portal", admin_root_path, class: "button is-primary" %>
