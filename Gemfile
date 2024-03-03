@@ -101,3 +101,5 @@ end
 gem "sentry-ruby", "~> 5.13"
 
 gem "sentry-rails", "~> 5.13"
+
+gem 'ransack', '~> 4.1'

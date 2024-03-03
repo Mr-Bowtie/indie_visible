@@ -52,4 +52,8 @@ class Book < ApplicationRecord
     PROMO_REQUIRED_ATTRIBUTES.all? { |attr| send(attr).present? } &&
       cover_image.attached?
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ['title']
+  end
 end

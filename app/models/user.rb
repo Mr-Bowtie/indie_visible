@@ -55,4 +55,7 @@ class User < ApplicationRecord
     PROMO_REQUIRED_ATTRIBUTES.all? { |attr| send(attr).present? } &&
     photo.attached?
   end
+  def self.ransackable_attributes(_auth_object = nil)
+    ['name']
+  end
 end
