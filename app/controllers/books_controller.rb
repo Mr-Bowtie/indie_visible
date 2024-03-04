@@ -5,14 +5,23 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     collection = Book.with_attached_cover_image.where(promo_active: true).includes(:author, :genres).order(:author_id)
+
     @filters = {}
 
     # for each param with a real value, apply a filter to the books list
     # also add a string to the filters list to display active filters
     filtering_params.select { |_, val| val != '0' && val != '' }.each do |p_key, p_val|
-      collection = if p_key == 'genre'
-                     @filters[p_key] = Genre.find(p_val).name
-                     collection.send :filter_by_genre, p_val
+      collection = if p_key == 'genres'
+                     # remove pesky empty string the browser sends over by default with multi-selects
+                     p_val = p_val.reject(&:blank?)
+
+                     p_val.each do |genre_id|
+                       next if genre_id == ''
+
+                       @filters["genre_#{genre_id}"] = Genre.find(genre_id).name
+                     end
+                     p_val.empty? ? collection : collection.send(:filter_by_genre, p_val)
+
                    else
                      @filters[p_key] = p_val
                      collection.send p_key.to_sym
@@ -115,7 +124,7 @@ class BooksController < ApplicationController
   end
 
   def filtering_params
-    params.permit(:genre, :spicy, :not_spicy, :kindle_unlimited, :queer_rep, :free)
+    params.permit(:spicy, :not_spicy, :kindle_unlimited, :queer_rep, :free, genres: [])
   end
 
   def mass_activation_toggle_params

@@ -41,7 +41,7 @@ class Book < ApplicationRecord
   belongs_to :author, class_name: 'User'
   has_one_attached :cover_image
 
-  scope :filter_by_genre, ->(genre_id) { joins(:genres).where(genres: { id: genre_id }).distinct }
+  scope :filter_by_genre, ->(genre_ids) { where(id: Book.joins(:genres).where(genres: { id: genre_ids }).group('books.id').having('COUNT(genres.id) = ?', genre_ids.length).select('books.id')) }
   scope :kindle_unlimited, -> { where('kindle_unlimited = true') }
   scope :queer_rep, -> { where('queer_rep = true') }
   scope :spicy, -> { where('spicy = true') }

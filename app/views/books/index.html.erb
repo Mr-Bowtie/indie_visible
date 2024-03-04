@@ -1,6 +1,7 @@
 <p style="color: green"><%= notice %></p>
+<%= [@books.empty?, @filters.empty?] %>
 
-<% if @live_promo && (!@books.empty? || !@filters.empty?)%>
+<% if @live_promo && (!@books.empty? || !@filters.empty?) %>
   <div class="container">
 
     <div class="is-flex is-justify-content-center mb-6">
@@ -10,12 +11,12 @@
       <%= form_with url: "/books", method: :get do |form| %>
         <div class="level-left mb-2 is-align-items-baseline">
           <div class="mr-2">
-            <%= form.label :genre, "Filter by genre:", class: "label" %>
-            <div class="select is-rounded is-small mb-2">
-              <%= form.select :genre,
+            <%= form.label :genres, "Filter by genre:", class: "label" %>
+            <div class="select is-small mb-2 is-multiple">
+              <%= form.select :genres,
                           Genre.all.collect { |g| [g.name, g.id] },
-                          include_blank: true,
-                          selected: params[:genre] %>
+                          { selected: params[:genres] },
+                          { multiple: true } %>
             </div>
           </div>
           <div>
@@ -57,12 +58,22 @@
             <div class="tags">
               <% @filters.each do |filter, value| %>
                 <span class="tag is-small is-info">
-                  <%= filter == "genre" ? value : filter %>
-                  <%= link_to "×",
-                  books_path(request.query_parameters.merge({ filter => "" })),
-                  class: "delete is-small",
-                  remote: true,
-                  method: :get %>
+                  <%= filter.include?("genre") ? value : filter %>
+                  <% if filter.include?("genre") %>
+                    <% gen_id = filter.gsub("genre_", "")
+                    updated_genres = request.query_parameters["genres"].reject { |g| g == gen_id } %>
+                    <%= link_to "x",
+                    books_path(request.query_parameters.merge({ "genres" => updated_genres })),
+                    class: "delete is-small",
+                    remote: true,
+                    method: :get %>
+                  <% else %>
+                    <%= link_to "×",
+                    books_path(request.query_parameters.merge({ filter => "" })),
+                    class: "delete is-small",
+                    remote: true,
+                    method: :get %>
+                  <% end %>
                 </span>
               <% end %>
             </div>
