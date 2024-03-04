@@ -152,6 +152,16 @@ CREATE TABLE public.books (
 
 
 --
+-- Name: books_genres; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.books_genres (
+    genre_id bigint,
+    book_id bigint
+);
+
+
+--
 -- Name: books_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -488,6 +498,20 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
+-- Name: index_books_genres_on_book_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_genres_on_book_id ON public.books_genres USING btree (book_id);
+
+
+--
+-- Name: index_books_genres_on_genre_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_genres_on_genre_id ON public.books_genres USING btree (genre_id);
+
+
+--
 -- Name: index_books_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -591,6 +615,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231112050129'),
 ('20231112052156'),
 ('20231114224041'),
-('20231119005948');
+('20231119005948'),
+('20240304002739');
 
 
