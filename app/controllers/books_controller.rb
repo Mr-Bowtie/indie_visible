@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    collection = Book.with_attached_cover_image.where(promo_active: true).includes(:author, :genre).order(:author_id)
+    collection = Book.with_attached_cover_image.where(promo_active: true).includes(:author, :genres).order(:author_id)
     @filters = {}
 
     # for each param with a real value, apply a filter to the books list
@@ -14,7 +14,6 @@ class BooksController < ApplicationController
                      @filters[p_key] = Genre.find(p_val).name
                      collection.send :filter_by_genre, p_val
                    else
-                     # TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
                      @filters[p_key] = p_val
                      collection.send p_key.to_sym
                    end
@@ -75,7 +74,7 @@ class BooksController < ApplicationController
   end
 
   def bulk_activation_toggle_form
-    @pagy, @books = pagy(Book.with_attached_cover_image.includes(:author, :genre).all.order(:author_id, :title), items: 50)
+    @pagy, @books = pagy(Book.with_attached_cover_image.includes(:author, :genres).all.order(:author_id, :title), items: 50)
     render 'bulk_activation_toggle_form'
   end
 
