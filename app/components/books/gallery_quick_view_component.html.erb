@@ -17,15 +17,18 @@
           data-action="click->books--quick-view#unClip"
         ><%= book.author.name %></a></h2>
     <% end %>
-
-    <div class="level is-align-items-center mb-2">
-      <% unless book.genre.nil? %>
-        <a href="/books?genre=<%= book.genre.id %>" class="subtitle mb-0">Genre:
-          <%= book.genre.name %></a>
+    <div class="level is-align-items-center mb-2 is-justify-content-flex-start">
+      <% unless book.genres.empty? %>
+        <h2 class="subtitle mb-0 mr-2">Genres:
+        </h2>
+        <% book.genres.each do |genre| %>
+          <a href="/books?genre=<%= genre.id %>" class="subtitle mb-0 mr-2 has-text-link is-underlined">
+            <%= genre.name %></a>
+        <% end %>
       <% end %>
-      <p class="subtitle mb-0"><strong>Price:
-        </strong><%= book.display_price %></p>
     </div>
+    <p class="subtitle"><strong>Price:
+      </strong><%= book.display_price %></p>
 
     <div class="mb-2">
       <% if book.spicy %>
