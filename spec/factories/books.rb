@@ -9,6 +9,7 @@
 #  free             :boolean          default(FALSE)
 #  kindle_unlimited :boolean          default(FALSE)
 #  one_liner_blurb  :string
+#  paperback_price  :string
 #  primary_link     :string
 #  promo_active     :boolean          default(FALSE)
 #  queer_rep        :boolean          default(FALSE)
@@ -40,7 +41,6 @@ FactoryBot.define do
     display_price { Faker::Commerce.price }
     free { false }
     promo_active { false }
-    genre { Genre.all.sample }
     author { User.where(role: 'author').sample }
 
     after(:build) do |book|
@@ -49,6 +49,15 @@ FactoryBot.define do
         filename: 'generic_cover.png',
         content_type: 'image/png'
       )
+
+      genre_ids = []
+      rand(1..3).times do
+        genre_ids << Genre.all.sample.id
+      end
+
+      genre_ids.uniq.each do |id|
+        book.genres << Genre.find(id)
+      end
     end
   end
 

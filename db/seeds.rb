@@ -27,4 +27,6 @@ end
   FactoryBot.create(:user, :admin)
 end
 
+FactoryBot.create(:promo)
+
 FactoryBot.create(:user, email: 'test@test.com', role: 'super_admin')
