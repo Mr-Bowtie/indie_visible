@@ -1,8 +1,11 @@
-(A) search bar - title and author +springUpdates @feature
 (A) fix mobile styling +springUpdates @styling @mobile
 (B) add back to top button +springUpdates @feature
 (C) Randomize books per user (per session?) +springUpdates @feature
-x 2024-03-02 allow banner upload per promo/ set date to display / display toggle +springUpdates @feature
-(C) make series appear together - in order +springUpdates @feature
-fix 'back to admin' button from bulk update page @springUpdates @bug
+(A) make series appear together - in order +springUpdates @feature
+(C) fix 'back to admin' button from bulk update page +springUpdates @bug
 add color scheme to promos +springUpdates @feature
+make book and author tiles smaller, fit more on screen +mobileStyling @mobile @styling
+mix margins +mobileStyling @mobile @styling
+clean up menus +mobileStyling @mobile @styling
+(A) allow books to belong to multiple genres +springUpdates @feature
+create Author Spotlight section +springUpdates @feature
