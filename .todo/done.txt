@@ -3,3 +3,4 @@ x 2024-03-02 Add books to author bio +springUpdates @styling
 x 2024-03-02 consolidate links to icons +springUpdates @styling
 x 2024-03-02 allow banner upload per promo/ set date to display / display toggle +springUpdates @feature
 x 2024-03-03 search bar - title and author +springUpdates @feature
+x 2024-03-05 allow books to belong to multiple genres +springUpdates @feature
