@@ -22,13 +22,23 @@
         <h2 class="subtitle mb-0 mr-2">Genres:
         </h2>
         <% book.genres.each do |genre| %>
-          <a href="/books?genre=<%= genre.id %>" class="subtitle mb-0 mr-2 has-text-link is-underlined">
+          <a
+            href="/books?genre=<%= genre.id %>"
+            class="subtitle mb-0 mr-2 has-text-link is-underlined"
+          >
             <%= genre.name %></a>
         <% end %>
       <% end %>
     </div>
-    <p class="subtitle"><strong>Price:
-      </strong><%= book.display_price %></p>
+    <div class="mb-2">
+      <p class="subtitle mb-0"><strong>E-Book Price:
+        </strong><%= book.display_price %></p>
+
+      <% if book.paperback_price %>
+        <p class="subtitle"><strong>Paperback Price:
+          </strong><%= book.paperback_price %></p>
+      <% end %>
+    </div>
 
     <div class="mb-2">
       <% if book.spicy %>
