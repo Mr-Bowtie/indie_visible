@@ -6,19 +6,19 @@
     <div class="is-flex is-justify-content-center mb-6">
       <h1 class="title is-1">Books</h1>
     </div>
-    <div class="level mobile-filter-controls">
+    <div class="level mobile-filter-controls is-justify-content-center">
       <%= form_with url: "/books", method: :get do |form| %>
-        <div class="level-left mb-2 is-align-items-baseline">
-          <div class="mr-2">
+        <div class="mb-2 is-align-items-baseline">
+          <div class="mr-2 mb-4">
             <%= form.label :genres, "Filter by genre:", class: "label" %>
-            <div class="select is-small mb-2 is-multiple">
+            <div class="multi-select" data-controller="choices">
               <%= form.select :genres,
                           Genre.all.collect { |g| [g.name, g.id] },
                           { selected: params[:genres] },
                           { multiple: true } %>
             </div>
           </div>
-          <div>
+          <div class="mb-4">
             <%= form.label :attributes, "Filter by tag:", class: "label" %>
             <div class="level">
               <div class="control mr-2 is-flex is-align-items-center">

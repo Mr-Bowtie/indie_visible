@@ -7,6 +7,7 @@
     "@hotwired/turbo-rails": "^7.3.0",
     "@smoosee/vite-plugin-sass": "^1.0.3",
     "bulma": "^0.9.4",
+    "choices.js": "^10.2.0",
     "esbuild": "^0.18.20",
     "sass": "^1.65.1",
     "tslib": "^2.6.2"
