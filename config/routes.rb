@@ -3,16 +3,20 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :businesses
+  get 'series/new'
+  post 'series/create'
   get 'books/bulk_activation_toggle_form', to: 'books#bulk_activation_toggle_form'
+  get 'users/index'
+  get '/search', to: 'search#index'
+  get 'authors/:id', to: 'users#author_show'
+
+  resources :businesses
   resources :books do
     collection do
       patch :bulk_activation_toggle
     end
   end
-  get 'users/index'
-  get '/search', to: 'search#index'
-  get 'authors/:id', to: 'users#author_show'
+
   namespace :admin do
     resources :users
     resources :genres
