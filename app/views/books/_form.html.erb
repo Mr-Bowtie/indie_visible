@@ -1,105 +1,90 @@
 <%= form_with(model: book) do |form| %>
+  <% if book.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% book.errors.full_messages.each do |message| %>
+          <li class="flash-error"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div class="columns">
-    <div class="field column is-half">
-      <div class="field">
+  <div class="container" style="max-width: 1000px;">
+    <div class="field">
+      <div class="field is-flex is-flex-direction-row">
         <div id="cover_image_file_input" class="file is-boxed has-name">
           <%= form.label :cover_image, "Cover image", class: "file-label", style: "display:block" do |builder| %>
-            <%= form.file_field :cover_image, class: "file-input" %>
-            <% if book.cover_image.attached? %>
-              <%= image_tag book.cover_image%>
-            <% end %>
-            <span class="file-cta">
-              <span class="file-label">upload cover image</span>
-            </span>
-            <span class="file-name"></span>
+            <div class="is-flex is-flex-direction-column is-align-items-center">
+              <div class="is-flex is-flex-direction-row">
+                <% if book.cover_image.attached? %>
+                  <div>
+                    <h2 class="subtitle">Current cover</h2>
+                    <%= image_tag book.cover_image, size: "200" %>
+                  </div>
+                <% end %>
+                <div>
+                  <h2 id="image-preview-title" class="subtitle" style="display: none">New cover</h2>
+                  <img
+                    id="image-preview"
+                    style="display: none; max-width: 200px; max-height: 200px;"
+                  />
+                </div>
+              </div>
+              <%= form.file_field :cover_image,
+                              class: "file-input",
+                              accept: "image/png, image/jpeg, image/jpg" %>
+              <div class="file-name" style="max-width:400px;"></div>
+              <span class="file-cta" style="width: 400px;">
+                <span class="file-label">upload cover image</span>
+              </span>
+              <p class="has-text-danger">image must be of type: png, jpg, jpeg</p>
+            </div>
           <% end %>
         </div>
-      </div>
-      <div class="field">
-        <%= form.label :title, class: "label", style: "display: block" %>
-        <div class="control">
-          <%= form.text_field :title, class: "input" %>
-        </div>
-        <% if book.errors[:title] %>
-          <ul>
-            <% book.errors.where(:title).each do |error| %>
-              <li class="has-text-danger"><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        <% end %>
-      </div>
-
-      <div class="field">
-        <%= form.label :primary_link,
-                   "Purchase link",
-                   class: "label",
-                   style: "display: block" %>
-        <div class="control">
-          <%= form.text_field :primary_link, class: "input" %>
-        </div>
-        <% if book.errors[:primary_link] %>
-          <ul>
-            <% book.errors.where(:primary_link).each do |error| %>
-              <li class="has-text-danger"><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        <% end %>
-      </div>
-
-      <div class="field">
-        <%= form.label :one_liner_blurb, class: "label", style: "display: block" %>
-        <div class="control">
-          <%= form.text_field :one_liner_blurb, class: "input" %>
-        </div>
-        <% if book.errors[:one_liner_blurb] %>
-          <ul>
-            <% book.errors.where(:one_liner_blurb).each do |error| %>
-              <li class="has-text-danger"><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        <% end %>
-      </div>
-
-      <div
-        class="
-          container
-          is-flex
-          is-flex-direction-row
-          is-justify-content-space-between
-        "
-      >
-        <div class="field" style="width: 100%;">
-          <%= form.label :genre, class: "label" %>
-          <div class="control">
-            <div class="select is-rounded" style="width: 80%;">
-              <%= form.select :genre_id, Genre.all.collect { |g| [g.name, g.id] } %>
+        <div class=" container is-flex is-flex-direction-column ml-4 ">
+          <div class="field">
+            <%= form.label :genre, class: "label" %>
+            <div class="control">
+              <div class="select is-rounded">
+                <%= form.select :genre_id, Genre.all.collect { |g| [g.name, g.id] } %>
+              </div>
             </div>
           </div>
-          <% if book.errors[:genre_id] %>
-            <ul>
-              <% book.errors.where(:genre_id).each do |error| %>
-                <li class="has-text-danger"><%= error.full_message %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        </div>
 
-        <div class="field">
-          <%= form.label :display_price, class: "label", style: "display: block" %>
-          <div class="control">
-            <%= form.text_field :display_price, class: "input" %>
+          <% if current_user.at_least_admin? %>
+            <div class="field">
+              <%= form.label :author, class: "label" %>
+              <div class="control">
+                <div class="select is-rounded">
+                  <%= form.select :author_id, User.valid_authors.collect { |t| [t.name, t.id] } %>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <%= form.hidden_field :author_id, value: current_user.id %>
+          <% end %>
+
+          <div class="field">
+            <%= form.label :display_price,
+                       "E-book Price",
+                       class: "label",
+                       style: "display: block" %>
+            <div class="control">
+              <%= form.text_field :display_price, class: "input", style: "width: 20%;" %>
+            </div>
           </div>
-          <% if book.errors[:display_price] %>
-            <ul>
-              <% book.errors.where(:display_price).each do |error| %>
-                <li class="has-text-danger"><%= error.full_message %></li>
-              <% end %>
-            </ul>
-          <% end %>
+          <div class="field">
+            <%= form.label :paperback_price,
+                       "Paperback Price",
+                       class: "label",
+                       style: "display: block" %>
+            <div class="control">
+              <%= form.text_field :paperback_price, class: "input", style: "width: 20%;" %>
+            </div>
+          </div>
         </div>
-      </div>
 
+      </div>
       <div
         class="
           container
@@ -134,7 +119,10 @@
           "
         >
           <%= form.check_box :kindle_unlimited, class: "checkbox mr-2" %>
-          <%= form.label :kindle_unlimited, class: "label", style: "display: block" %>
+          <%= form.label :kindle_unlimited,
+                     "Kindle Unlimited",
+                     class: "label",
+                     style: "display: block" %>
         </div>
         <div
           class="
@@ -147,12 +135,88 @@
           "
         >
           <%= form.check_box :queer_rep, class: "checkbox mr-2" %>
-          <%= form.label :queer_rep, class: "label", style: "display: block" %>
+          <%= form.label :queer_rep, "Queer Rep", class: "label", style: "display: block" %>
+        </div>
+        <div
+          class="
+            mr-4
+            control
+            is-flex
+            is-flex-direction-row
+            is-align-items-center
+            is-justify-content-center
+          "
+        >
+          <%= form.check_box :free, class: "checkbox mr-2" %>
+          <%= form.label :free, "Free E-book", class: "label", style: "display: block" %>
+        </div>
+
+        <% if current_user.admin? || current_user.super_admin? %>
+          <div
+            class="
+              mr-4
+              control
+              is-flex
+              is-flex-direction-row
+              is-align-items-center
+              is-justify-content-center
+            "
+          >
+            <%= form.check_box :promo_active, class: "checkbox mr-2" %>
+            <%= form.label :promo_active,
+                       "Promo Active",
+                       class: "label",
+                       style: "display: block" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= form.label :title, class: "label", style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :title, class: "input" %>
         </div>
       </div>
-    </div>
-    <div class="column is-half">
+
+      <div data-controller="series">
+        <div class="field">
+          <%= label_tag nil, "Part of a series?", class: "label" %>
+          <%= check_box_tag "series", nil, false, {class: "checkbox", data: { action: "click->series#toggleSeriesInputs", series_target: "seriesCheckbox"}} %>
+        </div>
+
+        <%= turbo_frame_tag "series_selector", class: "mb-2 is-hidden", data: { series_target: "seriesInputs"} do %>
+          <div class="field mb-4">
+            <%= form.label :series_id, "Series", class: "label" %>
+            <div class="control select mr-2">
+              <%= form.collection_select :series_id, series, :id, :name, include_blank: true %>
+            </div>
+            <%= link_to "Create New Series",
+            "/series/new",
+            class: "button is-primary",
+            data: {
+              turbo_frame: "series_selector"
+            } %>
+          </div>
+        <% end %>
+      </div>
+
       <div class="field">
+        <%= form.label :primary_link,
+                   "Purchase link",
+                   class: "label",
+                   style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :primary_link, class: "input" %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label :one_liner_blurb, class: "label", style: "display: block" %>
+        <div class="control">
+          <%= form.text_field :one_liner_blurb, class: "input" %>
+        </div>
+      </div>
+      <div class="field mb-4">
         <%= form.label :description, class: "label", style: "display: block" %>
         <%= form.text_area :description, class: "textarea", rows: "10" %>
         <% if book.errors[:description] %>
@@ -163,50 +227,33 @@
           </ul>
         <% end %>
       </div>
-      <div class="container is-flex is-flex-direction-row is-align-items-center">
-        <div
-          class="
-            mr-4
-            field
-            is-flex
-            is-flex-direction-row
-            is-align-items-center
-            is-justify-content-center
-          "
-        >
-          <%= form.check_box :free, class: "checkbox mr-2" %>
-          <%= form.label :free, class: "label", style: "display: block" %>
-        </div>
 
-        <div
-          class="
-            mr-4
-            mb-3
-            field
-            is-flex
-            is-flex-direction-row
-            is-align-items-center
-            is-justify-content-center
-          "
-        >
-          <%= form.check_box :promo_active, class: "checkbox mr-2" %>
-          <%= form.label :promo_active, class: "label", style: "display: block" %>
-        </div>
-      </div>
     </div>
-
-  </div>
-  <div>
-    <%= form.submit "Submit", class: "button is-info" %>
+    <div>
+      <%= form.submit "Submit", class: "button is-warning" %>
+    </div>
   </div>
 <% end %>
-
 <script>
   const fileInput = document.querySelector('#cover_image_file_input input[type=file]');
+  const imagePreview = document.getElementById('image-preview');
+  const imagePreviewTitle = document.getElementById('image-preview-title');
+
   fileInput.onchange = () => {
     if (fileInput.files.length > 0) {
       const fileName = document.querySelector('#cover_image_file_input .file-name');
       fileName.textContent = fileInput.files[0].name;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+        imagePreviewTitle.style.display = 'block'
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    } else {
+      imagePreview.style.display = 'none';
+      imagePreviewTitle.style.display = 'block'
     }
   }
 </script>

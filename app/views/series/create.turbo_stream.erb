@@ -1,0 +1,18 @@
+<turbo-stream action="update" target="series_selector">
+  <template>
+    <%= form_with model: Book.new do |form| %>
+      <div class="field mb-4">
+        <%= form.label :series_id, "Series", class: "label" %>
+        <div class="control select mr-2">
+          <%= form.collection_select :series_id, @series, :id, :name, include_blank: true %>
+        </div>
+        <%= link_to "Create New Series",
+        "/series/new",
+        class: "button is-primary",
+        data: {
+          turbo_frame: "series_selector"
+        } %>
+      </div>
+    <% end %>
+  </template>
+</turbo-stream>

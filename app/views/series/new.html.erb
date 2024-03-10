@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "series_selector" do %>
+  <%= form_with scope: :series, url: "/series/create" , id: "new_series_form", class: "mb-4", data: { controller: "series" } do |form| %>
+    <%= form.label :name, "New series name", class: "label" %>
+    <div class="level is-justify-content-flex-start">
+      <%= form.text_field :name, class: "input width-half mr-2" %>
+      <%= form.hidden_field :author_id, value: current_user.id %>
+      <%= form.submit "Create Series", class: "button is-primary" %>
+    </div>
+  <% end %>
+<% end %>
