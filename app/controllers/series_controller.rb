@@ -1,11 +1,13 @@
 class SeriesController < ApplicationController
-  def new; end
+  def new
+    @series = Series.new
+  end
 
   def create
-    @new_series = Series.new(series_params)
-    if @new_series.save
+    @series = Series.new(series_params)
+    if @series.save
       respond_to do |format|
-        @series = Series.where(author_id: current_user.id)
+        @author_series = Series.where(author_id: current_user.id)
         format.turbo_stream
       end
     else
