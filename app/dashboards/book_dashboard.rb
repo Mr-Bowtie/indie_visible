@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class BookDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -22,11 +22,12 @@ class BookDashboard < Administrate::BaseDashboard
     queer_rep: Field::Boolean,
     genres: Field::HasMany,
     author: Field::BelongsTo.with_options(searchable: true, searchable_fields: ['name']),
+    series: Field::BelongsTo.with_options(searchable: true, searchable_fields: ['name']),
     title: Field::String,
     trigger_warning: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    cover_image: Field::ActiveStorage,
+    cover_image: Field::ActiveStorage
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -37,6 +38,7 @@ class BookDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     title
+    series
     promo_active
     author
     genres
@@ -48,6 +50,7 @@ class BookDashboard < Administrate::BaseDashboard
     id
     cover_image
     title
+    series
     description
     one_liner_blurb
     display_price
