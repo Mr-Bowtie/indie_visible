@@ -42,6 +42,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum role: { author: 0, admin: 1, super_admin: 2 }
   has_many :books, foreign_key: 'author_id'
+  has_many :series, dependent: :destroy
   has_one_attached :photo
 
   # authors that have been sent invitations but havent logged in and filled out their profile will have an empty name

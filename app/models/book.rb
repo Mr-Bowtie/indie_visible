@@ -21,16 +21,19 @@
 #  updated_at       :datetime         not null
 #  author_id        :bigint
 #  genre_id         :bigint
+#  series_id        :bigint
 #
 # Indexes
 #
 #  index_books_on_author_id  (author_id)
 #  index_books_on_genre_id   (genre_id)
+#  index_books_on_series_id  (series_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (author_id => users.id)
 #  fk_rails_...  (genre_id => genres.id)
+#  fk_rails_...  (series_id => series.id)
 #
 class Book < ApplicationRecord
   REQUIRED_ATTRIBUTES = %i[title display_price one_liner_blurb primary_link].freeze
@@ -39,6 +42,7 @@ class Book < ApplicationRecord
   validates :cover_image, content_type: ['image/png', 'image/jpg', 'image/jpeg']
   has_and_belongs_to_many :genres
   belongs_to :author, class_name: 'User'
+  belongs_to :series, optional: true
   has_one_attached :cover_image
 
   scope :filter_by_genre, lambda { |genre_ids|

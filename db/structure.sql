@@ -147,7 +147,8 @@ CREATE TABLE public.books (
     spicy boolean DEFAULT false,
     genre_id bigint,
     author_id bigint,
-    paperback_price character varying
+    paperback_price character varying,
+    series_id bigint
 );
 
 
@@ -286,6 +287,38 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: series; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.series (
+    id bigint NOT NULL,
+    name character varying,
+    author_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: series_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.series_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: series_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.series_id_seq OWNED BY public.series.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -383,6 +416,13 @@ ALTER TABLE ONLY public.promos ALTER COLUMN id SET DEFAULT nextval('public.promo
 
 
 --
+-- Name: series id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.series ALTER COLUMN id SET DEFAULT nextval('public.series_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -462,6 +502,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: series series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.series
+    ADD CONSTRAINT series_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -526,6 +574,20 @@ CREATE INDEX index_books_on_genre_id ON public.books USING btree (genre_id);
 
 
 --
+-- Name: index_books_on_series_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_series_id ON public.books USING btree (series_id);
+
+
+--
+-- Name: index_series_on_author_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_series_on_author_id ON public.series USING btree (author_id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -558,6 +620,22 @@ CREATE INDEX index_users_on_invited_by_id ON public.users USING btree (invited_b
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: books fk_rails_1c0d164eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_1c0d164eeb FOREIGN KEY (series_id) REFERENCES public.series(id);
+
+
+--
+-- Name: series fk_rails_23702460ff; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.series
+    ADD CONSTRAINT fk_rails_23702460ff FOREIGN KEY (author_id) REFERENCES public.users(id);
 
 
 --
@@ -616,6 +694,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231112052156'),
 ('20231114224041'),
 ('20231119005948'),
-('20240304002739');
+('20240304002739'),
+('20240309221754'),
+('20240309222031');
 
 
