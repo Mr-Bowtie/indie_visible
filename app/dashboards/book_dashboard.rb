@@ -9,6 +9,7 @@ class BookDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    position: Field::Number,
     additional_links: Field::String,
     spicy: Field::Boolean,
     description: Field::Text,
@@ -38,6 +39,7 @@ class BookDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     title
     series
+    position
     promo_active
     author
     genres
@@ -49,6 +51,7 @@ class BookDashboard < Administrate::BaseDashboard
     cover_image
     title
     series
+    position
     description
     one_liner_blurb
     display_price
