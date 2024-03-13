@@ -6,3 +6,8 @@ x 2024-03-03 search bar - title and author +springUpdates @feature
 x 2024-03-05 allow books to belong to multiple genres +springUpdates @feature
 x 2024-03-09 make sure that paperback price is displayed for books +springUpdates @chore
 x 2024-03-10 create series dropdown and new series inline form +springUpdates @feature
+x 2024-03-12 add series dashboard to make admin happy +groupSeries @feature
+x 2024-03-12 add position to book form +groupSeries @feature
+x 2024-03-12 create through table for books_series +groupSeries @feature
+x 2024-03-12 force edit to go to main form +groupSeries @feature
+x 2024-03-12 create position input +groupSeries @feature
