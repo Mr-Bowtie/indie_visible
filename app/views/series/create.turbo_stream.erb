@@ -1,18 +1,25 @@
 <turbo-stream action="update" target="series_selector">
   <template>
-    <%= form_with model: Book.new do |form| %>
-      <div class="field mb-4">
-        <%= form.label :series_id, "Series", class: "label" %>
-        <div class="control select mr-2">
-          <%= form.collection_select :series_id, @author_series, :id, :name, include_blank: true %>
-        </div>
-        <%= link_to "Create New Series",
-        "/series/new",
-        class: "button is-primary",
-        data: {
-          turbo_frame: "series_selector"
-        } %>
+    <div class="field mb-4">
+      <label class="label" for="book_series_id">Series</label>
+      <div class="control select mr-2">
+        <select id=book_series_id name="book[series_id]">
+          <option value="" label=" "></option>
+          <% @author_series.each do |series| %>
+            <% if series.id == @series.id %>
+              <option value="<%= series.id %>" selected="selected"><%= series.name %></option>
+            <% else %>
+              <option value="<%= series.id %>"><%= series.name %></option>
+            <% end %>
+          <% end %>
+        </select>
       </div>
-    <% end %>
+      <%= link_to "Create New Series",
+      "/series/new",
+      class: "button is-primary",
+      data: {
+        turbo_frame: "series_selector"
+      } %>
+    </div>
   </template>
 </turbo-stream>
