@@ -8,6 +8,10 @@ make book and author tiles smaller, fit more on screen +mobileStyling @mobile @s
 mix margins +mobileStyling @mobile @styling
 clean up menus +mobileStyling @mobile @styling
 (A) create Author Spotlight section +springUpdates @feature
-(A) make sure that paperback price is displayed for books +springUpdates @chore
 (B) clean up nav bar look, add margins +springUpdates @styling
 (A) add new tags +springUpdates @feature
+(A) add position to book form +groupSeries @feature
+(A) update form to use multi select choice.js input for genre +springUpdates @feature
+
+(B) add button to go back to selecting series +groupSeries @feature
+(A) add series dashboard to make admin happy +groupSeries @feature
