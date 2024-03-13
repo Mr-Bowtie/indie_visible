@@ -3,8 +3,16 @@
     <%= form.label :name, "New series name", class: "label" %>
     <div class="level is-justify-content-flex-start">
       <%= form.text_field :name, class: "input width-half mr-2" %>
+
       <%= form.hidden_field :author_id, value: current_user.id %>
       <%= form.submit "Create Series", class: "button is-primary" %>
     </div>
+    <% if @series.errors[:name] %>
+      <ul>
+        <% @series.errors.where(:name).each do |error| %>
+          <li class="has-text-danger"><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
 <% end %>
