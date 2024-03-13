@@ -30,3 +30,4 @@ end
 FactoryBot.create(:promo)
 
 FactoryBot.create(:user, email: 'test@test.com', role: 'super_admin')
+FactoryBot.create(:user, :is_author, email: 'test_author@test.com')
