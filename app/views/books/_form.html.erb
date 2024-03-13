@@ -181,23 +181,41 @@
       <div data-controller="series">
         <div class="field">
           <%= label_tag nil, "Part of a series?", class: "label" %>
-          <%= check_box_tag "series", nil, false, {class: "checkbox", data: { action: "click->series#toggleSeriesInputs", series_target: "seriesCheckbox"}} %>
+          <%= check_box_tag "series",
+          nil,
+          @book.series,
+          {
+            class: "checkbox",
+            data: {
+              action: "click->series#toggleSeriesInputs",
+              series_target: "seriesCheckbox"
+            }
+          } %>
         </div>
 
-        <%= turbo_frame_tag "series_selector", class: "mb-2 is-hidden", data: { series_target: "seriesInputs"} do %>
-          <div class="field mb-4">
-            <%= form.label :series_id, "Series", class: "label" %>
-            <div class="control select mr-2">
-              <%= form.collection_select :series_id, series, :id, :name, include_blank: true %>
+        <div data-series-target="seriesInputs" class="is-hidden mb-2">
+          <%= turbo_frame_tag "series_selector", data: { series_target: "seriesInputs"} do %>
+            <div class="field mb-4">
+              <%= form.label :series_id, "Series", class: "label" %>
+              <div class="control select mr-2">
+                <%= form.collection_select :series_id, series, :id, :name, include_blank: true %>
+              </div>
+              <%= link_to "Create New Series",
+              "/series/new",
+              class: "button is-primary mr-3",
+              data: {
+                turbo_frame: "series_selector"
+              } %>
             </div>
-            <%= link_to "Create New Series",
-            "/series/new",
-            class: "button is-primary",
-            data: {
-              turbo_frame: "series_selector"
-            } %>
+          <% end %>
+
+          <div class="field mb-4 width-one-quarter">
+            <%= form.label :position, "Number in series", class: "label " %>
+            <div class="field">
+              <%= form.text_field :position, class: "input" %>
+            </div>
           </div>
-        <% end %>
+        </div>
       </div>
 
       <div class="field">
