@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :books
     resources :businesses
     resources :promos
+    resources :series
 
     root to: 'users#index'
   end
