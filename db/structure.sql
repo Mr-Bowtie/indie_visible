@@ -148,7 +148,8 @@ CREATE TABLE public.books (
     genre_id bigint,
     author_id bigint,
     paperback_price character varying,
-    series_id bigint
+    series_id bigint,
+    "position" integer
 );
 
 
@@ -696,6 +697,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231119005948'),
 ('20240304002739'),
 ('20240309221754'),
-('20240309222031');
+('20240309222031'),
+('20240313014411');
 
 

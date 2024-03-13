@@ -10,6 +10,7 @@
 #  kindle_unlimited :boolean          default(FALSE)
 #  one_liner_blurb  :string
 #  paperback_price  :string
+#  position         :integer
 #  primary_link     :string
 #  promo_active     :boolean          default(FALSE)
 #  queer_rep        :boolean          default(FALSE)
