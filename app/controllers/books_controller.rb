@@ -4,8 +4,11 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    collection = Book.with_attached_cover_image.where(promo_active: true).includes(:author, :genres, :series).order(:author_id)
-
+    collection = Book.with_attached_cover_image
+                     .where(promo_active: true)
+                     .includes(:author, :genres, :series)
+                     .left_joins(:series)
+                     .order('author.name ASC', 'series.name ASC', 'position ASC')
     @filters = {}
 
     # for each param with a real value, apply a filter to the books list
