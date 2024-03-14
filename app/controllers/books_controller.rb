@@ -50,13 +50,14 @@ class BooksController < ApplicationController
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
+    @series = Series.where(author_id: @book.author_id)
 
     respond_to do |format|
       if @book.save
         format.html { redirect_to admin_books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, series: @series }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -64,12 +65,13 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /books/1 or /books/1.json
   def update
+    @series = Series.where(author_id: @book.author_id)
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to admin_book_url(@book), notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity, series: @series }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
