@@ -30,7 +30,7 @@
 
   <h3 class="subtitle is-3">Books</h3>
   <div class="tile is-ancestor is-flex-wrap-wrap">
-    <% Book.promo_active_per_author(@author.id).each do |book| %>
+    <% @books.each do |book| %>
       <%= render(Books::GalleryCardComponent.new(book: book)) %>
       <%= render(Books::GalleryQuickViewComponent.new(book: book)) %>
     <% end %>
