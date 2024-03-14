@@ -14,10 +14,17 @@
     <%= book.title %>
   </p>
 
-  <p>
-    <strong>Blurb:</strong>
-    <%= book.one_liner_blurb %>
-  </p>
+  <% if book.series %>
+    <p>
+      <strong>Series:</strong>
+      <%= book.series.name %>
+    </p>
+
+    <p>
+      <strong>Series Number:</strong>
+      <%= book.position %>
+    </p>
+  <% end %>
 
   <p>
     <strong>E-book Price:</strong>
@@ -34,6 +41,11 @@
       <%= book.paperback_price %>
     </p>
   <% end %>
+
+  <p>
+    <strong>Blurb:</strong>
+    <%= book.one_liner_blurb %>
+  </p>
 
   <div>
     <% if book.spicy %>
