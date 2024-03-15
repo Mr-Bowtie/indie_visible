@@ -5,7 +5,7 @@
       <%= form.text_field :name, class: "input width-half mr-2" %>
 
       <%= form.hidden_field :author_id, value: current_user.id %>
-      <%= form.submit "Create Series", class: "button is-primary" %>
+      <%= form.submit "Create Series", class: "button is-primary mr-2" %>
     </div>
     <% if @series.errors[:name] %>
       <ul>
