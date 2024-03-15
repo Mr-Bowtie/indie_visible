@@ -5,9 +5,10 @@ class SeriesController < ApplicationController
 
   def create
     @series = Series.new(series_params)
+    @author_series = Series.where(author_id: current_user.id)
+
     if @series.save
       respond_to do |format|
-        @author_series = Series.where(author_id: current_user.id)
         format.turbo_stream
       end
     else
