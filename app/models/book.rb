@@ -41,7 +41,7 @@ class Book < ApplicationRecord
   PROMO_REQUIRED_ATTRIBUTES = %i[title display_price one_liner_blurb primary_link genre_id author_id].freeze
   validates(*REQUIRED_ATTRIBUTES, presence: true)
   validates :cover_image, content_type: ['image/png', 'image/jpg', 'image/jpeg']
-  validates :position, numericality: { only_integer: true }, uniqueness: { scope: :series_id }
+  validates :position, numericality: { only_integer: true }, uniqueness: { scope: :series_id }, allow_blank: true
   has_and_belongs_to_many :genres
   belongs_to :author, class_name: 'User'
   belongs_to :series, optional: true
