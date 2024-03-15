@@ -26,50 +26,52 @@ By default, it renders:
       <%= csp_meta_tag if defined?(csp_meta_tag) %>
     </head>
     <body>
-      <%= render "icons" %>
-      <nav class="navbar has-background-color">
-        <div class="navbar-brand">
-          <a href="<%= books_path %>">
-            <img
-              src="https://storage.googleapis.com/indievisible_static/indie-visible-logo.png"
-              alt="Logo of an open book with the words Indie Visible above"
-              width="175"
-            >
-          </a>
-        </div>
-        <div class="navbar-menu" id="navMenu">
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <% if signed_in? %>
-                <span class="mr-3">
-                  Signed in as:
-                  <%= current_user.email %>
-                </span>
-                <span class="tag has-background-info has-text-white mr-3">
-                  <%= current_user.role %>
-                </span>
-                <%= button_to "Sign out",
-                destroy_user_session_path,
-                method: :delete,
-                class: "button is-danger" %>
-              <% else %>
-                <%= link_to "Sign in", user_session_path, class: "button is-primary" %>
-              <% end %>
+      <div class="container">
+        <%= render "icons" %>
+        <nav class="navbar has-background-color">
+          <div class="navbar-brand">
+            <a href="<%= books_path %>">
+              <img
+                src="https://storage.googleapis.com/indievisible_static/indie-visible-logo.png"
+                alt="Logo of an open book with the words Indie Visible above"
+                width="175"
+              >
+            </a>
+          </div>
+          <div class="navbar-menu" id="navMenu">
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <% if signed_in? %>
+                  <span class="mr-3">
+                    Signed in as:
+                    <%= current_user.email %>
+                  </span>
+                  <span class="tag has-background-info has-text-white mr-3">
+                    <%= current_user.role %>
+                  </span>
+                  <%= button_to "Sign out",
+                  destroy_user_session_path,
+                  method: :delete,
+                  class: "button is-danger" %>
+                <% else %>
+                  <%= link_to "Sign in", user_session_path, class: "button is-primary" %>
+                <% end %>
+              </div>
             </div>
           </div>
+        </nav>
+
+        <div class="app-container">
+
+          <%= render "navigation" -%>
+
+          <main class="main-content">
+            <%= render "flashes" -%>
+            <%= yield %>
+          </main>
         </div>
-      </nav>
 
-      <div class="app-container">
-
-        <%= render "navigation" -%>
-
-        <main class="main-content">
-          <%= render "flashes" -%>
-          <%= yield %>
-        </main>
+        <%= render "javascript" %>
       </div>
-
-      <%= render "javascript" %>
     </body>
   </html>
