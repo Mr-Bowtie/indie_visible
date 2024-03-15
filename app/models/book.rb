@@ -43,6 +43,8 @@ class Book < ApplicationRecord
   validates :cover_image, content_type: ['image/png', 'image/jpg', 'image/jpeg']
   validates :position, numericality: { only_integer: true }, uniqueness: { scope: :series_id }, allow_blank: true
   has_and_belongs_to_many :genres
+  has_many :books_tags, dependent: :nullify
+  has_many :tags, through: :books_tags
   belongs_to :author, class_name: 'User'
   belongs_to :series, optional: true
   has_one_attached :cover_image

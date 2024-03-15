@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :tags
   get 'series/new'
   post 'series/create'
   get 'books/bulk_activation_toggle_form', to: 'books#bulk_activation_toggle_form'
