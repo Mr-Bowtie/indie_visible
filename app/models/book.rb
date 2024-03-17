@@ -15,7 +15,6 @@
 #  promo_active     :boolean          default(FALSE)
 #  queer_rep        :boolean          default(FALSE)
 #  spicy            :boolean          default(FALSE)
-#  tags             :string           default([]), is an Array
 #  title            :string
 #  trigger_warning  :string           default("")
 #  created_at       :datetime         not null
@@ -65,11 +64,7 @@ class Book < ApplicationRecord
       .having('COUNT(tags.id) = ?', tag_ids.length)
       .select('books.id'))
   }
-  scope :kindle_unlimited, -> { where('kindle_unlimited = true') }
-  scope :queer_rep, -> { where('queer_rep = true') }
-  scope :spicy, -> { where('spicy = true') }
-  scope :not_spicy, -> { where('spicy = false') }
-  scope :free, -> { where('free = true') }
+  scope :free, -> { joins(:tags).merge(Tag.where(name: %w[free Free])) }
   scope :promo_active_per_author, ->(author_id) { where(author_id:, promo_active: true) }
 
   def ready_for_promo?
@@ -79,5 +74,9 @@ class Book < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     ['title']
+  end
+
+  def free?
+    tags.select { |tag| tag.name.downcase == 'free' }.size == 1
   end
 end
