@@ -15,7 +15,6 @@
 #  promo_active     :boolean          default(FALSE)
 #  queer_rep        :boolean          default(FALSE)
 #  spicy            :boolean          default(FALSE)
-#  tags             :string           default([]), is an Array
 #  title            :string
 #  trigger_warning  :string           default("")
 #  created_at       :datetime         not null

@@ -138,7 +138,6 @@ CREATE TABLE public.books (
     display_price character varying,
     free boolean DEFAULT false,
     promo_active boolean DEFAULT false,
-    tags character varying[] DEFAULT '{}'::character varying[],
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     trigger_warning character varying DEFAULT ''::character varying,
@@ -807,6 +806,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240309222031'),
 ('20240313014411'),
 ('20240315013328'),
-('20240315013441');
+('20240315013441'),
+('20240317182531');
 
 
