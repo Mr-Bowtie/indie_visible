@@ -57,6 +57,14 @@ class Book < ApplicationRecord
       .having('COUNT(genres.id) = ?', genre_ids.length)
       .select('books.id'))
   }
+  scope :filter_by_tag, lambda { |tag_ids|
+    where(id:
+      Book.joins(:tags)
+      .merge(Tag.where(id: tag_ids))
+      .group('books.id')
+      .having('COUNT(tags.id) = ?', tag_ids.length)
+      .select('books.id'))
+  }
   scope :kindle_unlimited, -> { where('kindle_unlimited = true') }
   scope :queer_rep, -> { where('queer_rep = true') }
   scope :spicy, -> { where('spicy = true') }
