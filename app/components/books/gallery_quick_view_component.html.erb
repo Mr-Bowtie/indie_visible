@@ -30,6 +30,20 @@
         <% end %>
       <% end %>
     </div>
+    <div class="level is-align-items-center mb-2 is-justify-content-flex-start">
+      <% unless book.tags.empty? %>
+        <h2 class="subtitle mb-0 mr-2">Tags:
+        </h2>
+        <% book.tags.each do |tag| %>
+          <a
+            href="<%= books_path(tags: [tag]) %>"
+            data-turbo="false"
+            class="tag mr-2 is-<%= tag.color_class %>"
+          >
+            <%= tag.name %></a>
+        <% end %>
+      <% end %>
+    </div>
     <div class="mb-2">
       <p class="subtitle mb-0"><strong>E-Book Price:
         </strong><%= book.display_price %></p>
