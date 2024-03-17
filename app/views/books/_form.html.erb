@@ -32,15 +32,6 @@
           <% end %>
         </div>
         <div class=" container is-flex is-flex-direction-column ml-4 ">
-          <div class="field">
-            <%= form.label :genre, class: "label" %>
-            <div class="control">
-              <div class="select is-rounded">
-                <%= form.select :genre_id, Genre.all.collect { |g| [g.name, g.id] } %>
-              </div>
-            </div>
-          </div>
-
           <% if current_user.at_least_admin? %>
             <div class="field">
               <%= form.label :author, class: "label" %>
@@ -82,6 +73,31 @@
         </div>
 
       </div>
+      <div class="field width-half">
+        <%= form.label :genres, class: "label" %>
+        <div class="control">
+          <div class="multi-select" data-controller="choices">
+            <%= form.select :genres,
+                        Genre.all.collect { |g| [g.name, g.id] },
+                        { selected: @book.genres.map{|g| g.id.to_s} },
+                        { multiple: true } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field width-half">
+        <%= form.label :tags, class: "label" %>
+        <div class="control">
+          <div class="multi-select" data-controller="choices">
+            <%= form.select :tags,
+                        Tag.all.collect { |g| [g.name, g.id] },
+                        { selected: @book.tags.map{|t| t.id.to_s} },
+                        { multiple: true } %>
+          </div>
+        </div>
+      </div>
+
+
       <div
         class="
           container
@@ -92,62 +108,6 @@
           is-align-items-center
         "
       >
-        <div
-          class="
-            mr-4
-            control
-            is-flex
-            is-flex-direction-row
-            is-align-items-center
-            is-justify-content-center
-          "
-        >
-          <%= form.check_box :spicy, class: "checkbox mr-2" %>
-          <%= form.label :spicy, class: "label", style: "display: block" %>
-        </div>
-        <div
-          class="
-            mr-4
-            control
-            is-flex
-            is-flex-direction-row
-            is-align-items-center
-            is-justify-content-center
-          "
-        >
-          <%= form.check_box :kindle_unlimited, class: "checkbox mr-2" %>
-          <%= form.label :kindle_unlimited,
-                     "Kindle Unlimited",
-                     class: "label",
-                     style: "display: block" %>
-        </div>
-        <div
-          class="
-            mr-4
-            control
-            is-flex
-            is-flex-direction-row
-            is-align-items-center
-            is-justify-content-center
-          "
-        >
-          <%= form.check_box :queer_rep, class: "checkbox mr-2" %>
-          <%= form.label :queer_rep, "Queer Rep", class: "label", style: "display: block" %>
-        </div>
-        <div
-          class="
-            mr-4
-            control
-            is-flex
-            is-flex-direction-row
-            is-align-items-center
-            is-justify-content-center
-          "
-        >
-          <%= form.check_box :free, class: "checkbox mr-2" %>
-          <%= form.label :free, "Free E-book", class: "label", style: "display: block" %>
-        </div>
-
         <% if current_user.admin? || current_user.super_admin? %>
           <div
             class="

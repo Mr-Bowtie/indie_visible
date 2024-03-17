@@ -6,9 +6,9 @@
     <div class="is-flex is-justify-content-center mb-6">
       <h1 class="title is-1">Books</h1>
     </div>
-    <div class="level mobile-filter-controls is-justify-content-center">
-      <%= form_with url: "/books", method: :get do |form| %>
-        <div class="mb-2 is-align-items-baseline">
+    <div class="mobile-filter-controls is-flex is-justify-content-center" >
+      <%= form_with url: "/books", method: :get, class: "width-half" do |form| %>
+        <div class="mb-2 is-align-items-baseline width">
           <div class="mr-2 mb-4">
             <%= form.label :genres, "Filter by genre:", class: "label" %>
             <div class="multi-select" data-controller="choices">
@@ -18,31 +18,13 @@
                           { multiple: true } %>
             </div>
           </div>
-          <div class="mb-4">
-            <%= form.label :attributes, "Filter by tag:", class: "label" %>
-            <div class="level">
-              <div class="control mr-4 is-flex is-align-items-center">
-                <%= form.label :spicy, class: "lable mr-2" %>
-                <%= form.check_box :spicy, class: "checkbox", checked: params[:spicy] == "1" %>
-              </div>
-              <div class="control mr-4 is-flex is-align-items-center">
-                <%= form.label :not_spicy, class: "lable mr-2" %>
-                <%= form.check_box :not_spicy, class: "checkbox", checked: params[:not_spicy] == "1" %>
-              </div>
-              <div class="control mr-4 is-flex is-align-items-center">
-                <%= form.label :kindle_unlimited, "Kindle Unlimited", class: "lable mr-2" %>
-                <%= form.check_box :kindle_unlimited,
-                               class: "checkbox",
-                               checked: params[:kindle_unlimited] == "1" %>
-              </div>
-              <div class="control mr-4 is-flex is-align-items-center">
-                <%= form.label :queer_rep, "Queer Rep", class: "lable mr-2" %>
-                <%= form.check_box :queer_rep, class: "checkbox", checked: params[:queer_rep] == "1" %>
-              </div>
-              <div class="control mr-4 is-flex is-align-items-center">
-                <%= form.label :free, "Free E-book", class: "lable mr-2" %>
-                <%= form.check_box :free, class: "checkbox", checked: params[:free] == "1" %>
-              </div>
+          <div class="mr-2 mb-4">
+            <%= form.label :tags, "Filter by tag:", class: "label" %>
+            <div class="multi-select" data-controller="choices">
+              <%= form.select :tags,
+                          Tag.all.collect { |g| [g.name, g.id] },
+                          { selected: params[:tags] },
+                          { multiple: true } %>
             </div>
           </div>
         </div>
@@ -57,7 +39,7 @@
             <div class="tags">
               <% @filters.each do |filter, value| %>
                 <span class="tag is-small is-info">
-                  <%= filter.include?("genre") ? value : filter %>
+                  <%= value %>
                   <% if filter.include?("genre") %>
                     <% gen_id = filter.gsub("genre_", "")
                     updated_genres = request.query_parameters["genres"].reject { |g| g == gen_id } %>
@@ -66,9 +48,11 @@
                     class: "delete is-small",
                     remote: true,
                     method: :get %>
-                  <% else %>
-                    <%= link_to "×",
-                    books_path(request.query_parameters.merge({ filter => "" })),
+                <% elsif filter.include?("tag") %>
+                    <% gen_id = filter.gsub("tag_", "")
+                    updated_genres = request.query_parameters["tags"].reject { |g| g == gen_id } %>
+                    <%= link_to "x",
+                    books_path(request.query_parameters.merge({ "tags" => updated_genres })),
                     class: "delete is-small",
                     remote: true,
                     method: :get %>
