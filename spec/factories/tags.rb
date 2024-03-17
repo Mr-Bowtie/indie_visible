@@ -11,4 +11,8 @@ FactoryBot.define do
   factory :tag do
     name { Faker::Adjective.positive }
   end
+
+  trait :free do
+    name { 'free' }
+  end
 end

@@ -11,6 +11,7 @@
   FactoryBot.create(:genre)
 end
 
+FactoryBot.create(:tag, :free)
 5.times do
   FactoryBot.create(:tag)
 end
