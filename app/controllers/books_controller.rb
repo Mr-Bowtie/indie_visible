@@ -13,10 +13,10 @@ class BooksController < ApplicationController
 
     # for each param with a real value, apply a filter to the books list
     # also add a string to the filters list to display active filters
-    filtering_params.select { |_, val| val != '0' && val != '' }.each do |p_key, p_val|
+    filtering_params.each do |p_key, p_val|
+      # remove pesky empty string the browser sends over by default with multi-selects
+      p_val.reject!(&:blank?)
       collection = if p_key == 'genres'
-                     # remove pesky empty string the browser sends over by default with multi-selects
-                     p_val = p_val.reject(&:blank?)
 
                      p_val.each do |genre_id|
                        next if genre_id == ''
@@ -25,9 +25,13 @@ class BooksController < ApplicationController
                      end
                      p_val.empty? ? collection : collection.send(:filter_by_genre, p_val)
 
-                   else
-                     @filters[p_key] = p_val
-                     collection.send p_key.to_sym
+                   elsif p_key == 'tags'
+                     p_val.each do |tag_id|
+                       next if tag_id == ''
+
+                       @filters["tag_#{tag_id}"] = Tag.find(tag_id).name
+                     end
+                     p_val.empty? ? collection : collection.send(:filter_by_tag, p_val)
                    end
     end
 
@@ -128,11 +132,16 @@ class BooksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def book_params
-    params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :paperback_price, :free, :promo_active, :genre_id, :spicy, :kindle_unlimited, :queer_rep, :cover_image, :series_id, :author_id, :position)
+    build_params = params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :paperback_price, :free, :promo_active, :spicy, :kindle_unlimited, :queer_rep, :cover_image, :series_id, :author_id, :position, genres: [], tags: [])
+
+    build_params[:genres].reject!(&:empty?).map! { |g_id| Genre.find(g_id) }
+    build_params[:tags].reject!(&:empty?).map! { |t_id| Tag.find(t_id) }
+
+    build_params
   end
 
   def filtering_params
-    params.permit(:spicy, :not_spicy, :kindle_unlimited, :queer_rep, :free, genres: [])
+    params.permit(genres: [], tags: [])
   end
 
   def mass_activation_toggle_params
