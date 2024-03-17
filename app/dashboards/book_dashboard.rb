@@ -28,7 +28,8 @@ class BookDashboard < Administrate::BaseDashboard
     trigger_warning: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    cover_image: Field::ActiveStorage
+    cover_image: Field::ActiveStorage,
+    tags: Field::HasMany,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -42,7 +43,6 @@ class BookDashboard < Administrate::BaseDashboard
     position
     promo_active
     author
-    genres
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -64,6 +64,7 @@ class BookDashboard < Administrate::BaseDashboard
     queer_rep
     author
     genres
+    tags
     created_at
     updated_at
   ].freeze

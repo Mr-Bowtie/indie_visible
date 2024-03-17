@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :businesses
     resources :promos
     resources :series
+    resources :tags
 
     root to: 'users#index'
   end

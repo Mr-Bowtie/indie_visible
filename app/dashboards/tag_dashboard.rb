@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class GenreDashboard < Administrate::BaseDashboard
+class TagDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -35,7 +35,6 @@ class GenreDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    books
     name
   ].freeze
 
