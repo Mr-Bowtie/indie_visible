@@ -8,6 +8,6 @@
 #  updated_at :datetime         not null
 #
 class Tag < ApplicationRecord
-  has_many :book_tags, dependent: :nullify
-  has_many :books, through: :book_tags
+  has_many :books_tags, dependent: :nullify
+  has_many :books, through: :books_tags
 end

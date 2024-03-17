@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: book_tags
+# Table name: books_tags
 #
 #  id         :bigint           not null, primary key
 #  created_at :datetime         not null
@@ -10,10 +10,10 @@
 #
 # Indexes
 #
-#  index_book_tags_on_book_id  (book_id)
-#  index_book_tags_on_tag_id   (tag_id)
+#  index_books_tags_on_book_id  (book_id)
+#  index_books_tags_on_tag_id   (tag_id)
 #
-class BookTag < ApplicationRecord
+class BooksTag < ApplicationRecord
   belongs_to :book
   belongs_to :tag
 end

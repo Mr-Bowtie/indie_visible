@@ -125,38 +125,6 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: book_tags; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.book_tags (
-    id bigint NOT NULL,
-    book_id bigint,
-    tag_id bigint,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: book_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.book_tags_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: book_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.book_tags_id_seq OWNED BY public.book_tags.id;
-
-
---
 -- Name: books; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -212,6 +180,38 @@ CREATE SEQUENCE public.books_id_seq
 --
 
 ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
+
+
+--
+-- Name: books_tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.books_tags (
+    id bigint NOT NULL,
+    book_id bigint,
+    tag_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: books_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.books_tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: books_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.books_tags_id_seq OWNED BY public.books_tags.id;
 
 
 --
@@ -452,17 +452,17 @@ ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAU
 
 
 --
--- Name: book_tags id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.book_tags ALTER COLUMN id SET DEFAULT nextval('public.book_tags_id_seq'::regclass);
-
-
---
 -- Name: books id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
+
+
+--
+-- Name: books_tags id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books_tags ALTER COLUMN id SET DEFAULT nextval('public.books_tags_id_seq'::regclass);
 
 
 --
@@ -540,19 +540,19 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
--- Name: book_tags book_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.book_tags
-    ADD CONSTRAINT book_tags_pkey PRIMARY KEY (id);
-
-
---
 -- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.books
     ADD CONSTRAINT books_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_tags books_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books_tags
+    ADD CONSTRAINT books_tags_pkey PRIMARY KEY (id);
 
 
 --
@@ -640,20 +640,6 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
--- Name: index_book_tags_on_book_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_book_tags_on_book_id ON public.book_tags USING btree (book_id);
-
-
---
--- Name: index_book_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_book_tags_on_tag_id ON public.book_tags USING btree (tag_id);
-
-
---
 -- Name: index_books_genres_on_book_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -686,6 +672,20 @@ CREATE INDEX index_books_on_genre_id ON public.books USING btree (genre_id);
 --
 
 CREATE INDEX index_books_on_series_id ON public.books USING btree (series_id);
+
+
+--
+-- Name: index_books_tags_on_book_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_tags_on_book_id ON public.books_tags USING btree (book_id);
+
+
+--
+-- Name: index_books_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_tags_on_tag_id ON public.books_tags USING btree (tag_id);
 
 
 --
