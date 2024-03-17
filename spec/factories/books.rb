@@ -65,10 +65,6 @@ FactoryBot.define do
     end
   end
 
-  trait :has_tags do
-    tags { Array.new(3) { Faker::Book.genre } }
-  end
-
   trait :has_genres do
     genres { Array.new(3) { Faker::Book.genre } }
   end
@@ -79,5 +75,28 @@ FactoryBot.define do
     kindle_unlimited { booleans.sample }
     queer_rep { booleans.sample }
     free { booleans.sample }
+  end
+
+  trait :has_tags do
+    after(:build) do |book|
+      tag_ids = []
+      rand(1..4).times do
+        tag_ids << Tag.all.sample.id
+      end
+
+      tag_ids.uniq.each do |id|
+        book.tags << Tag.find(id)
+      end
+    end
+  end
+
+  trait :part_of_series do
+    after(:build) do |book|
+      series = Series.all.sample
+      last_book = series.books.order(:position).last
+      author_id = User.find(series.author_id).id
+      next_position = last_book.nil? ? 1 : last_book.position + 1
+      book.update(series_id: series.id, author_id: author_id, position: next_position)
+    end
   end
 end
