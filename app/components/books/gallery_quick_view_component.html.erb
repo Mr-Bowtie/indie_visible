@@ -46,9 +46,13 @@
       <% end %>
     </div>
     <div class="mb-2">
-      <p class="subtitle mb-0"><strong>E-Book Price:
-        </strong><%= book.display_price %></p>
-
+      <p class="subtitle mb-0"><strong>E-Book Price:</strong>
+        <% if book.free? %>
+          Free
+        <% else %>
+          <%= book.display_price %>
+        <% end %>
+      </p>
       <% if book.paperback_price %>
         <p class="subtitle"><strong>Paperback Price:
           </strong><%= book.paperback_price %></p>
