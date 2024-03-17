@@ -358,7 +358,8 @@ CREATE TABLE public.tags (
     id bigint NOT NULL,
     name character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    color_class integer
 );
 
 
@@ -807,6 +808,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240313014411'),
 ('20240315013328'),
 ('20240315013441'),
-('20240317182531');
+('20240317182531'),
+('20240317192322');
 
 

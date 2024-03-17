@@ -10,6 +10,7 @@
 FactoryBot.define do
   factory :tag do
     name { Faker::Adjective.positive }
+    color_class { rand(1..5) }
   end
 
   trait :free do
