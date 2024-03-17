@@ -23,7 +23,8 @@
         </h2>
         <% book.genres.each do |genre| %>
           <a
-            href="/books?genre=<%= genre.id %>"
+            href="/books?genres[]=<%= genre.id %>"
+            data-turbo="false"
             class="subtitle mb-0 mr-2 has-text-link is-underlined"
           >
             <%= genre.name %></a>
