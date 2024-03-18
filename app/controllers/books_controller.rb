@@ -6,7 +6,7 @@ class BooksController < ApplicationController
   def index
     collection = Book.with_attached_cover_image
                      .where(promo_active: true)
-                     .includes(:author, :genres, :series)
+                     .includes(:author, :genres, :series, :tags)
                      .left_joins(:series)
                      .order('author.name ASC', 'series.name ASC', 'position ASC')
     @filters = {}
