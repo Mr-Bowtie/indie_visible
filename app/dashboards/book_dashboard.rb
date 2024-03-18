@@ -11,16 +11,12 @@ class BookDashboard < Administrate::BaseDashboard
     id: Field::Number,
     position: Field::Number,
     additional_links: Field::String,
-    spicy: Field::Boolean,
     description: Field::Text,
     display_price: Field::String,
     paperback_price: Field::String,
-    free: Field::Boolean,
-    kindle_unlimited: Field::Boolean,
     one_liner_blurb: Field::String,
     primary_link: Field::Url,
     promo_active: Field::Boolean,
-    queer_rep: Field::Boolean,
     genres: Field::HasMany,
     author: Field::BelongsTo.with_options(searchable: true, searchable_fields: ['name']),
     series: Field::BelongsTo.with_options(searchable: true, searchable_fields: ['name']),
@@ -57,11 +53,7 @@ class BookDashboard < Administrate::BaseDashboard
     display_price
     paperback_price
     primary_link
-    spicy
-    free
-    kindle_unlimited
     promo_active
-    queer_rep
     author
     genres
     tags
@@ -73,20 +65,6 @@ class BookDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    cover_image
-    additional_links
-    spicy
-    description
-    display_price
-    free
-    kindle_unlimited
-    one_liner_blurb
-    primary_link
-    promo_active
-    queer_rep
-    genres
-    title
-    trigger_warning
   ].freeze
 
   # COLLECTION_FILTERS
