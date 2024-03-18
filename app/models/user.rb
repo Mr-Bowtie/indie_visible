@@ -47,7 +47,7 @@ class User < ApplicationRecord
   has_one_attached :photo
 
   # authors that have been sent invitations but havent logged in and filled out their profile will have an empty name
-  scope :valid_authors, -> { where(name: '').invert_where }
+  scope :valid_users, -> { where(name: '').invert_where }
   scope :in_the_spotlight, -> { where(spotlight: true) }
 
   def at_least_admin?
@@ -56,8 +56,9 @@ class User < ApplicationRecord
 
   def profile_created?
     PROMO_REQUIRED_ATTRIBUTES.all? { |attr| send(attr).present? } &&
-    photo.attached?
+      photo.attached?
   end
+
   def self.ransackable_attributes(_auth_object = nil)
     ['name']
   end

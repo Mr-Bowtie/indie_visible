@@ -37,7 +37,7 @@
               <%= form.label :author, class: "label" %>
               <div class="control">
                 <div class="select is-rounded">
-                  <%= form.select :author_id, User.valid_authors.collect { |t| [t.name, t.id] } %>
+                  <%= form.select :author_id, User.valid_users.collect { |t| [t.name, t.id] } %>
                 </div>
               </div>
             </div>
