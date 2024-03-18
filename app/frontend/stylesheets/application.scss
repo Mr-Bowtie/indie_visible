@@ -40,6 +40,7 @@
 // INFO: theme colors, also set in app/assets/stylesheets/administrate/application.scss
 $primary: #b4d2d9;
 $link: #70b5c5;
+// $info: red;
 $warning: #ccdde4;
 $danger: #8c5c32;
 $background: #efe7dc;
@@ -122,4 +123,19 @@ input[type=checkbox] {
 
 .width-one-quarter {
   width: 25%;
+}
+
+
+.choices__inner {
+  .choices__list {
+      .choices__item--selectable {
+      background-color: $primary;
+      border: none;
+      color:black;
+    }
+  }
+}
+
+.section {
+  border-bottom: 3px solid black;
 }

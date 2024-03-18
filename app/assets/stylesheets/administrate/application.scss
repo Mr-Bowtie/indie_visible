@@ -37,4 +37,14 @@ $warning: #ccdde4;
 $danger: #8c5c32;
 $background: #efe7dc;
 
+.choices__inner {
+  .choices__list {
+      .choices__item--selectable {
+      background-color: $primary;
+      border: none;
+      color:black;
+    }
+  }
+}
+
 @import "bulma"
