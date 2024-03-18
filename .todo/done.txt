@@ -21,3 +21,9 @@ x 2024-03-16 add multi select for filters +tagRefactor @feature
 x 2024-03-16 rewrite scopes +tagRefactor @feature
 x 2024-03-16 rework active filter view passing +tagRefactor @feature
 x 2024-03-16 update form to use multi select choice.js input for genre +springUpdates @feature
+x 2024-03-17 add new tags +springUpdates @feature
+x 2024-03-17 refactor tags as a model +springUpdates @feature
+x 2024-03-17 rework tag display on book components +tagRefactor @feature
+x 2024-03-17 update handling free tag +tagRefactor @refactor
+x 2024-03-17 make multi-select links primary bulma color +springUpdates @feature
+x 2024-03-17 +authorSpotlight @feature

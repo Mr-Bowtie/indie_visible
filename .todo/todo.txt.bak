@@ -8,8 +8,7 @@ mix margins +mobileStyling @mobile @styling
 clean up menus +mobileStyling @mobile @styling
 (A) create Author Spotlight section +springUpdates @feature
 (B) clean up nav bar look, add margins +springUpdates @styling
-(A) add new tags +springUpdates @feature
-x 2024-03-16 update form to use multi select choice.js input for genre +springUpdates @feature
-refactor tags as a model +springUpdates @feature
-rework tag display on book components +tagRefactor @feature
-update handling free tag +tagRefactor @refactor
+setup: route, controller action +springUpdates @styling
+add new spotlighted attr and scope +springUpdates @styling
+setup page: author sections +springUpdates @styling
+add spotlight blurb section +springUpdates
