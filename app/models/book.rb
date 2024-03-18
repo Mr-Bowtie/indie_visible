@@ -66,6 +66,7 @@ class Book < ApplicationRecord
   }
   scope :free, -> { joins(:tags).merge(Tag.where(name: %w[free Free])) }
   scope :promo_active_per_author, ->(author_id) { where(author_id:, promo_active: true) }
+  scope :series_ordered, -> { left_joins(:series).order('series.name ASC', 'position ASC')}
 
   def ready_for_promo?
     PROMO_REQUIRED_ATTRIBUTES.all? { |attr| send(attr).present? } &&
