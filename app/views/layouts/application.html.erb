@@ -43,6 +43,9 @@
           <div class="navbar-start">
             <a class="navbar-item" href="<%= books_path %>">Books</a>
             <a class="navbar-item" href="<%= businesses_path %>">Bookish Stores</a>
+            <% if Promo.active.any? && User.in_the_spotlight.any? %>
+              <a class="navbar-item" href="/author-spotlight">Author Spotlight</a>
+            <% end %>
           </div>
           <div class="navbar-item width-half ml-4">
             <%= form_with url: search_path, method: "get", html: { class: "width-full"}  do |form| %>

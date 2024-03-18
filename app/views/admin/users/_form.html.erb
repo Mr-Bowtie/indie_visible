@@ -34,7 +34,7 @@ and renders all form fields for a resource's editable attributes.
     <% end %>
 
     <% page.attributes(controller.action_name).each do |attribute| -%>
-      <% if attribute.attribute == :role && !current_user.at_least_admin? %>
+      <% if (attribute.attribute == :role || attribute.attribute == :spotlight) && !current_user.at_least_admin? %>
 
         <% next %>
       <% else %>

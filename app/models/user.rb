@@ -22,6 +22,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :integer          default("author")
+#  spotlight              :boolean
 #  tiktok_url             :string
 #  website_url            :string
 #  invited_by_id          :bigint
@@ -47,6 +48,7 @@ class User < ApplicationRecord
 
   # authors that have been sent invitations but havent logged in and filled out their profile will have an empty name
   scope :valid_authors, -> { where(name: '').invert_where }
+  scope :in_the_spotlight, -> { where(spotlight: true) }
 
   def at_least_admin?
     admin? || super_admin?

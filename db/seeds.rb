@@ -20,6 +20,10 @@ end
   FactoryBot.create(:user, :is_author)
 end
 
+3.times do
+  FactoryBot.create(:user, :is_author, :spotlight)
+end
+
 5.times do
   FactoryBot.create(:series)
 end

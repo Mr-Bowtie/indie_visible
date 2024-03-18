@@ -407,7 +407,8 @@ CREATE TABLE public.users (
     invitations_count integer DEFAULT 0,
     facebook_url character varying,
     tiktok_url character varying,
-    instagram_url character varying
+    instagram_url character varying,
+    spotlight boolean
 );
 
 
@@ -809,6 +810,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240315013328'),
 ('20240315013441'),
 ('20240317182531'),
-('20240317192322');
+('20240317192322'),
+('20240317211123');
 
 

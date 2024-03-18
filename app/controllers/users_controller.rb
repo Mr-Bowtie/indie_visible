@@ -9,4 +9,8 @@ class UsersController < ApplicationController
                  .left_joins(:series)
                  .order('series.name Asc', 'position ASC')
   end
+
+  def author_spotlight
+    @authors = User.valid_users.in_the_spotlight
+  end
 end

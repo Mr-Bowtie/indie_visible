@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/search', to: 'search#index'
   get 'authors/:id', to: 'users#author_show'
 
+  get 'author-spotlight', to: 'users#author_spotlight'
+
   resources :businesses
   resources :books do
     collection do
