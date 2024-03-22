@@ -42,7 +42,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: { author: 0, admin: 1, super_admin: 2 }
-  has_many :books, foreign_key: 'author_id'
+  has_many :books, foreign_key: 'author_id', dependent: :destroy
   has_many :series, dependent: :destroy, foreign_key: 'author_id'
   has_one_attached :photo
 
