@@ -162,7 +162,7 @@
             <div class="field mb-4">
               <%= form.label :series_id, "Series", class: "label" %>
               <div class="control select mr-2">
-                <%= form.collection_select :series_id, series, :id, :name %>
+                <%= form.collection_select :series_id, series, :id, :name, include_blank: true %>
               </div>
               <%= link_to "Create New Series",
               "/series/new",

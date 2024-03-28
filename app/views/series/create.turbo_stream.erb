@@ -4,6 +4,7 @@
       <label class="label" for="book_series_id">Series</label>
       <div class="control select mr-2">
         <select id=book_series_id name="book[series_id]">
+          <option value="" label=" "></option>
           <% @author_series.each do |series| %>
             <% if series.id == @series.id %>
               <option value="<%= series.id %>" selected="selected"><%= series.name %></option>
