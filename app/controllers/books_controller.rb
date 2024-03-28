@@ -58,6 +58,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @series = Series.where(author_id: @book.author_id)
+    @show_series = params[:series]
     respond_to do |format|
       if @book.save
         format.html { redirect_to admin_books_path, notice: 'Book was successfully created.' }
@@ -65,7 +66,7 @@ class BooksController < ApplicationController
       else
         errors = @book.errors.map { |error| [error.attribute, error.type] }
         log('create', "Creating Book failed with the following errors: #{errors}")
-        format.html { render :new, status: :unprocessable_entity, series: @series }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -74,11 +75,14 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1 or /books/1.json
   def update
     @series = Series.where(author_id: @book.author_id)
+    @show_series = params[:series]
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to admin_book_url(@book), notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
+        errors = @book.errors.map { |error| [error.attribute, error.type] }
+        log('update', "Updating Book failed with the following errors: #{errors}")
         format.html { render :edit, status: :unprocessable_entity, series: @series }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end

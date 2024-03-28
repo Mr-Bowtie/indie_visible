@@ -79,7 +79,7 @@
           <div class="multi-select" data-controller="choices">
             <%= form.select :genres,
                         Genre.all.collect { |g| [g.name, g.id] },
-                        { selected: @book.genres.map{|g| g.id.to_s} },
+                        { selected: @book.genres.map { |g| g.id.to_s } },
                         { multiple: true } %>
           </div>
         </div>
@@ -91,12 +91,11 @@
           <div class="multi-select" data-controller="choices">
             <%= form.select :tags,
                         Tag.all.collect { |g| [g.name, g.id] },
-                        { selected: @book.tags.map{|t| t.id.to_s} },
+                        { selected: @book.tags.map { |t| t.id.to_s } },
                         { multiple: true } %>
           </div>
         </div>
       </div>
-
 
       <div
         class="
@@ -147,7 +146,7 @@
           <%= label_tag nil, "Part of a series?", class: "label" %>
           <%= check_box_tag "series",
           nil,
-          @book.series,
+          (@book.series || show_series),
           {
             class: "checkbox",
             data: {
@@ -171,6 +170,14 @@
                 turbo_frame: "series_selector"
               } %>
             </div>
+            <% if book.errors[:series_id] %>
+              <ul>
+                <% book.errors.where(:series_id).each do |error| %>
+                  <li class="has-text-danger"><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            <% end %>
+
           <% end %>
 
           <div class="field mb-4 width-one-quarter">
