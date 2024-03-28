@@ -41,6 +41,8 @@ class Book < ApplicationRecord
   validates(*REQUIRED_ATTRIBUTES, presence: true)
   validates :cover_image, content_type: ['image/png', 'image/jpg', 'image/jpeg']
   validates :position, numericality: { only_integer: true }, uniqueness: { scope: :series_id }, allow_blank: true
+  validates :position, presence: true, if: -> { series_id.present? }
+  validates :series_id, presence: true, if: -> { position.present? }
   has_and_belongs_to_many :genres
   has_many :books_tags, dependent: :nullify
   has_many :tags, through: :books_tags
@@ -66,7 +68,7 @@ class Book < ApplicationRecord
   }
   scope :free, -> { joins(:tags).merge(Tag.where(name: %w[free Free])) }
   scope :promo_active_per_author, ->(author_id) { where(author_id:, promo_active: true) }
-  scope :series_ordered, -> { left_joins(:series).order('series.name ASC', 'position ASC')}
+  scope :series_ordered, -> { left_joins(:series).order('series.name ASC', 'position ASC') }
 
   def ready_for_promo?
     PROMO_REQUIRED_ATTRIBUTES.all? { |attr| send(attr).present? } &&
