@@ -1,7 +1,9 @@
 # frozen_string_literal: true
+require 'logging/logs'
 
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+  include Logging::Logs
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected

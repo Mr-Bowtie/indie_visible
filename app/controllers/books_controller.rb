@@ -58,12 +58,13 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @series = Series.where(author_id: @book.author_id)
-
     respond_to do |format|
       if @book.save
         format.html { redirect_to admin_books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
+        errors = @book.errors.map { |error| [error.attribute, error.type] }
+        log('create', "Creating Book failed with the following errors: #{errors}")
         format.html { render :new, status: :unprocessable_entity, series: @series }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
