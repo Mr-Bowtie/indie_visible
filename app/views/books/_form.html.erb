@@ -159,7 +159,9 @@
         <div data-series-target="seriesInputs" class="is-hidden mb-2">
           <%= turbo_frame_tag "series_selector", data: { series_target: "seriesInputs"} do %>
             <div class="field mb-4">
-              <%= form.label :series_id, "Series", class: "label" %>
+              <div class="level is-justify-content-flex-start mb-0">
+                <%= form.label :series_id, "Series", class: "label mr-2" %><i class="mb-2 fa-solid fa-circle-info" title="If you dont see the series you just created, try refreshing. As a backup you can create a series from the Author Portal sidebar menu, then come back here."></i>
+              </div>
               <div class="control select mr-2">
                 <%= form.collection_select :series_id, series, :id, :name, include_blank: true %>
               </div>
