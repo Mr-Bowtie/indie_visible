@@ -23,12 +23,12 @@ class SeriesPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin? || user.super_admin?
+    true
   end
 
   def update?
     user.admin? || user.super_admin? || record.author_id == user.id
-  end
+  end 
 
   def destroy?
     user.admin? || user.super_admin? || record.author_id == user.id
