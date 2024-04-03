@@ -65,9 +65,9 @@
       </div>
     </nav>
     <div class="container is-flex is-justify-content-center mb-4">
-      <% if Promo.active.any? && Promo.active.first.banner.exists %>
+      <% if Promo.active.any? && Promo.active.first.banner.attached? %>
         <%= image_tag Promo.active.first.banner %>
-      <% elsif Promo.next_up.any? && Promo.next_up.first.banner.exists %>
+      <% elsif Promo.next_up.any? && Promo.next_up.first.banner.attached? %>
         <%= image_tag Promo.next_up.first.banner %>
       <% end %>
 
