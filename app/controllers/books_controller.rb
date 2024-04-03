@@ -49,11 +49,6 @@ class BooksController < ApplicationController
     @series = Series.where(author_id: current_user.id)
   end
 
-  # GET /books/1/edit
-  def edit
-    @series = Series.where(author_id: @book.author_id)
-  end
-
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
@@ -70,6 +65,11 @@ class BooksController < ApplicationController
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # GET /books/1/edit
+  def edit
+    @series = Series.where(author_id: @book.author_id)
   end
 
   # PATCH/PUT /books/1 or /books/1.json
