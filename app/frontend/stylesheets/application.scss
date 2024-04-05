@@ -38,12 +38,12 @@
 @import '@fortawesome/fontawesome-free/css/all.css'; 
 
 // INFO: theme colors, also set in app/assets/stylesheets/administrate/application.scss
-$primary: #b4d2d9;
-$link: #70b5c5;
-// $info: red;
-$warning: #ccdde4;
-$danger: #8c5c32;
-$background: #efe7dc;
+$primary: #f0c4db;
+$link: #c7d42d;
+$info: #c2e6f6;
+$warning: #ffff25;
+$danger: #c23d5b;
+$background: #dfedf6;
 @import 'bulma/bulma';
 
 input[type=checkbox] {
