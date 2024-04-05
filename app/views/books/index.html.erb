@@ -7,7 +7,7 @@
       <h1 class="title is-1">Books</h1>
     </div>
     <div class="mobile-filter-controls is-flex is-justify-content-center" >
-      <%= form_with url: "/books", method: :get, class: "width-half" do |form| %>
+      <%= form_with url: "/books", method: :get, class: "filter-form" do |form| %>
         <div class="mb-2 is-align-items-baseline width">
           <div class="mr-2 mb-4">
             <%= form.label :genres, "Filter by genre:", class: "label" %>

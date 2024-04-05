@@ -14,7 +14,8 @@
     <% end %>
   </div>
 
-  <p data-action="click->books--card#showModal">
+  <div class="gallery-card-details">
+    <p data-action="click->books--card#showModal">
     <strong>Title:</strong>
     <%= book.title %>
   </p>
@@ -51,4 +52,5 @@
     <strong>Blurb:</strong>
     <%= book.one_liner_blurb %>
   </p>
+  </div>
 </div>

@@ -59,8 +59,15 @@ input[type=checkbox] {
   @include touch {
     display: flex;
     flex-direction: column;
-    margin-left: 10%;
+    margin: auto;
     align-items: unset;
+  }
+}
+
+.filter-form {
+  width: 50%;
+  @include touch {
+    width: 100%;
   }
 }
 
@@ -84,7 +91,7 @@ input[type=checkbox] {
 
 .navbar-menu {
   @include touch {
-    text-align: end;
+    text-align: center;
   }
 }
 
@@ -139,3 +146,41 @@ input[type=checkbox] {
 .section {
   border-bottom: 3px solid black;
 }
+
+.search-bar {
+  margin-right: 0.5rem;
+  @include touch {
+    margin-right: 0rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.search-button {
+  margin-right: 1rem;
+  @include touch {
+    margin-right: 0rem;
+  }
+}
+
+.search-container {
+  width: 50%;
+  margin-left: 1rem;
+  @include touch {
+    margin: auto;
+    width: 100%;
+  }
+}
+
+.container {
+  @include touch {
+    padding: 0 .5rem;
+  }
+}
+
+.gallery-card-details {
+  @include touch {
+    text-align: left;
+    width: 85%;
+  }
+}
+
