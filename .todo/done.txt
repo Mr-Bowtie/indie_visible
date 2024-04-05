@@ -27,3 +27,9 @@ x 2024-03-17 rework tag display on book components +tagRefactor @feature
 x 2024-03-17 update handling free tag +tagRefactor @refactor
 x 2024-03-17 make multi-select links primary bulma color +springUpdates @feature
 x 2024-03-17 +authorSpotlight @feature
+x 2024-04-05 create Author Spotlight section +springUpdates @feature
+x 2024-04-05 clean up nav bar look, add margins +springUpdates @styling
+x 2024-04-05 setup: route, controller action +authorSpotlight @feature
+x 2024-04-05 add new spotlighted attr and scope +authorSpotlight @feature
+x 2024-04-05 setup page: author sections +authorSpotlight @feature
+x 2024-04-05 add spotlight blurb section +authorSpotlight @feature
