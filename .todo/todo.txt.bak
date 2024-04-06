@@ -1,9 +1,10 @@
-(A) fix mobile styling +springUpdates @styling @mobile
+x 2024-04-06 fix mobile styling +springUpdates @styling @mobile
 (B) add back to top button +springUpdates @feature
 (C) Randomize books per user (per session?) +springUpdates @feature
 (C) fix 'back to admin' button from bulk update page +springUpdates @bug
 add color scheme to promos +springUpdates @feature
-make book and author tiles smaller, fit more on screen +mobileStyling @mobile @styling
-mix margins +mobileStyling @mobile @styling
-clean up menus +mobileStyling @mobile @styling
-set spring colors +springUpdates @styling
+x 2024-04-06 make book and author tiles smaller, fit more on screen +mobileStyling @mobile @styling
+x 2024-04-06 mix margins +mobileStyling @mobile @styling
+x 2024-04-06 clean up menus +mobileStyling @mobile @styling
+x 2024-04-06 set spring colors +springUpdates @styling
+look into traffic monitoring +analytics @investigations

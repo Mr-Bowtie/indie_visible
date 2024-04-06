@@ -33,3 +33,8 @@ x 2024-04-05 setup: route, controller action +authorSpotlight @feature
 x 2024-04-05 add new spotlighted attr and scope +authorSpotlight @feature
 x 2024-04-05 setup page: author sections +authorSpotlight @feature
 x 2024-04-05 add spotlight blurb section +authorSpotlight @feature
+x 2024-04-06 fix mobile styling +springUpdates @styling @mobile
+x 2024-04-06 make book and author tiles smaller, fit more on screen +mobileStyling @mobile @styling
+x 2024-04-06 mix margins +mobileStyling @mobile @styling
+x 2024-04-06 clean up menus +mobileStyling @mobile @styling
+x 2024-04-06 set spring colors +springUpdates @styling
