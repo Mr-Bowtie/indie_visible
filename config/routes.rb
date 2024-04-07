@@ -51,4 +51,6 @@ Rails.application.routes.draw do
     end
   end
   mount Sidekiq::Web => '/sidekiq'
+
+  mount Blazer::Engine, at: 'blazer'
 end

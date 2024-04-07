@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'logging/logs'
 
 class ApplicationController < ActionController::Base
@@ -13,7 +14,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:role])
   end
 
-  def after_invite_path_for(inviter, invitee)
+  def after_invite_path_for(_inviter, _invitee)
     admin_root_path
   end
-end 
+
+  def require_admin
+    binding.pry
+    redirect_to new_user_session_path unless current_user && curent_user.at_least_admin?
+  end
+end
