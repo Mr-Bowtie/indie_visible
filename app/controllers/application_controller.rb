@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    binding.pry
     redirect_to new_user_session_path unless current_user && curent_user.at_least_admin?
   end
 end
