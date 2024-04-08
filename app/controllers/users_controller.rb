@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def author_show
     @author = User.find(params[:id])
+    ahoy.track 'author page visit', name: @author.name
     @books = Book.promo_active_per_author(@author.id)
                  .left_joins(:series)
                  .order('series.name Asc', 'position ASC')
