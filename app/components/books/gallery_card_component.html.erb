@@ -4,6 +4,7 @@
   data-books--card-id="<%= book.id %>"
   data-controller="books--card"
   data-action="click->books--card#showModal"
+  data-book-title="<%= book.title %>"
 >
   <% if book.cover_image.attached? %>
     <%= image_tag book.cover_image.variant(resize_to_limit: [800, 800]), loading: "lazy" %>
@@ -15,42 +16,42 @@
   </div>
 
   <div class="gallery-card-details">
-    <p data-action="click->books--card#showModal">
-    <strong>Title:</strong>
-    <%= book.title %>
-  </p>
-
-  <% if book.series %>
     <p>
-      <strong>Series:</strong>
-      <%= book.series.name %>
+      <strong>Title:</strong>
+      <%= book.title %>
     </p>
 
-    <p>
-      <strong>Series Number:</strong>
-      <%= book.position %>
-    </p>
-  <% end %>
+    <% if book.series %>
+      <p>
+        <strong>Series:</strong>
+        <%= book.series.name %>
+      </p>
 
-  <p>
-    <strong>E-book Price:</strong>
-    <% if book.free? %>
-      Free
-    <% else %>
-      <%= book.display_price %>
+      <p>
+        <strong>Series Number:</strong>
+        <%= book.position %>
+      </p>
     <% end %>
-  </p>
 
-  <% if book.paperback_price.present? %>
     <p>
-      <strong>Paperback Price:</strong>
-      <%= book.paperback_price %>
+      <strong>E-book Price:</strong>
+      <% if book.free? %>
+        Free
+      <% else %>
+        <%= book.display_price %>
+      <% end %>
     </p>
-  <% end %>
 
-  <p>
-    <strong>Blurb:</strong>
-    <%= book.one_liner_blurb %>
-  </p>
+    <% if book.paperback_price.present? %>
+      <p>
+        <strong>Paperback Price:</strong>
+        <%= book.paperback_price %>
+      </p>
+    <% end %>
+
+    <p>
+      <strong>Blurb:</strong>
+      <%= book.one_liner_blurb %>
+    </p>
   </div>
 </div>
