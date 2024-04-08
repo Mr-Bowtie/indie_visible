@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    redirect_to new_user_session_path unless current_user && curent_user.at_least_admin?
+    redirect_to '/users/sign_in' unless current_user && current_user.at_least_admin?
   end
 end
