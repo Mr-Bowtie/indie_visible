@@ -1,4 +1,4 @@
-<div id="<%= dom_id business %>" class="tile is-parent is-vertical is-4 is-align-items-center">
+<div data-controller="business" id="<%= dom_id business %>" class="tile is-parent is-vertical is-4 is-align-items-center">
   <% if business.logo_image.attached? %>
     <%= image_tag business.logo_image, size: "400" %>
   <% end %>
@@ -7,5 +7,5 @@
     <%= business.name %>
   </h1>
 
-  <a href="<%= business.website_url %>" class="button is-link is-medium wide-button" target="_blank">Visit Site</a>
+  <a href="<%= business.website_url %>" class="button is-link is-medium wide-button" target="_blank" data-action="click->business#trackClick" data-business-name="<%= business.name %>">Visit Site</a>
 </div>

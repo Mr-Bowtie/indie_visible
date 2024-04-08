@@ -9,7 +9,9 @@
     import NavbarController from "./navbar_controller.js"
     import ChoicesController from "./choices_controller.js"
     import SeriesController from "./series_controller"
+    import BusinessController from "./business_controller"
 
+    app.register("business", BusinessController)
     app.register("books--quick-view", Books__QuickViewController)
     app.register("books--card", Books__CardController)
     app.register("navbar", NavbarController)
