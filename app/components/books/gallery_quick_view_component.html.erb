@@ -81,6 +81,8 @@
       href="<%= book.primary_link %>"
       class="mb-3 button is-link auto-center is-medium"
       target="_blank"
+      data-book-title="<%= book.title %>"
+      data-action="click->books--quick-view#trackPurchaseClick"
     >Buy Here</a>
 
     <p><%= book.description %></p>
