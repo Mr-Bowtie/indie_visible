@@ -113,6 +113,92 @@ ALTER SEQUENCE public.active_storage_variant_records_id_seq OWNED BY public.acti
 
 
 --
+-- Name: ahoy_events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ahoy_events (
+    id bigint NOT NULL,
+    visit_id bigint,
+    user_id bigint,
+    name character varying,
+    properties jsonb,
+    "time" timestamp(6) without time zone
+);
+
+
+--
+-- Name: ahoy_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.ahoy_events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ahoy_events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.ahoy_events_id_seq OWNED BY public.ahoy_events.id;
+
+
+--
+-- Name: ahoy_visits; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ahoy_visits (
+    id bigint NOT NULL,
+    visit_token character varying,
+    visitor_token character varying,
+    user_id bigint,
+    ip character varying,
+    user_agent text,
+    referrer text,
+    referring_domain character varying,
+    landing_page text,
+    browser character varying,
+    os character varying,
+    device_type character varying,
+    country character varying,
+    region character varying,
+    city character varying,
+    latitude double precision,
+    longitude double precision,
+    utm_source character varying,
+    utm_medium character varying,
+    utm_term character varying,
+    utm_content character varying,
+    utm_campaign character varying,
+    app_version character varying,
+    os_version character varying,
+    platform character varying,
+    started_at timestamp(6) without time zone
+);
+
+
+--
+-- Name: ahoy_visits_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.ahoy_visits_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ahoy_visits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.ahoy_visits_id_seq OWNED BY public.ahoy_visits.id;
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -122,6 +208,179 @@ CREATE TABLE public.ar_internal_metadata (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
+
+
+--
+-- Name: blazer_audits; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.blazer_audits (
+    id bigint NOT NULL,
+    user_id bigint,
+    query_id bigint,
+    statement text,
+    data_source character varying,
+    created_at timestamp(6) without time zone
+);
+
+
+--
+-- Name: blazer_audits_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.blazer_audits_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: blazer_audits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.blazer_audits_id_seq OWNED BY public.blazer_audits.id;
+
+
+--
+-- Name: blazer_checks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.blazer_checks (
+    id bigint NOT NULL,
+    creator_id bigint,
+    query_id bigint,
+    state character varying,
+    schedule character varying,
+    emails text,
+    slack_channels text,
+    check_type character varying,
+    message text,
+    last_run_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: blazer_checks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.blazer_checks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: blazer_checks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.blazer_checks_id_seq OWNED BY public.blazer_checks.id;
+
+
+--
+-- Name: blazer_dashboard_queries; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.blazer_dashboard_queries (
+    id bigint NOT NULL,
+    dashboard_id bigint,
+    query_id bigint,
+    "position" integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: blazer_dashboard_queries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.blazer_dashboard_queries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: blazer_dashboard_queries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.blazer_dashboard_queries_id_seq OWNED BY public.blazer_dashboard_queries.id;
+
+
+--
+-- Name: blazer_dashboards; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.blazer_dashboards (
+    id bigint NOT NULL,
+    creator_id bigint,
+    name character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: blazer_dashboards_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.blazer_dashboards_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: blazer_dashboards_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.blazer_dashboards_id_seq OWNED BY public.blazer_dashboards.id;
+
+
+--
+-- Name: blazer_queries; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.blazer_queries (
+    id bigint NOT NULL,
+    creator_id bigint,
+    name character varying,
+    description text,
+    statement text,
+    data_source character varying,
+    status character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: blazer_queries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.blazer_queries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: blazer_queries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.blazer_queries_id_seq OWNED BY public.blazer_queries.id;
 
 
 --
@@ -138,7 +397,6 @@ CREATE TABLE public.books (
     display_price character varying,
     free boolean DEFAULT false,
     promo_active boolean DEFAULT false,
-    tags character varying[] DEFAULT '{}'::character varying[],
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     trigger_warning character varying DEFAULT ''::character varying,
@@ -147,7 +405,19 @@ CREATE TABLE public.books (
     spicy boolean DEFAULT false,
     genre_id bigint,
     author_id bigint,
-    paperback_price character varying
+    paperback_price character varying,
+    series_id bigint,
+    "position" integer
+);
+
+
+--
+-- Name: books_genres; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.books_genres (
+    genre_id bigint,
+    book_id bigint
 );
 
 
@@ -168,6 +438,38 @@ CREATE SEQUENCE public.books_id_seq
 --
 
 ALTER SEQUENCE public.books_id_seq OWNED BY public.books.id;
+
+
+--
+-- Name: books_tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.books_tags (
+    id bigint NOT NULL,
+    book_id bigint,
+    tag_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: books_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.books_tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: books_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.books_tags_id_seq OWNED BY public.books_tags.id;
 
 
 --
@@ -276,6 +578,70 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: series; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.series (
+    id bigint NOT NULL,
+    name character varying,
+    author_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: series_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.series_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: series_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.series_id_seq OWNED BY public.series.id;
+
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tags (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    color_class integer
+);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -300,7 +666,8 @@ CREATE TABLE public.users (
     invitations_count integer DEFAULT 0,
     facebook_url character varying,
     tiktok_url character varying,
-    instagram_url character varying
+    instagram_url character varying,
+    spotlight boolean
 );
 
 
@@ -345,10 +712,66 @@ ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAU
 
 
 --
+-- Name: ahoy_events id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ahoy_events ALTER COLUMN id SET DEFAULT nextval('public.ahoy_events_id_seq'::regclass);
+
+
+--
+-- Name: ahoy_visits id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ahoy_visits ALTER COLUMN id SET DEFAULT nextval('public.ahoy_visits_id_seq'::regclass);
+
+
+--
+-- Name: blazer_audits id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_audits ALTER COLUMN id SET DEFAULT nextval('public.blazer_audits_id_seq'::regclass);
+
+
+--
+-- Name: blazer_checks id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_checks ALTER COLUMN id SET DEFAULT nextval('public.blazer_checks_id_seq'::regclass);
+
+
+--
+-- Name: blazer_dashboard_queries id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_dashboard_queries ALTER COLUMN id SET DEFAULT nextval('public.blazer_dashboard_queries_id_seq'::regclass);
+
+
+--
+-- Name: blazer_dashboards id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_dashboards ALTER COLUMN id SET DEFAULT nextval('public.blazer_dashboards_id_seq'::regclass);
+
+
+--
+-- Name: blazer_queries id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_queries ALTER COLUMN id SET DEFAULT nextval('public.blazer_queries_id_seq'::regclass);
+
+
+--
 -- Name: books id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.books ALTER COLUMN id SET DEFAULT nextval('public.books_id_seq'::regclass);
+
+
+--
+-- Name: books_tags id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books_tags ALTER COLUMN id SET DEFAULT nextval('public.books_tags_id_seq'::regclass);
 
 
 --
@@ -370,6 +793,20 @@ ALTER TABLE ONLY public.genres ALTER COLUMN id SET DEFAULT nextval('public.genre
 --
 
 ALTER TABLE ONLY public.promos ALTER COLUMN id SET DEFAULT nextval('public.promos_id_seq'::regclass);
+
+
+--
+-- Name: series id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.series ALTER COLUMN id SET DEFAULT nextval('public.series_id_seq'::regclass);
+
+
+--
+-- Name: tags id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
 
 
 --
@@ -404,6 +841,22 @@ ALTER TABLE ONLY public.active_storage_variant_records
 
 
 --
+-- Name: ahoy_events ahoy_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ahoy_events
+    ADD CONSTRAINT ahoy_events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ahoy_visits ahoy_visits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ahoy_visits
+    ADD CONSTRAINT ahoy_visits_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -412,11 +865,59 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: blazer_audits blazer_audits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_audits
+    ADD CONSTRAINT blazer_audits_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blazer_checks blazer_checks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_checks
+    ADD CONSTRAINT blazer_checks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blazer_dashboard_queries blazer_dashboard_queries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_dashboard_queries
+    ADD CONSTRAINT blazer_dashboard_queries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blazer_dashboards blazer_dashboards_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_dashboards
+    ADD CONSTRAINT blazer_dashboards_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blazer_queries blazer_queries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.blazer_queries
+    ADD CONSTRAINT blazer_queries_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.books
     ADD CONSTRAINT books_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: books_tags books_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books_tags
+    ADD CONSTRAINT books_tags_pkey PRIMARY KEY (id);
 
 
 --
@@ -449,6 +950,22 @@ ALTER TABLE ONLY public.promos
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: series series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.series
+    ADD CONSTRAINT series_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tags tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
 
 
 --
@@ -488,6 +1005,125 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
+-- Name: index_ahoy_events_on_name_and_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ahoy_events_on_name_and_time ON public.ahoy_events USING btree (name, "time");
+
+
+--
+-- Name: index_ahoy_events_on_properties; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ahoy_events_on_properties ON public.ahoy_events USING gin (properties jsonb_path_ops);
+
+
+--
+-- Name: index_ahoy_events_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ahoy_events_on_user_id ON public.ahoy_events USING btree (user_id);
+
+
+--
+-- Name: index_ahoy_events_on_visit_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ahoy_events_on_visit_id ON public.ahoy_events USING btree (visit_id);
+
+
+--
+-- Name: index_ahoy_visits_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ahoy_visits_on_user_id ON public.ahoy_visits USING btree (user_id);
+
+
+--
+-- Name: index_ahoy_visits_on_visit_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_ahoy_visits_on_visit_token ON public.ahoy_visits USING btree (visit_token);
+
+
+--
+-- Name: index_ahoy_visits_on_visitor_token_and_started_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ahoy_visits_on_visitor_token_and_started_at ON public.ahoy_visits USING btree (visitor_token, started_at);
+
+
+--
+-- Name: index_blazer_audits_on_query_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blazer_audits_on_query_id ON public.blazer_audits USING btree (query_id);
+
+
+--
+-- Name: index_blazer_audits_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blazer_audits_on_user_id ON public.blazer_audits USING btree (user_id);
+
+
+--
+-- Name: index_blazer_checks_on_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blazer_checks_on_creator_id ON public.blazer_checks USING btree (creator_id);
+
+
+--
+-- Name: index_blazer_checks_on_query_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blazer_checks_on_query_id ON public.blazer_checks USING btree (query_id);
+
+
+--
+-- Name: index_blazer_dashboard_queries_on_dashboard_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blazer_dashboard_queries_on_dashboard_id ON public.blazer_dashboard_queries USING btree (dashboard_id);
+
+
+--
+-- Name: index_blazer_dashboard_queries_on_query_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blazer_dashboard_queries_on_query_id ON public.blazer_dashboard_queries USING btree (query_id);
+
+
+--
+-- Name: index_blazer_dashboards_on_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blazer_dashboards_on_creator_id ON public.blazer_dashboards USING btree (creator_id);
+
+
+--
+-- Name: index_blazer_queries_on_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_blazer_queries_on_creator_id ON public.blazer_queries USING btree (creator_id);
+
+
+--
+-- Name: index_books_genres_on_book_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_genres_on_book_id ON public.books_genres USING btree (book_id);
+
+
+--
+-- Name: index_books_genres_on_genre_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_genres_on_genre_id ON public.books_genres USING btree (genre_id);
+
+
+--
 -- Name: index_books_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -499,6 +1135,34 @@ CREATE INDEX index_books_on_author_id ON public.books USING btree (author_id);
 --
 
 CREATE INDEX index_books_on_genre_id ON public.books USING btree (genre_id);
+
+
+--
+-- Name: index_books_on_series_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_series_id ON public.books USING btree (series_id);
+
+
+--
+-- Name: index_books_tags_on_book_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_tags_on_book_id ON public.books_tags USING btree (book_id);
+
+
+--
+-- Name: index_books_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_tags_on_tag_id ON public.books_tags USING btree (tag_id);
+
+
+--
+-- Name: index_series_on_author_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_series_on_author_id ON public.series USING btree (author_id);
 
 
 --
@@ -534,6 +1198,22 @@ CREATE INDEX index_users_on_invited_by_id ON public.users USING btree (invited_b
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: books fk_rails_1c0d164eeb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT fk_rails_1c0d164eeb FOREIGN KEY (series_id) REFERENCES public.series(id);
+
+
+--
+-- Name: series fk_rails_23702460ff; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.series
+    ADD CONSTRAINT fk_rails_23702460ff FOREIGN KEY (author_id) REFERENCES public.users(id);
 
 
 --
@@ -591,6 +1271,17 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231112050129'),
 ('20231112052156'),
 ('20231114224041'),
-('20231119005948');
+('20231119005948'),
+('20240304002739'),
+('20240309221754'),
+('20240309222031'),
+('20240313014411'),
+('20240315013328'),
+('20240315013441'),
+('20240317182531'),
+('20240317192322'),
+('20240317211123'),
+('20240407230830'),
+('20240407231057');
 
 

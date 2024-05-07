@@ -24,18 +24,19 @@ FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 libc6
+    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 libc6 git
 
 # Install JavaScript dependencies
-ARG NODE_VERSION=18.16.1
+ARG NODE_VERSION=20.12.1
 ARG YARN_VERSION=1.22.19
-ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    npm i -g corepack && \
-    corepack prepare yarn@$YARN_VERSION --activate && \
-
-    rm -rf /tmp/node-build-master
+ARG NVM_DIR=/usr/local/nvm
+ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+RUN mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && \
+    . $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    corepack enable && \
+    corepack prepare yarn@$YARN_VERSION --activate 
+     # rm -rf /tmp/node-build-master
 
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./

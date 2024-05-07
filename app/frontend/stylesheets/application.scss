@@ -35,13 +35,15 @@
 // @import "bulma/sass/components/navbar.sass";
 // @import "bulma/sass/layout/hero.sass";
 // @import "bulma/sass/layout/section.sass";
+@import '@fortawesome/fontawesome-free/css/all.css'; 
 
 // INFO: theme colors, also set in app/assets/stylesheets/administrate/application.scss
-$primary: #b4d2d9;
-$link: #70b5c5;
-$warning: #ccdde4;
-$danger: #8c5c32;
-$background: #efe7dc;
+$primary: #f0c4db;
+$link: #c7d42d;
+$info: #c2e6f6;
+$warning: #ffff25;
+$danger: #c23d5b;
+$background: #dfedf6;
 @import 'bulma/bulma';
 
 input[type=checkbox] {
@@ -57,8 +59,15 @@ input[type=checkbox] {
   @include touch {
     display: flex;
     flex-direction: column;
-    margin-left: 10%;
+    margin: auto;
     align-items: unset;
+  }
+}
+
+.filter-form {
+  width: 50%;
+  @include touch {
+    width: 100%;
   }
 }
 
@@ -82,7 +91,7 @@ input[type=checkbox] {
 
 .navbar-menu {
   @include touch {
-    text-align: end;
+    text-align: center;
   }
 }
 
@@ -110,3 +119,68 @@ input[type=checkbox] {
 .flash {
   transition: opacity 0.5s ease-out;
 }
+
+.width-full {
+  width: 100%;
+}
+
+.width-half {
+  width: 50%;
+}
+
+.width-one-quarter {
+  width: 25%;
+}
+
+
+.choices__inner {
+  .choices__list {
+      .choices__item--selectable {
+      background-color: $primary;
+      border: none;
+      color:black;
+    }
+  }
+}
+
+.section {
+  border-bottom: 3px solid black;
+}
+
+.search-bar {
+  margin-right: 0.5rem;
+  @include touch {
+    margin-right: 0rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.search-button {
+  margin-right: 1rem;
+  @include touch {
+    margin-right: 0rem;
+  }
+}
+
+.search-container {
+  width: 50%;
+  margin-left: 1rem;
+  @include touch {
+    margin: auto;
+    width: 100%;
+  }
+}
+
+.container {
+  @include touch {
+    padding: 0 .5rem;
+  }
+}
+
+.gallery-card-details {
+  @include touch {
+    text-align: left;
+    width: 85%;
+  }
+}
+

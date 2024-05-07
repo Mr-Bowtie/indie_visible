@@ -1,51 +1,57 @@
 <div
-  class="tile is-parent is-vertical is-3 mobile-centered-container"
+  class="tile is-parent is-vertical is-2 mobile-centered-container"
   id="<%= dom_id book %>"
   data-books--card-id="<%= book.id %>"
   data-controller="books--card"
   data-action="click->books--card#showModal"
+  data-book-title="<%= book.title %>"
 >
   <% if book.cover_image.attached? %>
     <%= image_tag book.cover_image.variant(resize_to_limit: [800, 800]), loading: "lazy" %>
   <% end %>
-
-  <p data-action="click->books--card#showModal">
-    <strong>Title:</strong>
-    <%= book.title %>
-  </p>
-
-  <p>
-    <strong>Blurb:</strong>
-    <%= book.one_liner_blurb %>
-  </p>
-
-  <p>
-    <strong>E-book Price:</strong>
-    <% if book.free? %>
-      Free
-    <% else %>
-      <%= book.display_price %>
-    <% end %>
-  </p>
-
-  <% if book.paperback_price.present? %>
-    <p>
-      <strong>Paperback Price:</strong>
-      <%= book.paperback_price %>
-    </p>
-  <% end %>
-
   <div>
-    <% if book.spicy %>
-      <span class="tag is-danger">Spicy</span>
+    <% book.tags.each do |tag| %>
+      <span class="tag is-<%= tag.color_class %>"><%= tag.name.capitalize %></span>
+    <% end %>
+  </div>
+
+  <div class="gallery-card-details">
+    <p>
+      <strong>Title:</strong>
+      <%= book.title %>
+    </p>
+
+    <% if book.series %>
+      <p>
+        <strong>Series:</strong>
+        <%= book.series.name %>
+      </p>
+
+      <p>
+        <strong>Series Number:</strong>
+        <%= book.position %>
+      </p>
     <% end %>
 
-    <% if book.kindle_unlimited %>
-      <span class="tag is-warning">KU</span>
+    <p>
+      <strong>E-book Price:</strong>
+      <% if book.free? %>
+        Free
+      <% else %>
+        <%= book.display_price %>
+      <% end %>
+    </p>
+
+    <% if book.paperback_price.present? %>
+      <p>
+        <strong>Paperback Price:</strong>
+        <%= book.paperback_price %>
+      </p>
     <% end %>
 
-    <% if book.queer_rep %>
-      <span class="tag is-link">Queer Rep</span>
-    <% end %>
+    <p>
+      <strong>Blurb:</strong>
+      <%= book.one_liner_blurb %>
+    </p>
   </div>
 </div>

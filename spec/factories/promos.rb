@@ -11,8 +11,8 @@
 #
 FactoryBot.define do
   factory :promo do
-    title { "MyString" }
-    start_date { "2023-11-14" }
-    end_date { "2023-11-14" }
+    title { 'MyString' }
+    start_date { Date.today - 1.day }
+    end_date { Date.today + 7.days }
   end
 end

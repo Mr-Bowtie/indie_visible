@@ -10,6 +10,7 @@
 #  updated_at :datetime         not null
 #
 class Promo < ApplicationRecord
+  has_one_attached :banner
   scope :next_up, lambda {
                     where(['start_date > :today', { today: Date.today }])
                       .order(:start_date)

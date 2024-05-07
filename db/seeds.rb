@@ -11,12 +11,21 @@
   FactoryBot.create(:genre)
 end
 
+FactoryBot.create(:tag, :free)
+5.times do
+  FactoryBot.create(:tag)
+end
+
 5.times do
   FactoryBot.create(:user, :is_author)
 end
 
-25.times do
-  FactoryBot.create(:book, :has_flags)
+3.times do
+  FactoryBot.create(:user, :is_author, :spotlight)
+end
+
+5.times do
+  FactoryBot.create(:series)
 end
 
 6.times do
@@ -27,4 +36,15 @@ end
   FactoryBot.create(:user, :admin)
 end
 
+FactoryBot.create(:promo)
+
 FactoryBot.create(:user, email: 'test@test.com', role: 'super_admin')
+FactoryBot.create(:user, :is_author, email: 'test_author@test.com')
+
+15.times do
+  FactoryBot.create(:book, :has_tags)
+end
+
+10.times do
+  FactoryBot.create(:book, :has_tags, :part_of_series)
+end

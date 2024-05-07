@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class BookDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -9,24 +9,23 @@ class BookDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    position: Field::Number,
     additional_links: Field::String,
-    spicy: Field::Boolean,
     description: Field::Text,
     display_price: Field::String,
     paperback_price: Field::String,
-    free: Field::Boolean,
-    kindle_unlimited: Field::Boolean,
     one_liner_blurb: Field::String,
     primary_link: Field::Url,
     promo_active: Field::Boolean,
-    queer_rep: Field::Boolean,
-    genre: Field::BelongsTo.with_options(searchable: true, searchable_fields: ['name']),
+    genres: Field::HasMany,
     author: Field::BelongsTo.with_options(searchable: true, searchable_fields: ['name']),
+    series: Field::BelongsTo.with_options(searchable: true, searchable_fields: ['name']),
     title: Field::String,
     trigger_warning: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     cover_image: Field::ActiveStorage,
+    tags: Field::HasMany,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -35,31 +34,29 @@ class BookDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     title
+    series
+    position
     promo_active
     author
-    genre
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     cover_image
     title
+    series
+    position
     description
     one_liner_blurb
     display_price
     paperback_price
     primary_link
-    spicy
-    free
-    kindle_unlimited
     promo_active
-    queer_rep
     author
-    genre
+    genres
+    tags
     created_at
     updated_at
   ].freeze
@@ -68,20 +65,6 @@ class BookDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    cover_image
-    additional_links
-    spicy
-    description
-    display_price
-    free
-    kindle_unlimited
-    one_liner_blurb
-    primary_link
-    promo_active
-    queer_rep
-    genre
-    title
-    trigger_warning
   ].freeze
 
   # COLLECTION_FILTERS

@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+require 'logging/logs'
+
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+  include Logging::Logs
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -11,7 +14,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:role])
   end
 
-  def after_invite_path_for(inviter, invitee)
+  def after_invite_path_for(_inviter, _invitee)
     admin_root_path
   end
-end 
+
+  def require_admin
+    redirect_to '/users/sign_in' unless current_user && current_user.at_least_admin?
+  end
+end

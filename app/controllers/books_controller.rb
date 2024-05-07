@@ -4,19 +4,34 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    collection = Book.with_attached_cover_image.where(promo_active: true).includes(:author, :genre).order(:author_id)
+    collection = Book.with_attached_cover_image
+                     .where(promo_active: true)
+                     .includes(:author, :genres, :series, :tags)
+                     .left_joins(:series)
+                     .order('author.name ASC', 'series.name ASC', 'position ASC')
     @filters = {}
 
     # for each param with a real value, apply a filter to the books list
     # also add a string to the filters list to display active filters
-    filtering_params.select { |_, val| val != '0' && val != '' }.each do |p_key, p_val|
-      collection = if p_key == 'genre'
-                     @filters[p_key] = Genre.find(p_val).name
-                     collection.send :filter_by_genre, p_val
-                   else
-                     # TODO: add a decorator here that transforms the attribute name to user friendly string. Not dire, just looks ugly right now.
-                     @filters[p_key] = p_val
-                     collection.send p_key.to_sym
+    filtering_params.each do |p_key, p_val|
+      # remove pesky empty string the browser sends over by default with multi-selects
+      p_val.reject!(&:blank?)
+      collection = if p_key == 'genres'
+
+                     p_val.each do |genre_id|
+                       next if genre_id == ''
+
+                       @filters["genre_#{genre_id}"] = Genre.find(genre_id).name
+                     end
+                     p_val.empty? ? collection : collection.send(:filter_by_genre, p_val)
+
+                   elsif p_key == 'tags'
+                     p_val.each do |tag_id|
+                       next if tag_id == ''
+
+                       @filters["tag_#{tag_id}"] = Tag.find(tag_id).name
+                     end
+                     p_val.empty? ? collection : collection.send(:filter_by_tag, p_val)
                    end
     end
 
@@ -31,34 +46,44 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    @series = Series.where(author_id: current_user.id)
   end
-
-  # GET /books/1/edit
-  def edit; end
 
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
-
+    @series = Series.where(author_id: @book.author_id)
+    @show_series = params[:series]
     respond_to do |format|
       if @book.save
-        format.html { redirect_to book_url(@book), notice: 'Book was successfully created.' }
+        format.html { redirect_to admin_books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
+        errors = @book.errors.map { |error| [error.attribute, error.type] }
+        log('create', "Creating Book failed with the following errors: #{errors}")
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  # GET /books/1/edit
+  def edit
+    @series = Series.where(author_id: @book.author_id)
+  end
+
   # PATCH/PUT /books/1 or /books/1.json
   def update
+    @series = Series.where(author_id: @book.author_id)
+    @show_series = params[:series]
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to book_url(@book), notice: 'Book was successfully updated.' }
+        format.html { redirect_to admin_book_url(@book), notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        errors = @book.errors.map { |error| [error.attribute, error.type] }
+        log('update', "Updating Book failed with the following errors: #{errors}")
+        format.html { render :edit, status: :unprocessable_entity, series: @series }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -75,7 +100,7 @@ class BooksController < ApplicationController
   end
 
   def bulk_activation_toggle_form
-    @pagy, @books = pagy(Book.with_attached_cover_image.includes(:author, :genre).all.order(:author_id, :title), items: 50)
+    @pagy, @books = pagy(Book.with_attached_cover_image.includes(:author, :genres).all.order(:author_id, :title), items: 50)
     render 'bulk_activation_toggle_form'
   end
 
@@ -112,11 +137,16 @@ class BooksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def book_params
-    params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :paperback_price, :free, :promo_active, :genre_id, :spicy, :kindle_unlimited, :queer_rep, :cover_image)
+    build_params = params.require(:book).permit(:title, :primary_link, :additional_links, :one_liner_blurb, :description, :display_price, :paperback_price, :free, :promo_active, :spicy, :kindle_unlimited, :queer_rep, :cover_image, :series_id, :author_id, :position, genres: [], tags: [])
+
+    build_params[:genres].reject!(&:empty?).map! { |g_id| Genre.find(g_id) }
+    build_params[:tags].reject!(&:empty?).map! { |t_id| Tag.find(t_id) }
+
+    build_params
   end
 
   def filtering_params
-    params.permit(:genre, :spicy, :not_spicy, :kindle_unlimited, :queer_rep, :free)
+    params.permit(genres: [], tags: [])
   end
 
   def mass_activation_toggle_params

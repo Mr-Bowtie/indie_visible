@@ -13,14 +13,31 @@ that displays all possible records to associate with.
   An instance of [Administrate::Field::BelongsTo][1].
   Contains helper methods for displaying a collection select box.
 
-[1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/BelongsTo
-%>
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/BelongsTo %>
 
-<div class="field-unit__label">
-  <%= f.label field.permitted_attribute %>
-</div>
-<div class="field-unit__field">
-  <%= f.select(field.permitted_attribute,
-               options_for_select(field.associated_resource_options, field.selected_option),
-               include_blank: field.include_blank_option) %>
-</div>
+  <div class="field-unit__label">
+    <%= f.label field.permitted_attribute %>
+  </div>
+  <div class="field-unit__field">
+    <% if field.permitted_attribute == "author_id" %>
+      <% scoped_options =
+        (
+          if current_user.at_least_admin?
+            User.valid_users.map { |user| [user.name, user.id] }
+          else
+            [[current_user.name, current_user.id]]
+          end
+        ) %>
+      <%= f.select(
+        field.permitted_attribute,
+        options_for_select(scoped_options, field.selected_option),
+        include_blank: field.include_blank_option
+      ) %>
+    <% else %>
+      <%= f.select(
+        field.permitted_attribute,
+        options_for_select(field.associated_resource_options, field.selected_option),
+        include_blank: field.include_blank_option
+      ) %>
+    <% end %>
+  </div>

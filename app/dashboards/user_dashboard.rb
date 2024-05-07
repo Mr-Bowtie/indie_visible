@@ -17,6 +17,7 @@ class UserDashboard < Administrate::BaseDashboard
     reset_password_sent_at: Field::DateTime,
     reset_password_token: Field::String,
     role: Field::Select,
+    spotlight: Field::Boolean,
     books: Field::HasMany.with_options(foreign_key: 'author_id'),
     name: Field::String,
     website_url: Field::Url,
@@ -36,6 +37,7 @@ class UserDashboard < Administrate::BaseDashboard
     id
     name
     email
+    spotlight
     role
   ].freeze
 
@@ -44,6 +46,7 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     name
+    spotlight
     email
     photo
     about
@@ -61,6 +64,8 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     name
+    role
+    spotlight
     email
     photo
     about
@@ -68,7 +73,6 @@ class UserDashboard < Administrate::BaseDashboard
     facebook_url
     instagram_url
     tiktok_url
-    role
     books
   ].freeze
 

@@ -22,6 +22,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :integer          default("author")
+#  spotlight              :boolean
 #  tiktok_url             :string
 #  website_url            :string
 #  invited_by_id          :bigint
@@ -57,5 +58,9 @@ FactoryBot.define do
         content_type: 'image/png'
       )
     end
+  end
+
+  trait :spotlight do
+    spotlight { true }
   end
 end

@@ -1,0 +1,40 @@
+x 2024-03-02 add price to book detail page +springUpdates @styling
+x 2024-03-02 Add books to author bio +springUpdates @styling
+x 2024-03-02 consolidate links to icons +springUpdates @styling
+x 2024-03-02 allow banner upload per promo/ set date to display / display toggle +springUpdates @feature
+x 2024-03-03 search bar - title and author +springUpdates @feature
+x 2024-03-05 allow books to belong to multiple genres +springUpdates @feature
+x 2024-03-09 make sure that paperback price is displayed for books +springUpdates @chore
+x 2024-03-10 create series dropdown and new series inline form +springUpdates @feature
+x 2024-03-12 add series dashboard to make admin happy +groupSeries @feature
+x 2024-03-12 add position to book form +groupSeries @feature
+x 2024-03-12 create through table for books_series +groupSeries @feature
+x 2024-03-12 force edit to go to main form +groupSeries @feature
+x 2024-03-12 create position input +groupSeries @feature
+x 2024-03-13 setup collection query +groupSeries @feature
+x 2024-03-13 make series appear together - in order +springUpdates @feature
+x 2024-03-14 add button to go back to selecting series +groupSeries @feature
+x 2024-03-16 update factories +tagRefactor @feature
+x 2024-03-16 setup admin for tags +tagRefactor @feature
+x 2024-03-16 add multi select for book form +tagRefactor @feature
+x 2024-03-16 add multi select for filters +tagRefactor @feature
+x 2024-03-16 rewrite scopes +tagRefactor @feature
+x 2024-03-16 rework active filter view passing +tagRefactor @feature
+x 2024-03-16 update form to use multi select choice.js input for genre +springUpdates @feature
+x 2024-03-17 add new tags +springUpdates @feature
+x 2024-03-17 refactor tags as a model +springUpdates @feature
+x 2024-03-17 rework tag display on book components +tagRefactor @feature
+x 2024-03-17 update handling free tag +tagRefactor @refactor
+x 2024-03-17 make multi-select links primary bulma color +springUpdates @feature
+x 2024-03-17 +authorSpotlight @feature
+x 2024-04-05 create Author Spotlight section +springUpdates @feature
+x 2024-04-05 clean up nav bar look, add margins +springUpdates @styling
+x 2024-04-05 setup: route, controller action +authorSpotlight @feature
+x 2024-04-05 add new spotlighted attr and scope +authorSpotlight @feature
+x 2024-04-05 setup page: author sections +authorSpotlight @feature
+x 2024-04-05 add spotlight blurb section +authorSpotlight @feature
+x 2024-04-06 fix mobile styling +springUpdates @styling @mobile
+x 2024-04-06 make book and author tiles smaller, fit more on screen +mobileStyling @mobile @styling
+x 2024-04-06 mix margins +mobileStyling @mobile @styling
+x 2024-04-06 clean up menus +mobileStyling @mobile @styling
+x 2024-04-06 set spring colors +springUpdates @styling

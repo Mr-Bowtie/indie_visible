@@ -1,0 +1,32 @@
+<% if existing_action?(collection_presenter.resource_name, :edit) %>
+  <% if resource.class == Book %>
+    <td>
+      <%= if accessible_action?(resource, :edit)
+        link_to("Edit", edit_book_path(resource), class: "action-edit")
+      end %>
+    </td>
+  <% else %>
+    <td><%= if accessible_action?(resource, :edit)
+        link_to(
+          t("administrate.actions.edit"),
+          [:edit, namespace, resource],
+          class: "action-edit"
+        )
+      end %></td>
+  <% end %>
+<% end %>
+
+<% if existing_action?(collection_presenter.resource_name, :destroy) %>
+  <td><%= if accessible_action?(resource, :destroy)
+      link_to(
+        t("administrate.actions.destroy"),
+        [namespace, resource],
+        class: "link link--danger, has-text-danger",
+        method: :delete,
+        data: {
+          confirm: "are you sure?",
+          turbo_confirm: t("administrate.actions.confirm")
+        }
+      )
+    end %></td>
+<% end %>

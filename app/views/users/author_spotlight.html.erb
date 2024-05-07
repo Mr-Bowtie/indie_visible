@@ -1,0 +1,46 @@
+<div class="container">
+  <h1 class="has-text-centered title is-1">Author Spotlight</h1>
+  <section id="spotlight-blurb">
+  </section>
+  <% @authors.each do |author| %>
+    <section class="section" id="author-<%= author.id %>">
+      <%# author photo + social links %>
+      <div class="columns">
+        <% if author.photo.attached? %>
+        <div class="column is-one-fifth">
+          <%= image_tag author.photo, size: "200" %>
+        </div>
+      <% end %>
+
+      <div class="column">
+        <h2 class="is-size-4 has-text-weight-bold"><%= author.name %></h2>
+
+        <div class="mr-2 mb-2">
+          <a href="<%= author.website_url %>" target="_blank" class="is-size-4">Visit my website!</a>
+        </div>
+        <div>
+          <% unless author.facebook_url.empty? %>
+            <a href="<%= author.facebook_url %>" class="mr-2"><i class="fa-brands fa-facebook fa-2x"></i></a>
+          <% end %>
+          <% unless author.instagram_url.empty? %>
+            <a href="<%= author.instagram_url %>" class="mr-2"><i class="fa-brands fa-instagram fa-2x"></i></a>
+          <% end %>
+          <% unless author.tiktok_url.empty? %>
+            <a href="<%= author.tiktok_url %>"><i class="fa-brands fa-tiktok fa-2x"></i></a>
+          <% end %>
+        </div>
+      </div>
+      </div>
+      <%# book list %>
+      <h3 class="subtitle is-3">Books</h3>
+  <div class="tile is-ancestor is-flex-wrap-wrap">
+    <% Book.promo_active_per_author(author.id).series_ordered.each do |book| %>
+      <%= render(Books::GalleryCompactComponent.new(book: book)) %>
+      <%= render(Books::GalleryQuickViewComponent.new(book: book)) %>
+    <% end %>
+  </div
+      <%# divider %>
+      <br class="width-full">
+    </section>
+  <% end %>
+</div>

@@ -3,21 +3,31 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :businesses
+  resources :tags
+  get 'series/new'
+  post 'series/create'
   get 'books/bulk_activation_toggle_form', to: 'books#bulk_activation_toggle_form'
+  get 'users/index'
+  get '/search', to: 'search#index'
+  get 'authors/:id', to: 'users#author_show'
+
+  get 'author-spotlight', to: 'users#author_spotlight'
+
+  resources :businesses
   resources :books do
     collection do
       patch :bulk_activation_toggle
     end
   end
-  get 'users/index'
-  get 'authors/:id', to: 'users#author_show'
+
   namespace :admin do
     resources :users
     resources :genres
     resources :books
     resources :businesses
     resources :promos
+    resources :series
+    resources :tags
 
     root to: 'users#index'
   end
@@ -41,4 +51,6 @@ Rails.application.routes.draw do
     end
   end
   mount Sidekiq::Web => '/sidekiq'
+
+  mount Blazer::Engine, at: 'blazer'
 end

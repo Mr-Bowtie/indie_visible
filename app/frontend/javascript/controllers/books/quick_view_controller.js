@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import ahoy from "ahoy.js"
 
 // Connects to data-controller="books--quick-view"
 export default class extends Controller {
@@ -11,5 +12,9 @@ export default class extends Controller {
 
   unClip(){
     document.querySelector('html').classList.remove('is-clipped')
+  }
+  
+  trackPurchaseClick(event){
+    ahoy.track("book purchase link clicked", {title: event.target.dataset.bookTitle})
   }
 }

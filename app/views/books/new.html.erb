@@ -4,12 +4,12 @@
       <h1 class="title has-text-grey-dark">New book</h1>
       <hr>
 
-      <%= render "form", book: @book %>
+      <%= render "form", book: @book, series: @series, show_series: @show_series %>
 
       <br>
 
       <div>
-        <%= link_to "Back to books", books_path, class: "button is-outlined is-link" %>
+        <%= link_to "Back to admin", admin_books_path, class: "button is-outlined is-link" %>
       </div>
     </div>
   </div>

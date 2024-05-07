@@ -12,13 +12,52 @@
     <h1 class="title is-2"><%= book.title %></h1>
     <% unless book.author_id == nil %>
       <h2 class="subtitle is-3">By:
-        <a href="/authors/<%= book.author.id %>" data-action="click->books--quick-view#unClip"><%= book.author.name %></a></h2>
+        <a
+          href="/authors/<%= book.author.id %>"
+          data-action="click->books--quick-view#unClip"
+        ><%= book.author.name %></a></h2>
     <% end %>
-
-    <% unless book.genre.nil? %>
-      <a href="/books?genre=<%= book.genre.id %>" class="subtitle">Genre:
-        <%= book.genre.name %></a>
-    <% end %>
+    <div class="level is-align-items-center mb-2 is-justify-content-flex-start">
+      <% unless book.genres.empty? %>
+        <h2 class="subtitle mb-0 mr-2">Genres:
+        </h2>
+        <% book.genres.each do |genre| %>
+          <a
+            href="/books?genres[]=<%= genre.id %>"
+            data-turbo="false"
+            class="subtitle mb-0 mr-2 has-text-link is-underlined"
+          >
+            <%= genre.name %></a>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="level is-align-items-center mb-2 is-justify-content-flex-start">
+      <% unless book.tags.empty? %>
+        <h2 class="subtitle mb-0 mr-2">Tags:
+        </h2>
+        <% book.tags.each do |tag| %>
+          <a
+            href="<%= books_path(tags: [tag]) %>"
+            data-turbo="false"
+            class="tag mr-2 is-<%= tag.color_class %>"
+          >
+            <%= tag.name %></a>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="mb-2">
+      <p class="subtitle mb-0"><strong>E-Book Price:</strong>
+        <% if book.free? %>
+          Free
+        <% else %>
+          <%= book.display_price %>
+        <% end %>
+      </p>
+      <% if book.paperback_price %>
+        <p class="subtitle"><strong>Paperback Price:
+          </strong><%= book.paperback_price %></p>
+      <% end %>
+    </div>
 
     <div class="mb-2">
       <% if book.spicy %>
@@ -34,11 +73,17 @@
       <% end %>
     </div>
 
-  <% if book.cover_image.attached? %>
-    <%= image_tag book.cover_image, class: "mb-2" %>
-  <% end %>
+    <% if book.cover_image.attached? %>
+      <%= image_tag book.cover_image, class: "mb-2" %>
+    <% end %>
 
-    <a href="<%= book.primary_link %>" class="mb-3 button is-link auto-center is-medium" target="_blank">Buy Here</a>
+    <a
+      href="<%= book.primary_link %>"
+      class="mb-3 button is-link auto-center is-medium"
+      target="_blank"
+      data-book-title="<%= book.title %>"
+      data-action="click->books--quick-view#trackPurchaseClick"
+    >Buy Here</a>
 
     <p><%= book.description %></p>
   </div>

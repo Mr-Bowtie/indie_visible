@@ -5,9 +5,5 @@ class CreateTags < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    change_table :books do |t|
-      t.belongs_to :tag, foreign_key: true
-    end
   end
 end

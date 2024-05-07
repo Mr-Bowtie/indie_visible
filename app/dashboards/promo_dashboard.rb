@@ -14,6 +14,7 @@ class PromoDashboard < Administrate::BaseDashboard
     title: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    banner: Field::ActiveStorage
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -33,6 +34,7 @@ class PromoDashboard < Administrate::BaseDashboard
     id
     title
     end_date
+    banner
     start_date
     created_at
     updated_at
@@ -45,6 +47,7 @@ class PromoDashboard < Administrate::BaseDashboard
     title
     start_date
     end_date
+    banner
   ].freeze
 
   # COLLECTION_FILTERS

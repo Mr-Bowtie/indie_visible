@@ -16,45 +16,60 @@
   </head>
 
   <body>
-    <nav class="navbar mb-2 has-background-color">
-      <div class="navbar-brand">
-        <a href="<%= books_path %>" class="ml-3 navbar-logo">
-          <img
-            src="https://storage.googleapis.com/indievisible_static/indie-visible-logo.png"
-            alt="Logo of an open book with the words Indie Visible above"
+    <nav class="navbar mb-2 has-background-color is-justify-content-space-around">
+      <div class="container">
+        <div class="navbar-brand">
+          <a href="<%= books_path %>" class="ml-3 navbar-logo">
+            <img
+              src="https://storage.googleapis.com/indievisible_static/indie-visible-logo.png"
+              alt="Logo of an open book with the words Indie Visible above"
+            >
+          </a>
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-controller="navbar"
+            data-action="click->navbar#toggleMenu"
+            data-target="navMenu"
           >
-        </a>
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-controller="navbar"
-          data-action="click->navbar#toggleMenu"
-          data-target="navMenu"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-      <div class="navbar-menu" id="navMenu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="<%= books_path %>">Books</a>
-          <a class="navbar-item" href="<%= businesses_path %>">Bookish Stores</a>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <%= link_to "Author Portal", admin_root_path, class: "button is-primary" %>
+        <div class="navbar-menu" id="navMenu">
+          <div class="navbar-start">
+            <a class="navbar-item" href="<%= books_path %>">Books</a>
+            <a class="navbar-item" href="<%= businesses_path %>">Bookish Stores</a>
+            <% if Promo.active.any? && User.in_the_spotlight.any? %>
+              <a class="navbar-item" href="/author-spotlight">Author Spotlight</a>
+            <% end %>
+          </div>
+          <div class="navbar-item search-container ">
+            <%= form_with url: search_path, method: "get", html: { class: "width-full"}  do |form| %>
+              <div class="level is-align-items-center">
+                <%= form.text_field :query, class: "input mr-2 search-bar" %>
+                <%= form.submit "Search", class: "button search-button" %>
+              </div>
+
+            <% end %>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <%= link_to "Author Portal", admin_root_path, class: "button is-primary" %>
+            </div>
           </div>
         </div>
       </div>
     </nav>
     <div class="container is-flex is-justify-content-center mb-4">
-      <img
-        src="https://storage.googleapis.com/indievisible_static/winter-wonderland-banner-3.png"
-        alt="Winter wonderland banner"
-      >
+      <% if Promo.active.any? && Promo.active.first.banner.attached? %>
+        <%= image_tag Promo.active.first.banner %>
+      <% elsif Promo.next_up.any? && Promo.next_up.first.banner.attached? %>
+        <%= image_tag Promo.next_up.first.banner %>
+      <% end %>
 
     </div>
     <%= yield %>
