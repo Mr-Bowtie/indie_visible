@@ -36,6 +36,8 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
@@ -61,8 +63,9 @@ services:
       - "3036:3036"
     entrypoint: /root/vite-entrypoint.sh
 
-volumes: 
+volumes:
   vite_dev:
   vite_test:
   gem_cache:
+  pgdata:
 # vim: ft=yaml nospell
