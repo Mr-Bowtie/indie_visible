@@ -5,49 +5,47 @@ set -e
 INPUT=$*
 
 if [ -z "$INPUT" ]; then
-  echo "Please specify --worktree or --non-worktree"
-  exit 1
+	echo "Please specify --worktree or --non-worktree"
+	exit 1
 fi
 
 if [ "$INPUT" = "--worktree" ]; then
-  echo "============== Setting local bundler path ==================="
-  bundle config set --local path vendor/bundle
-  echo "================ Installing Gems ==================="
-  bundle install
-  echo "================ parsing gem yard docs ==================="
-  bundle exec yard gems
-  echo "================ setup Annotations ===================="
-  bundle exec rails generate annotate:install
-  if [ -f "spec/spec_helper.rb" ]; then 
-    echo "================ RSpec already installed, Skipping ================"
-  else 
-    echo "================ setup RSpec ===================="
-    bundle exec rails generate rspec:install
-  fi
+	echo "============== Setting local bundler path ==================="
+	bundle config set --local path vendor/bundle
+	echo "================ Installing Gems ==================="
+	bundle install
+	echo "================ parsing gem yard docs ==================="
+	bundle exec yard gems
+	echo "================ setup Annotations ===================="
+	bundle exec rails generate annotate:install
+	if [ -f "spec/spec_helper.rb" ]; then
+		echo "================ RSpec already installed, Skipping ================"
+	else
+		echo "================ setup RSpec ===================="
+		bundle exec rails generate rspec:install
+	fi
 
-  if [ -f "../main/.env" ]; then
-    echo "================ Copying .env file ===================="
-    cp ../main/.env .env
-  fi
-else 
-  echo "================ Installing Gems ==================="
-  bundle install
+	if [ -f "../main/.env" ]; then
+		echo "================ Copying .env file ===================="
+		cp ../main/.env .env
+	fi
+else
+	echo "================ Installing Gems ==================="
+	bundle install
 
-  if [ -f "spec/spec_helper.rb" ]; then 
-    echo "================ RSpec already installed, Skipping ================"
-  else 
-    echo "================ setup RSpec ===================="
-    bundle exec rails generate rspec:install
-  fi
+	if [ -f "spec/spec_helper.rb" ]; then
+		echo "================ RSpec already installed, Skipping ================"
+	else
+		echo "================ setup RSpec ===================="
+		bundle exec rails generate rspec:install
+	fi
 
-  if [ -f "lib/tasks/auto_annotate_models.rake" ]; then
-    echo "================ Annotate already installed, Skipping ================"
-  else
-    echo "================ setup Annotations ===================="
-    bundle exec rails generate annotate:install
-  fi
+	if [ -f "lib/tasks/auto_annotate_models.rake" ]; then
+		echo "================ Annotate already installed, Skipping ================"
+	else
+		echo "================ setup Annotations ===================="
+		bundle exec rails generate annotate:install
+	fi
 fi
 
-
 echo "================ setup complete ===================="
-
