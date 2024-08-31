@@ -2,6 +2,7 @@
 /.bundle
 vendor
 tags
+*.dump
 
 # Ignore all logfiles and tempfiles.
 /log/*
