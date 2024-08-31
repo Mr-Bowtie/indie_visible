@@ -6,7 +6,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.3'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.8'
+gem 'rails', '~> 7.0.8', '>= 7.0.8.4'
+
+gem 'rexml', '~> 3.3', '>= 3.3.6'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 # Use postgresql as the database for Active Record
@@ -52,7 +54,7 @@ gem 'google-cloud-storage', '~> 1.11', require: false
 gem 'factory_bot_rails'
 # fake data generation
 gem 'faker'
-# Security scanning 
+# Security scanning
 gem 'brakeman'
 # Run security audits on installed gems
 gem 'bundler-audit'
@@ -91,20 +93,18 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
+gem 'sentry-ruby', '~> 5.13'
 
-gem "sentry-ruby", "~> 5.13"
-
-gem "sentry-rails", "~> 5.13"
+gem 'sentry-rails', '~> 5.13'
 
 gem 'ransack', '~> 4.1'
 
 gem 'ahoy_matey', '~> 5.1.0'
 
 gem 'blazer', '~> 3.0', '>= 3.0.3'
-

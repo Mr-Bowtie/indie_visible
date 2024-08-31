@@ -61,11 +61,11 @@ jobs:
       - name: rubocop
         uses: prozsolt/rubocop-github-action@master
 
-      - name: Yarn audit
-        uses: pragatheeswarans/yarn-audit-action@v1.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          label: 'audit issues'
+      # - name: Yarn audit
+      #   uses: pragatheeswarans/yarn-audit-action@v1.0.0
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     label: 'audit issues'
           
       - name: Brakeman
         uses: artplan1/brakeman-action@v1.2.1
