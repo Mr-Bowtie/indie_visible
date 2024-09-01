@@ -14,8 +14,8 @@ if [ "$INPUT" = "--worktree" ]; then
 	bundle config set --local path vendor/bundle
 	echo "================ Installing Gems ==================="
 	bundle install
-	echo "================ parsing gem yard docs ==================="
-	bundle exec yard gems
+	# echo "================ parsing gem yard docs ==================="
+	# bundle exec yard gems
 	echo "================ setup Annotations ===================="
 	bundle exec rails generate annotate:install
 	if [ -f "spec/spec_helper.rb" ]; then
