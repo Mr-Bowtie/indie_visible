@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'users/index'
   get '/search', to: 'search#index'
   get 'authors/:id', to: 'users#author_show'
+  get 'heartbeat', to: 'uptime#heartbeat'
 
   get 'author-spotlight', to: 'users#author_spotlight'
 
