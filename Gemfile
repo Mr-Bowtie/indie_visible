@@ -108,3 +108,5 @@ gem 'ransack', '~> 4.1'
 gem 'ahoy_matey', '~> 5.1.0'
 
 gem 'blazer', '~> 3.0', '>= 3.0.3'
+
+gem 'aws-sdk-s3', '~> 1.170'
