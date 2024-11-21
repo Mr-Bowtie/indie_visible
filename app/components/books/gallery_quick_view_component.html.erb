@@ -59,27 +59,13 @@
       <% end %>
     </div>
 
-    <div class="mb-2">
-      <% if book.spicy %>
-        <span class="tag is-danger">Spicy</span>
-      <% end %>
-
-      <% if book.kindle_unlimited %>
-        <span class="tag is-warning">KU</span>
-      <% end %>
-
-      <% if book.queer_rep %>
-        <span class="tag is-link">Queer Rep</span>
-      <% end %>
-    </div>
-
     <% if book.cover_image.attached? %>
-      <%= image_tag book.cover_image, class: "mb-2" %>
+      <%= image_tag book.cover_image, class: "mb-2", loading: "lazy" %>
     <% end %>
 
     <a
       href="<%= book.primary_link %>"
-      class="mb-3 button is-link auto-center is-medium"
+      class="mb-3 button is-primary auto-center is-medium"
       target="_blank"
       data-book-title="<%= book.title %>"
       data-action="click->books--quick-view#trackPurchaseClick"
