@@ -1,25 +1,21 @@
 <div
-  class="tile is-parent is-vertical is-2 mobile-centered-container"
+  class="tile is-parent is-vertical is-3 mobile-centered-container px-5 py-5"
   id="<%= dom_id book %>"
   data-books--card-id="<%= book.id %>"
   data-controller="books--card"
   data-action="click->books--card#showModal"
   data-book-title="<%= book.title %>"
 >
-  <% if book.cover_image.attached? %>
-    <%= image_tag book.cover_image.variant(resize_to_limit: [800, 800]), loading: "lazy" %>
-  <% end %>
-  <div>
-    <% book.tags.each do |tag| %>
-      <span class="tag is-<%= tag.color_class %>"><%= tag.name.capitalize %></span>
-    <% end %>
-  </div>
 
   <div class="gallery-card-details">
-    <p>
-      <strong>Title:</strong>
+    <p class="title is-4 mb-2">
       <%= book.title %>
     </p>
+    <div class="pt-2" style="border-top: 1px solid black;">
+      <% book.tags.each do |tag| %>
+        <span class="tag is-<%= tag.color_class %>"><%= tag.name.capitalize %></span>
+      <% end %>
+    </div>
 
     <% if book.series %>
       <p>
