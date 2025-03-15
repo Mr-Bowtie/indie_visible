@@ -19,13 +19,13 @@
           <a href="<%= author.website_url %>" target="_blank" class="is-size-4">Visit my website!</a>
         </div>
         <div>
-          <% unless author.facebook_url.empty? %>
+          <% unless author.facebook_url.nil? %>
             <a href="<%= author.facebook_url %>" class="mr-2"><i class="fa-brands fa-facebook fa-2x"></i></a>
           <% end %>
-          <% unless author.instagram_url.empty? %>
+          <% unless author.instagram_url.nil? %>
             <a href="<%= author.instagram_url %>" class="mr-2"><i class="fa-brands fa-instagram fa-2x"></i></a>
           <% end %>
-          <% unless author.tiktok_url.empty? %>
+          <% unless author.tiktok_url.nil? %>
             <a href="<%= author.tiktok_url %>"><i class="fa-brands fa-tiktok fa-2x"></i></a>
           <% end %>
         </div>
