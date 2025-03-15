@@ -50,6 +50,8 @@ class Book < ApplicationRecord
   belongs_to :series, optional: true
   has_one_attached :cover_image
 
+  after_save :process_image_variants, if: -> { cover_image.attached? }
+
   scope :filter_by_genre, lambda { |genre_ids|
     where(id:
       Book.joins(:genres)
@@ -81,5 +83,12 @@ class Book < ApplicationRecord
 
   def free?
     tags.select { |tag| tag.name.downcase == 'free' }.size == 1
+  end
+
+  private
+
+  def process_image_variants
+    cover_image.variant(resize_to_limit: [250, 250]).processed
+    cover_image.variant(resize_to_limit: [500, 500]).processed
   end
 end

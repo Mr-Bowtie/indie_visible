@@ -6,7 +6,7 @@
   data-action="click->books--card#showModal"
 >
   <% if book.cover_image.attached? %>
-    <%= image_tag book.cover_image, loading: "lazy" %>
+    <%= image_tag book.cover_image.variant(resize_to_limit: [500, 500]), loading: "lazy" %>
   <% end %>
   <div>
     <% book.tags.each do |tag| %>

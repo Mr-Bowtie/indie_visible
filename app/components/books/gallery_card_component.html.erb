@@ -8,6 +8,10 @@
 >
 
   <div class="gallery-card-details">
+    <% if book.cover_image.attached? %>
+      <%= image_tag book.cover_image.variant(resize_to_limit: [250, 250]) %>
+    <% end %>
+
     <p class="title is-4 mb-2">
       <%= book.title %>
     </p>
@@ -44,6 +48,7 @@
         <%= book.paperback_price %>
       </p>
     <% end %>
+    
 
     <p>
       <strong>Blurb:</strong>
