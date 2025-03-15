@@ -24,9 +24,7 @@ class Promo < ApplicationRecord
                      .or(where(['end_date = :today', { today: Date.today }]))
                  }
 
-  private
-
   def process_banner_variants
-    banner.variant(resize_to_limit: [1500, 400]).processed
+    banner.variant(resize_to_limit: [1500, 400]).process
   end
 end

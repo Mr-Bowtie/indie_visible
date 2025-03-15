@@ -46,8 +46,6 @@ class User < ApplicationRecord
   has_many :series, dependent: :destroy, foreign_key: 'author_id'
   has_one_attached :photo
 
-  after_save :process_photo_variants, if: -> { photo.attached? }
-
   # authors that have been sent invitations but havent logged in and filled out their profile will have an empty name
   scope :valid_users, -> { where(name: '').invert_where }
   scope :in_the_spotlight, -> { where(spotlight: true) }
@@ -65,9 +63,9 @@ class User < ApplicationRecord
     ['name']
   end
 
-  private
-
   def process_photo_variants
+    return unless photo.attached?
+
     photo.variant(resize_to_limit: [200, 200]).processed
     photo.variant(resize_to_limit: [500, 500]).processed
   end
