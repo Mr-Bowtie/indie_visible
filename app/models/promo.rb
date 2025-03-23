@@ -12,8 +12,6 @@
 class Promo < ApplicationRecord
   has_one_attached :banner
 
-  after_save :process_banner_variants, if: -> { banner.attached? }
-
   scope :next_up, lambda {
                     where(['start_date > :today', { today: Date.today }])
                       .order(:start_date)
