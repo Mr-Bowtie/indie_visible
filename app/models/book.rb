@@ -82,4 +82,11 @@ class Book < ApplicationRecord
   def free?
     tags.select { |tag| tag.name.downcase == 'free' }.size == 1
   end
+
+  def process_image_variants
+    return unless cover_image.attached?
+
+    cover_image.variant(resize_to_limit: [250, 250]).processed
+    cover_image.variant(resize_to_limit: [500, 500]).processed
+  end
 end

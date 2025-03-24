@@ -59,9 +59,11 @@
       <% end %>
     </div>
 
-    <% if book.cover_image.attached? %>
-      <%= image_tag book.cover_image, class: "mb-2", loading: "lazy" %>
+    <div class="has-text-centered">
+      <% if book.cover_image.attached? %>
+      <%= image_tag book.cover_image.variant(resize_to_limit: [500, 500]), class: "mb-2", loading: "lazy" %>
     <% end %>
+    </div>
 
     <a
       href="<%= book.primary_link %>"

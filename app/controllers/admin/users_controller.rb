@@ -45,6 +45,15 @@ module Admin
       redirect_to(new_user_invitation_url)
     end
 
+    def create
+      super
+      requested_resource.process_photo_variants
+    end
+
+    def update
+      super
+      requested_resource.process_photo_variants
+    end
     # def resource_params
     #   params.require(:user).permit(:about, :spotlight, :email, :name, :role, :facebook_url, :instagram_url, :tiktok_url, :photo, :website_url, book_ids: [])
     # end

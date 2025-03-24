@@ -62,4 +62,11 @@ class User < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     ['name']
   end
+
+  def process_photo_variants
+    return unless photo.attached?
+
+    photo.variant(resize_to_limit: [200, 200]).processed
+    photo.variant(resize_to_limit: [500, 500]).processed
+  end
 end

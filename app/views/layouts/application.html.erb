@@ -66,9 +66,9 @@
     </nav>
     <div class="container is-flex is-justify-content-center mb-4">
       <% if Promo.active.any? && Promo.active.first.banner.attached? %>
-        <%= image_tag Promo.active.first.banner %>
+        <%= image_tag Promo.active.first.banner.variant(resize_to_limit: [1500, 400]) %>
       <% elsif Promo.next_up.any? && Promo.next_up.first.banner.attached? %>
-        <%= image_tag Promo.next_up.first.banner %>
+        <%= image_tag Promo.next_up.first.banner.variant(resize_to_limit: [1500, 400]) %>
       <% end %>
 
     </div>
